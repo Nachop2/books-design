@@ -1,5 +1,6 @@
 import {
     MDBBadge,
+    MDBBtn,
     MDBCard,
     MDBCardBody,
     MDBCardHeader,
@@ -37,8 +38,9 @@ const Home = () => {
                 const prepareCards = booksData.map(book => ({
                     id: book.id,
                     title: book.name,
+                    stock: book.stock,
                     text: book.description || "Sin descripción",
-                    category_names: ["ISBN: "+book.isbn, "Autor: "+book.author],
+                    category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
                     //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
                 }));
 
@@ -55,7 +57,7 @@ const Home = () => {
         fetchBooks();
     }, []);
 
-    
+
 
 
 
@@ -113,32 +115,50 @@ const Home = () => {
 
                                 <MDBRow className="row-cols-1 row-cols-md-12 g-4">
                                     {cards.map((card, i) => (
-                                            <MDBCol key={i}>
+                                        <MDBCol key={i}>
 
-                                                <MDBCard>
-                                                    {/* <MDBRipple rippleTag='div' className='bg-image hover-zoom'>
+                                            <MDBCard>
+                                                {/* <MDBRipple rippleTag='div' className='bg-image hover-zoom'>
                                                         <MDBCardImage src={card.image} alt={card.title} position="top" />
                                                         <MDBCardLink href={`/quiz/play/${card.id}`}>
                                                             <div className='mask'></div>
                                                         </MDBCardLink>
                                                     </MDBRipple> */}
 
-                                                    <MDBCardBody>
-                                                        
-                                                        <MDBCardLink href={`/quiz/play/${card.id}`}>
-                                                            <MDBCardTitle>{card.title}</MDBCardTitle>
-                                                        </MDBCardLink>
-                                                        {card.category_names.map(name => (
-                                                            <MDBBadge pill light color='primary' className="mb-3 me-1">
-                                                                {name}
+                                                <MDBCardBody>
+
+                                                    <MDBRow>
+                                                        <MDBCol>
+                                                            <MDBCardLink href={`/quiz/play/${card.id}`}>
+                                                                <MDBCardTitle>{card.title}</MDBCardTitle>
+                                                            </MDBCardLink>
+                                                            {card.category_names.map(name => (
+                                                                <MDBBadge pill light color='primary' className="mb-3 me-1">
+                                                                    {name}
+                                                                </MDBBadge>
+                                                            ))}
+                                                            <MDBCardText>{card.text}</MDBCardText>
+
+                                                        </MDBCol>
+                                                        <MDBCol className="d-flex" style={{ justifyContent: "flex-end", alignItems: "center" }}>
+                                                            <MDBBadge pill light color='primary' className="p-2 me-2">
+                                                                Cantidad: {card.stock}
                                                             </MDBBadge>
-                                                        ))}
-                                                        <MDBCardText>{card.text}</MDBCardText>
-                                                    </MDBCardBody>
-                                                    
-                                                </MDBCard>
-                                            </MDBCol>
-                                        ))}
+                                                            <MDBBtn color="danger" className="ms-2" href="">
+                                                                <MDBIcon fas icon="dollar-sign" /> Vender
+                                                            </MDBBtn>
+                                                            <MDBBtn color="success" className="ms-2" href="">
+                                                                <MDBIcon fas icon="sign-in-alt" /> Añadir
+                                                            </MDBBtn>
+                                                        </MDBCol>
+                                                    </MDBRow>
+
+
+                                                </MDBCardBody>
+
+                                            </MDBCard>
+                                        </MDBCol>
+                                    ))}
                                 </MDBRow>
                                 <div className="d-flex justify-content-center mt-5">
                                     <MDBCardLink href="/category/1">Ver más de "{title.title}"</MDBCardLink>
