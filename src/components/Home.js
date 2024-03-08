@@ -21,43 +21,58 @@ import { useEffect, useState } from "react";
 const Home = () => {
     const [cards, setCards] = useState([]);
 
+    const fetchBooks = async () => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/books`, {
+                method: 'GET',
+                //credentials: 'include'
+            });
+            if (!response.ok) {
+                throw new Error("Failed to fetch books");
+            }
+            const booksData = await response.json();
+            console.log(booksData);
 
+            const prepareCards = booksData.map(book => ({
+                id: book.id,
+                title: book.name,
+                stock: book.stock,
+                text: book.description || "Sin descripción",
+                category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
+                //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
+            }));
+
+
+            setCards(prepareCards);
+
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
     useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/books`, {
-                    method: 'GET',
-                    //credentials: 'include'
-                });
-                if (!response.ok) {
-                    throw new Error("Failed to fetch books");
-                }
-                const booksData = await response.json();
-                console.log(booksData);
-
-                const prepareCards = booksData.map(book => ({
-                    id: book.id,
-                    title: book.name,
-                    stock: book.stock,
-                    text: book.description || "Sin descripción",
-                    category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
-                    //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
-                }));
-
-
-                console.log(cards);
-                setCards([...cards, ...prepareCards]);
-
-            }
-            catch (error) {
-                console.error(error);
-            }
-        };
-
         fetchBooks();
     }, []);
 
-
+    const handleBook = async (id,type) => {
+        const formData = new FormData();
+        formData.append('stock', 2);
+        formData.append('_method', "PUT");
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/`+type+'/' + id + '/' + 2, {
+            method: 'POST',
+            //credentials: 'include'
+            body: formData,
+        });
+        if (!response.ok) {
+            console.log(response);
+            throw new Error("Failed to add books");
+        } else {
+            console.log(await response.json());
+            setCards([]);
+            fetchBooks();
+            console.log("book gaming");
+        }
+    }
 
 
 
@@ -129,7 +144,8 @@ const Home = () => {
 
                                                     <MDBRow>
                                                         <MDBCol>
-                                                            <MDBCardLink href={`/quiz/play/${card.id}`}>
+                                                        {/* href={`/quiz/play/${card.id}`} */}
+                                                            <MDBCardLink>
                                                                 <MDBCardTitle>{card.title}</MDBCardTitle>
                                                             </MDBCardLink>
                                                             {card.category_names.map(name => (
@@ -144,10 +160,10 @@ const Home = () => {
                                                             <MDBBadge pill light color='primary' className="p-2 me-2">
                                                                 Cantidad: {card.stock}
                                                             </MDBBadge>
-                                                            <MDBBtn color="danger" className="ms-2" href="">
+                                                            <MDBBtn color="danger" className="ms-2" href="" onClick={() => handleBook(card.id,"sell")}>
                                                                 <MDBIcon fas icon="dollar-sign" /> Vender
                                                             </MDBBtn>
-                                                            <MDBBtn color="success" className="ms-2" href="">
+                                                            <MDBBtn color="success" className="ms-2" href="" onClick={() => handleBook(card.id,"add")}>
                                                                 <MDBIcon fas icon="sign-in-alt" /> Añadir
                                                             </MDBBtn>
                                                         </MDBCol>
