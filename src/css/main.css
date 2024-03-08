@@ -1,0 +1,41 @@
+#container {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    border: 2px solid #000;
+}
+
+#dotCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+#option1 {
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    z-index: 1;
+}
+
+#option2 {
+    position: absolute;
+    top: 90px;
+    left: 80px;
+    z-index: 1;
+}
+
+#option3 {
+    position: absolute;
+    top: 40px;
+    left: 260px;
+    z-index: 1;
+}
+
+#option4 {
+    position: absolute;
+    top: 90px;
+    left: 260px;
+    z-index: 1;
+}
