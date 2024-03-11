@@ -11,6 +11,10 @@ import {
     MDBCarouselCaption,
     MDBCarouselItem,
     MDBCol,
+    MDBDropdown,
+    MDBDropdownItem,
+    MDBDropdownMenu,
+    MDBDropdownToggle,
     MDBIcon,
     MDBRipple,
     MDBRow,
@@ -54,11 +58,10 @@ const Home = () => {
         fetchBooks();
     }, []);
 
-    const handleBook = async (id,type) => {
+    const handleBook = async (id, type, amount) => {
         const formData = new FormData();
-        formData.append('stock', 2);
         formData.append('_method', "PUT");
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/`+type+'/' + id + '/' + 2, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + type + '/' + id + '/' + amount, {
             method: 'POST',
             //credentials: 'include'
             body: formData,
@@ -121,9 +124,10 @@ const Home = () => {
                 <div className="mt-5" key={index}>
                     <MDBCard>
                         <MDBCardHeader>
-                            <MDBTypography tag='h3' className="text-center my-3">
-                                <MDBIcon fas icon={title.icon} /> {title.title}
-                            </MDBTypography>
+                            
+
+
+
                         </MDBCardHeader>
                         <MDBCardBody>
                             <MDBCardText>
@@ -144,7 +148,7 @@ const Home = () => {
 
                                                     <MDBRow>
                                                         <MDBCol>
-                                                        {/* href={`/quiz/play/${card.id}`} */}
+                                                            {/* href={`/quiz/play/${card.id}`} */}
                                                             <MDBCardLink>
                                                                 <MDBCardTitle>{card.title}</MDBCardTitle>
                                                             </MDBCardLink>
@@ -160,12 +164,20 @@ const Home = () => {
                                                             <MDBBadge pill light color='primary' className="p-2 me-2">
                                                                 Cantidad: {card.stock}
                                                             </MDBBadge>
-                                                            <MDBBtn color="danger" className="ms-2" href="" onClick={() => handleBook(card.id,"sell")}>
+                                                            <MDBBtn color="danger" className="ms-2" href="" onClick={() => handleBook(card.id, "sell", 1)}>
                                                                 <MDBIcon fas icon="dollar-sign" /> Vender
                                                             </MDBBtn>
-                                                            <MDBBtn color="success" className="ms-2" href="" onClick={() => handleBook(card.id,"add")}>
-                                                                <MDBIcon fas icon="sign-in-alt" /> Añadir
-                                                            </MDBBtn>
+                                                            <MDBDropdown>
+
+
+                                                                <MDBDropdownToggle color="success" className="ms-2" href="" ><MDBIcon fas icon="sign-in-alt" /> Añadir</MDBDropdownToggle>
+                                                                {/* onClick={() => handleBook(card.id, "add")} */}
+                                                                <MDBDropdownMenu>
+                                                                    {[...Array(15)].map((x, i) =>
+                                                                        <MDBDropdownItem link key={i + 1} onClick={() => handleBook(card.id, "add", i + 1)}>{i + 1}</MDBDropdownItem>
+                                                                    )}
+                                                                </MDBDropdownMenu>
+                                                            </MDBDropdown>
                                                         </MDBCol>
                                                     </MDBRow>
 
