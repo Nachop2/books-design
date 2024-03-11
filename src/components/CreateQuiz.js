@@ -176,7 +176,7 @@ const CreateQuiz = ({ quizToBeEdited }) => {
             formData.append('_method', 'PUT');
 
             await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/test/` + quizToBeEdited.test_id, {
-                
+
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -196,7 +196,7 @@ const CreateQuiz = ({ quizToBeEdited }) => {
                 .catch(error => console.error('Error:', error));
         } else {
             await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/upload-test`, {
-                
+
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -219,245 +219,27 @@ const CreateQuiz = ({ quizToBeEdited }) => {
     }
 
 
-    const uploadJson = (event) => {
-        const file = event.target.files[0];
-
-        if (file.size === 0) {
-            console.error("El cuestionario a importar está vacío");
-            Swal.fire({
-                icon: "error",
-                title: "El cuestionario a importar está vacío",
-                showConfirmButton: true,
-            })
-            return;
-        }
-
-        let reader = new FileReader();
-        reader.onload = onReaderLoad;
-        reader.readAsText(file);
-
-        function onReaderLoad(event) {
-            const result = event.target.result;
-
-            // Verificar si el resultado es nulo o el archivo está vacío
-            if (!result) {
-                console.error("El cuestionario a importar está vacío");
-                Swal.fire({
-                    icon: "error",
-                    title: "El cuestionario importado está vacío",
-                    showConfirmButton: true,
-                })
-                return;
-            }
-
-            console.log(result);
-            const importedQuestions = JSON.parse(result);
-
-            // Verificar el formato del archivo
-            // if (!checkFileFormat(importedQuestions)) {
-            //     console.error("El formato del archivo es inválido");
-            //     Swal.fire({
-            //         icon: "error",
-            //         title: "El formato del archivo es inválido. Por favor, revise que su cuestionario esté bien escrito o no infringa ninguna norma",
-            //         showConfirmButton: true,
-            //     })
-            //     return;
-            // }
-
-            // Continuar con el procesamiento del archivo
-            setPreguntas(importedQuestions);
-            setIdPreguntaActual(importedQuestions.length + 1);
-            Swal.fire({
-                icon: "success",
-                title: "El cuestionario ha sido importado con éxito",
-                showConfirmButton: true,
-            })
-            console.log("El cuestionario ha sido importado con éxito")
-        }
-
-        function checkFileFormat(preguntas) {
-            // Verificar si el cuestionario es un arreglo
-            if (!Array.isArray(preguntas)) {
-                return false;
-            }
-
-            const idsUnicos = new Set();
-            const enunciadosUnicos = new Set();
-
-            // Verificar cada pregunta en el cuestionario
-            for (const pregunta of preguntas) {
-                // Comprobar si el ID de la pregunta es único
-                if (idsUnicos.has(pregunta.id)) {
-                    return false;
-                }
-                idsUnicos.add(pregunta.id);
-
-
-                // Comprobar si el enunciado de la pregunta es único
-                if (enunciadosUnicos.has(pregunta.enunciado)) {
-                    return false;
-                }
-                enunciadosUnicos.add(pregunta.enunciado);
-
-
-                // Comprobar si las respuestas no se repiten
-                const respuestasUnicas = new Set(pregunta.respuestas);
-                if (respuestasUnicas.size !== pregunta.respuestas.length) {
-                    return false; // Respuestas no son únicas, formato inválido
-                }
-
-                // Comprueba si cada respuesta es una cadena de texto
-                if (!pregunta.respuestas.every(respuesta => typeof respuesta === 'string')) {
-                    return false;
-                }
-
-
-                // Verificar si la pregunta tiene todas las propiedades necesarias y cumple el formato
-                if (
-                    typeof pregunta.enunciado !== "string" ||
-                    !Array.isArray(pregunta.respuestas) ||
-                    pregunta.respuestas.length < 2 ||
-                    typeof pregunta.respuestacorrecta !== "number" ||
-                    pregunta.respuestacorrecta < 0 ||
-                    pregunta.respuestacorrecta % 1 !== 0 ||
-                    pregunta.respuestacorrecta >= pregunta.respuestas.length ||
-                    typeof pregunta.favorita !== "boolean" ||
-                    typeof pregunta.id !== "number" ||
-                    pregunta.id % 1 !== 0 ||
-                    pregunta.id < 1
-                ) {
-                    return false;
-                }
-            }
-
-            // Si todas las preguntas pasan la verificación, el formato es válido
-            return true;
-        }
-    };
-
-
     return (
         <div className="d-flex justify-content-center align-content-center mt-5">
             <MDBCard>
                 <MDBCardHeader>
-                    <MDBTypography tag='h3' className="my-3">{quizToBeEdited ? 'Editar' : 'Crear'} cuestionario</MDBTypography>
+                    <MDBTypography tag='h3' className="my-3">{quizToBeEdited ? 'Editar' : 'Crear'} libro</MDBTypography>
                 </MDBCardHeader>
                 <MDBCardBody>
 
                     <MDBCardText>
                         {/* Título */}
-                        <MDBInput type='text' id='title' label='Título'/>
-
-                        {/* Visibilidad del test */}
-                        <div className="mt-4">
-                            <MDBTypography tag='h6'>Visibilidad</MDBTypography>
-                            <select className="form-select mb-4" id='type'
-                                value={selectedVisibility} onChange={handleVisibilityTypeSelect}>
-                                <option value="">-- Elige la visibilidad--</option>
-                                <option value="private">Privada</option>
-                                <option value="friend">Solo amigos</option>
-                                <option value="public">Publica</option>
-                            </select>
-                        </div>
+                        <MDBInput type='text' id='title' label='Título' />
+                        <MDBInput className="mt-4" type='text' id='ISBN' label='ISBN' />
+                        <MDBInput className="mt-4" type='text' id='Autor' label='Autor' />
 
                         {/* Descripción */}
-                        <MDBTextArea type='text' id='description' label='Descripción' rows={4} />
-                        {/* Categorías */}
-                        <div className="mt-4">
-                            <MDBTypography tag='h6'>Categorías</MDBTypography>
-                            <select className="form-select mb-4" id='category'
-                                value={selectedCategory} onChange={handleCategorySelect}>
-                                <option value="" selected>-- Elija las categorías del test --</option>
-                                {categories.map(category => (
-                                    <option value={`${category.name}`}>{category.name}</option>
-                                ))}
-                            </select>
-                            <MDBListGroup className="mt-3" id="categories">
-                                {selectedCategories.map(category => (
-                                    <MDBListGroupItem key={category.id} className="d-flex justify-content-between align-items-center">
-                                        {category.name}
-                                        {category.name === "Sin categorizar" ?
-                                            "" : <MDBIcon icon="times" color="danger" style={{ cursor: "pointer" }} onClick={() => handleCategoryDelete(category.id)} />}
-                                    </MDBListGroupItem>
-                                ))}
-                            </MDBListGroup>
-                        </div>
-
-
-                        {/* Tipo de pregunta */}
-                        <div className="mt-4">
-                            <MDBTypography tag='h6'>Preguntas</MDBTypography>
-                            <select className="form-select mb-4" id='type'
-                                value={selectedQuestionType} onChange={handleQuestionTypeSelect}>
-                                <option value="">-- Elige el tipo de pregunta --</option>
-                                <option value="Opcion multiple">Opción múltiple</option>
-                                {/* <option value="Multiple respuestas">Multiple respuestas</option> */}
-
-                                <option value="Verdadero / Falso">Verdadero / Falso</option>
-                                {/* <option value="Relacional">Relacional</option> */}
-                            </select>
-                        </div>
-
-                        {/* Enseñar pregunta según el tipo elegido */}
-                        {selectedQuestionType === 'Opcion multiple' && (
-                            <div>
-                                <MultipleChoiceMain />
-                            </div>
-                        )}
-                        {selectedQuestionType === 'Verdadero / Falso' && (
-                            <div>
-                                <TrueFalseMain />
-                            </div>
-                        )}
-                        {selectedQuestionType === 'Multiple respuestas' && (
-                            <div>
-                                <MultipleAnswerMain />
-                            </div>
-                        )}
-                        {selectedQuestionType === 'Relacional' && (
-                            <div>
-                                <p>Texto de muestra para Relacional</p>
-                            </div>
-                        )}
-
-
-                        {/* Importación de cuestionario */}
-                        <div className="mt-5">
-                            <MDBFile label="Importar cuestionario" id="avatar" name="avatar" accept=".json" onChange={uploadJson} />
-                        </div>
-
-
-                        <CreatedQuestions
-                            preguntas={preguntas}
-                            removeQuestion={removeQuestion}
-                        ></CreatedQuestions>
-
-                        <CheckQuestions
-                            preguntas={preguntas}
-                        ></CheckQuestions>
+                        <MDBTextArea className="mt-4" type='text' id='description' label='Descripción' rows={4} />
 
                         {/* Comprobar que solo se puede exportar o terminar cuestionarios si hay al menos una pregunta */}
-                        {preguntas.length > 0 && (
-                            <>
-                                <div className="mt-5">
-                                    <a id="downloadAnchorElem" href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(preguntas))}
-                                        download="preguntas.json">
-                                        <MDBBtn color="info" block>
-                                            <MDBIcon fas icon="file-export" /> Exportar cuestionario
-                                        </MDBBtn>
-                                    </a>
-                                </div>
-                                <MDBBtn type='submit' className='mt-4' block onClick={saveToAccount}>
-                                    <MDBIcon fas icon="check-double" /> Terminar cuestionario
-                                </MDBBtn>
-                            </>
-                        )}
-
-                        {/* {selectedQuestionType !== "" && (
-                            <MDBBtn type='submit' className='mb-4' block>
-                                Confirmar
-                            </MDBBtn>
-                        )} */}
+                        <MDBBtn type='submit' className='mt-4' block onClick={saveToAccount}>
+                            <MDBIcon fas icon="check-double" /> Crear libro
+                        </MDBBtn>
                     </MDBCardText>
                 </MDBCardBody>
             </MDBCard>
