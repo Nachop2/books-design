@@ -71,7 +71,6 @@ const Home = () => {
             //throw new Error("Failed to add books");
         } else {
             console.log(await response.json());
-            setCards([]);
             fetchBooks();
         }
     }
