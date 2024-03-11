@@ -83,9 +83,11 @@ const CreateQuiz = ({ quizToBeEdited }) => {
             ?.split('=')[1];
 
         const formData = new FormData();
-        formData.append('name', document.querySelector("#title").value);
-        formData.append('visibility', selectedVisibility);
-        formData.append('description', document.querySelector("#description").value);
+        formData.append('name', document.querySelector("#name").value);
+        formData.append('isbn', document.querySelector("#isbn").value);
+        formData.append('author', document.querySelector("#author").value);
+
+        //formData.append('description', document.querySelector("#description").value);
 
 
         console.log(formData);
@@ -114,21 +116,21 @@ const CreateQuiz = ({ quizToBeEdited }) => {
                 })
                 .catch(error => console.error('Error:', error));
         } else {
-            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/upload-test`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book`, {
 
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'X-XSRF-TOKEN': decodeURIComponent(csrfToken), // Include the CSRF token in the headers
                 },
-                credentials: 'include', // Include cookies for the domain
+                //credentials: 'include', // Include cookies for the domain
                 body: formData,
             })
                 .then(response => response.json())
                 .then(data => {
                     Swal.fire({
                         icon: "success",
-                        title: "El cuestionario ha sido subido a la plataforma con éxito",
+                        title: "El libro se subido a la plataforma con éxito",
                         showConfirmButton: true,
                     })
                 })
@@ -148,9 +150,9 @@ const CreateQuiz = ({ quizToBeEdited }) => {
 
                     <MDBCardText>
                         {/* Título */}
-                        <MDBInput type='text' id='title' label='Título' />
-                        <MDBInput className="mt-4" type='text' id='ISBN' label='ISBN' />
-                        <MDBInput className="mt-4" type='text' id='Autor' label='Autor' />
+                        <MDBInput type='text' id='name' label='Título' />
+                        <MDBInput className="mt-4" type='text' id='isbn' label='ISBN' />
+                        <MDBInput className="mt-4" type='text' id='author' label='Autor' />
 
                         {/* Descripción */}
                         <MDBTextArea className="mt-4" type='text' id='description' label='Descripción' rows={4} />
