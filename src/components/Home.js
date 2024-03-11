@@ -68,7 +68,7 @@ const Home = () => {
         });
         if (!response.ok) {
             console.log(response);
-            throw new Error("Failed to add books");
+            //throw new Error("Failed to add books");
         } else {
             console.log(await response.json());
             setCards([]);
