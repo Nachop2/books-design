@@ -153,6 +153,9 @@ const CreateQuiz = ({ quizToBeEdited }) => {
                         <MDBInput type='text' id='name' label='Título' />
                         <MDBInput className="mt-4" type='text' id='isbn' label='ISBN' />
                         <MDBInput className="mt-4" type='text' id='author' label='Autor' />
+                        <MDBInput className="mt-4" type='text' id='imprenta' label='Imprenta' />
+                        <MDBInput className="mt-4" type='number' id='price' label='Precio de compra' />
+                        <MDBInput className="mt-4" type='number' id='sellingAt' label='Precio de venta' />
 
                         {/* Descripción */}
                         <MDBTextArea className="mt-4" type='text' id='description' label='Descripción' rows={4} />
