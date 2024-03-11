@@ -76,66 +76,6 @@ const CreateQuiz = ({ quizToBeEdited }) => {
 
     }, []);
 
-    const handleCategoryDelete = (categoryId) => {
-        setSelectedCategories((prevCategories) => prevCategories.filter(category => category.id !== categoryId));
-    };
-
-    const handleCategorySelect = (event) => {
-        const selectedCategoryName = event.target.value;
-
-        if (selectedCategoryName && !selectedCategories.some(category => category.name === selectedCategoryName)) {
-            handleCategoryDelete(selectedCategories.find(category => category.name === "Sin categorizar")?.id);
-
-            const newCategory = {
-                id: categories.find(category => category.name === selectedCategoryName)?.id, // El ID sería idéntico al que le corresponde de la BD
-                name: selectedCategoryName,
-                created_at: categories.find(category => category.name === selectedCategoryName)?.created_at,
-                updated_at: categories.find(category => category.name === selectedCategoryName)?.updated_at
-            };
-
-            setSelectedCategories((prevCategories) => [...prevCategories, newCategory]);
-        }
-    };
-
-    const handleVisibilityTypeSelect = (event) => {
-        setSelectedVisibility(event.target.value);
-    };
-
-    const handleQuestionTypeSelect = (event) => {
-        setSelectedQuestionType(event.target.value);
-    };
-
-    const removeQuestion = (id) => {
-        Swal.fire({
-            title: `¿Borrar la pregunta nº${id}?`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#0ca104",
-            cancelButtonColor: "#d33",
-            cancelButtonText: "Cancelar",
-            confirmButtonText: "Sí, bórrala"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log("Aa" + id);
-                console.log(id);
-
-                // Hacer que las preguntas estén ordenadas, independientemente de cuál se borre:
-                setPreguntas(preguntas
-                    .filter((pregunta) => pregunta.id !== id)
-                    .map((pregunta, index) => ({ ...pregunta, id: index + 1 })));
-                setIdPreguntaActual(preguntas.length);
-
-                Swal.fire({
-                    title: "¡Eliminada!",
-                    text: "La pregunta fue eliminada correctamente",
-                    icon: "success"
-                });
-            }
-        });
-
-    }
-
-
     const saveToAccount = async () => {
         const csrfToken = document.cookie
             .split('; ')
@@ -146,27 +86,6 @@ const CreateQuiz = ({ quizToBeEdited }) => {
         formData.append('name', document.querySelector("#title").value);
         formData.append('visibility', selectedVisibility);
         formData.append('description', document.querySelector("#description").value);
-
-
-        let CategoryIDs = [];
-
-        selectedCategories.forEach(element => {
-            CategoryIDs.push(element.id);
-        });
-
-        console.log(CategoryIDs);
-
-        // Append each category ID individually
-        CategoryIDs.forEach((categoryId) => {
-            formData.append('category_ids[]', categoryId); // Notice 'category_ids[]' to denote it's an array
-        });
-
-        let blob = new Blob([JSON.stringify(preguntas)], { type: "application/json" });
-        let file = new File([blob], "preguntas.json", {
-            type: "application/json",
-            lastModified: new Date()
-        });
-        formData.append('test_file', file);
 
 
         console.log(formData);
