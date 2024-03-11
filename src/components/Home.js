@@ -58,7 +58,8 @@ const Home = () => {
         fetchBooks();
     }, []);
 
-    const handleBook = async (id, type, amount) => {
+    const handleBook = async (event, id, type, amount) => {
+        event.preventDefault();
         const formData = new FormData();
         formData.append('_method', "PUT");
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + type + '/' + id + '/' + amount, {
@@ -130,17 +131,17 @@ const Home = () => {
                                                     <MDBBadge pill light color='primary' className="p-2 me-2">
                                                         Cantidad: {card.stock}
                                                     </MDBBadge>
-                                                    <MDBBtn color="danger" className="ms-2" href="" onClick={() => handleBook(card.id, "sell", 1)}>
+                                                    <MDBBtn color="danger" className="ms-2" onClick={(e) => handleBook(e,card.id, "sell", 1)}>
                                                         <MDBIcon fas icon="dollar-sign" /> Vender
                                                     </MDBBtn>
                                                     <MDBDropdown>
 
 
-                                                        <MDBDropdownToggle color="success" className="ms-2" href="" ><MDBIcon fas icon="sign-in-alt" /> Añadir</MDBDropdownToggle>
+                                                        <MDBDropdownToggle color="success" className="ms-2" ><MDBIcon fas icon="sign-in-alt" /> Añadir</MDBDropdownToggle>
                                                         {/* onClick={() => handleBook(card.id, "add")} */}
                                                         <MDBDropdownMenu>
                                                             {[...Array(15)].map((x, i) =>
-                                                                <MDBDropdownItem link key={i + 1} onClick={() => handleBook(card.id, "add", i + 1)}>{i + 1}</MDBDropdownItem>
+                                                                <MDBDropdownItem link={true} key={i + 1} onClick={(e) => handleBook(e, card.id, "add", i + 1)}>{i + 1}</MDBDropdownItem>
                                                             )}
                                                         </MDBDropdownMenu>
                                                     </MDBDropdown>
