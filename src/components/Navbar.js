@@ -45,7 +45,7 @@ const Navbar = ({ userIsLoggedIn }) => {
                     <MDBIcon icon="bars" fas />
                 </MDBNavbarToggler>
 
-                <MDBCollapse navbar open={openBasic} style={{height: "fit-content;"}}>
+                <MDBCollapse navbar open={openBasic} style={{ height: "fit-content;" }}>
                     <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
                         <MDBNavbarItem>
                             <MDBNavbarLink href="/home">Inicio</MDBNavbarLink>
@@ -64,38 +64,35 @@ const Navbar = ({ userIsLoggedIn }) => {
                             </MDBDropdown>
                         </MDBNavbarItem> */}
                         <MDBNavbarItem>
-                        <div className="d-grid gap-2 p-1 d-lg-flex">
-                            {userIsLoggedIn ? (
-                                <>
-                                    <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/dashboard">
-                                        <MDBIcon fas icon="table" /> Menú
-                                    </MDBBtn>
-                                    <MDBBtn color="warning" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/quiz/create">
-                                        <MDBIcon fas icon="plus-circle" /> Crear cuestionario
-                                    </MDBBtn>
-                                    <MDBBtn color="info" onClick={onLogout}>
-                                        <MDBIcon fas icon="sign-out-alt" /> Cerrar sesión
-                                    </MDBBtn>
-                                </>
-                            ) : (
-                                <>
-                                    <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/login">
-                                        <MDBIcon fas icon="sign-in-alt" /> Iniciar sesión
-                                    </MDBBtn>
-                                    <MDBBtn color="success" href="/register">
-                                        <MDBIcon fas icon="user-plus" /> Registrarse
-                                    </MDBBtn>
-                                </>
-                            )}
-                        </div>
-                    </MDBNavbarItem>
+                            <div className="d-grid gap-2 p-1 d-lg-flex">
+                                {userIsLoggedIn ? (
+                                    <>
+                                        <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/dashboard">
+                                            <MDBIcon fas icon="table" /> Menú
+                                        </MDBBtn>
+                                        <MDBBtn color="warning" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/quiz/create">
+                                            <MDBIcon fas icon="plus-circle" /> Crear cuestionario
+                                        </MDBBtn>
+                                        <MDBBtn color="info" onClick={onLogout}>
+                                            <MDBIcon fas icon="sign-out-alt" /> Cerrar sesión
+                                        </MDBBtn>
+                                    </>
+                                ) : (
+                                    <>
+                                        <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/login">
+                                            <MDBIcon fas icon="sign-in-alt" /> Iniciar sesión
+                                        </MDBBtn>
+                                        <MDBBtn color="success" href="/register">
+                                            <MDBIcon fas icon="user-plus" /> Registrarse
+                                        </MDBBtn>
+                                    </>
+                                )}
+                            </div>
+                        </MDBNavbarItem>
                     </MDBNavbarNav>
 
-                    <form className="d-flex input-group my-2">
-                        <input type="search" className="form-control" placeholder="Search..." aria-label="Search" />
-                        <MDBBtn color="primary"><MDBIcon fas icon="search" /></MDBBtn>
-                    </form>
                     
+
                 </MDBCollapse>
             </MDBContainer>
         </MDBNavbar>

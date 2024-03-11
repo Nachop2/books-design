@@ -124,10 +124,19 @@ const Home = () => {
                 <div className="mt-5" key={index}>
                     <MDBCard>
                         <MDBCardHeader>
-                            
-
-
-
+                            <MDBRow>
+                                <MDBCol className="col-2">
+                                    <MDBTypography tag='h3' className="text-center my-3">
+                                        <MDBIcon fas icon={title.icon} /> {title.title}
+                                    </MDBTypography>
+                                </MDBCol>
+                                <MDBCol className="d-flex " style={{ alignItems: "center" }}>
+                                    <form className="input-group my-2">
+                                        <input type="search" className="form-control" placeholder="Search..." aria-label="Search" />
+                                        <MDBBtn color="primary"><MDBIcon fas icon="search" /></MDBBtn>
+                                    </form>
+                                </MDBCol>
+                            </MDBRow>
                         </MDBCardHeader>
                         <MDBCardBody>
                             <MDBCardText>
