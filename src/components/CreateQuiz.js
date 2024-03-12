@@ -19,7 +19,7 @@ import MultipleAnswerMain from "./CreateQuizComponents/MultipleAnswerComponents/
 import { CategoryContext } from "./CategoryContext";
 
 
-const CreateQuiz = ({ quizToBeEdited }) => {
+const CreateQuiz = ({ bookToBeEdited }) => {
     const { categories, setCategories } = useContext(CategoryContext);
     const { currentQuestionId, questions } = useContext(CreateQuizContext);
 
@@ -37,41 +37,30 @@ const CreateQuiz = ({ quizToBeEdited }) => {
     const [searchParams, setSearchParams] = useSearchParams();
 
 
-    useEffect(() => {
-        // Si la edición está activada, esto se encarga de recoger los datos de las categorías correspondientes
-        // y actualizar las categorías seleccionadas
-        const quizCategoryData = async (e) => {
-            if (quizToBeEdited && categories.length !== 0) {
-                const data = quizToBeEdited.category_names.map(category_name => {
-                    return categories.find(category => category.name === category_name);
-                });
-                setSelectedCategories(data);
-            }
-        }
-
-        quizCategoryData();
-    }, [categories]);
-
-
-    useEffect(() => {
-        // Regresa al estado por defecto para la lista de categorías seleccionadas si no hay ninguna
-        if (selectedCategories.length === 0) {
-            setSelectedCategories([{ id: 1, name: "Sin categorizar", created_at: "", updated_at: "" }]);
-        }
-    }, [selectedCategories]);
 
     useEffect(() => {
         // Si la edición está activada, esto se encarga de recoger los datos del test y actualizar
-        if (quizToBeEdited) {
-            setPreguntas(quizToBeEdited.questions);
-            setSelectedVisibility(quizToBeEdited.visibility);
-            setIdPreguntaActual(quizToBeEdited.questions.length + 1);
+        if (bookToBeEdited) {
+            document.querySelector("#name").value = bookToBeEdited.name;
+            document.querySelector("#name").classList.add("active");
 
-            document.querySelector("#title").value = quizToBeEdited.name;
-            document.querySelector("#title").classList.add("active");
+            document.querySelector("#isbn").value = bookToBeEdited.isbn;
+            document.querySelector("#isbn").classList.add("active");
 
-            document.querySelector("#description").value = quizToBeEdited.description;
-            document.querySelector("#description").classList.add("active");
+            document.querySelector("#author").value = bookToBeEdited.author;
+            document.querySelector("#author").classList.add("active");
+
+            document.querySelector("#imprenta").value = bookToBeEdited.imprenta;
+            document.querySelector("#imprenta").classList.add("active");
+
+            document.querySelector("#price").value = bookToBeEdited.price;
+            document.querySelector("#price").classList.add("active");
+
+            document.querySelector("#sellingAt").value = bookToBeEdited.sellingAt;
+            document.querySelector("#sellingAt").classList.add("active");
+
+            // document.querySelector("#description").value = bookToBeEdited.description;
+            // document.querySelector("#description").classList.add("active");
         }
 
     }, []);
@@ -94,12 +83,12 @@ const CreateQuiz = ({ quizToBeEdited }) => {
 
 
         console.log(formData);
-        if (quizToBeEdited) {
+        if (bookToBeEdited) {
 
             // Use method spoofing for Laravel, since using PUT doesn't work properly
             formData.append('_method', 'PUT');
 
-            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/test/` + quizToBeEdited.test_id, {
+            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/test/` + bookToBeEdited.test_id, {
 
                 method: 'POST',
                 headers: {
@@ -147,7 +136,7 @@ const CreateQuiz = ({ quizToBeEdited }) => {
         <div className="d-flex justify-content-center align-content-center mt-5">
             <MDBCard>
                 <MDBCardHeader>
-                    <MDBTypography tag='h3' className="my-3">{quizToBeEdited ? 'Editar' : 'Crear'} libro</MDBTypography>
+                    <MDBTypography tag='h3' className="my-3">{bookToBeEdited ? 'Editar' : 'Crear'} libro</MDBTypography>
                 </MDBCardHeader>
                 <MDBCardBody>
 
@@ -161,11 +150,11 @@ const CreateQuiz = ({ quizToBeEdited }) => {
                         <MDBInput className="mt-4" type='number' id='sellingAt' label='Precio de venta' />
 
                         {/* Descripción */}
-                        <MDBTextArea className="mt-4" type='text' id='description' label='Descripción' rows={4} />
+                        {/* <MDBTextArea className="mt-4" type='text' id='description' label='Descripción' rows={4} /> */}
 
                         {/* Comprobar que solo se puede exportar o terminar cuestionarios si hay al menos una pregunta */}
                         <MDBBtn type='submit' className='mt-4' block onClick={saveToAccount}>
-                            <MDBIcon fas icon="check-double" /> Crear libro
+                            <MDBIcon fas icon="check-double" /> {bookToBeEdited ? 'Guardar cambios' : 'Crear libro'}
                         </MDBBtn>
                     </MDBCardText>
                 </MDBCardBody>

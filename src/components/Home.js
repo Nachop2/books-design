@@ -21,10 +21,11 @@ import {
     MDBTypography
 } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const [cards, setCards] = useState([]);
-
+    const navigate = useNavigate();
     const fetchBooks = async () => {
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/books`, {
@@ -137,7 +138,7 @@ const Home = () => {
                                                     <MDBDropdown>
 
 
-                                                        <MDBDropdownToggle color="success" className="ms-2" ><MDBIcon fas icon="sign-in-alt" /> Añadir</MDBDropdownToggle>
+                                                        <MDBDropdownToggle color="success" className="ms-2" ><MDBIcon fas icon="plus" /> Añadir</MDBDropdownToggle>
                                                         {/* onClick={() => handleBook(card.id, "add")} */}
                                                         <MDBDropdownMenu>
                                                             {[...Array(15)].map((x, i) =>
@@ -145,7 +146,7 @@ const Home = () => {
                                                             )}
                                                         </MDBDropdownMenu>
                                                     </MDBDropdown>
-                                                    <MDBBtn color="primary" className="ps-3 pe-3 ms-2" onClick={(e) => {}}>
+                                                    <MDBBtn color="primary" className="ps-3 pe-3 ms-2" onClick={() => navigate(`/book/edit/${card.id}`)}>
                                                         <MDBIcon fas icon="pen"/>
                                                     </MDBBtn>
                                                 </MDBCol>
