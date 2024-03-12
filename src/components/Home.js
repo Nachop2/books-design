@@ -124,7 +124,7 @@ const Home = () => {
                                                             {name}
                                                         </MDBBadge>
                                                     ))}
-                                                    <MDBCardText>{card.text}</MDBCardText>
+                                                    {/* <MDBCardText>{card.text}</MDBCardText> */}
 
                                                 </MDBCol>
                                                 <MDBCol className="d-flex" style={{ justifyContent: "flex-end", alignItems: "center" }}>

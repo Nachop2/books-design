@@ -86,6 +86,9 @@ const CreateQuiz = ({ quizToBeEdited }) => {
         formData.append('name', document.querySelector("#name").value);
         formData.append('isbn', document.querySelector("#isbn").value);
         formData.append('author', document.querySelector("#author").value);
+        formData.append('imprenta', document.querySelector("#imprenta").value);
+        formData.append('price', document.querySelector("#price").value);
+        formData.append('sellingAt', document.querySelector("#sellingAt").value);
 
         //formData.append('description', document.querySelector("#description").value);
 
