@@ -145,6 +145,9 @@ const Home = () => {
                                                             )}
                                                         </MDBDropdownMenu>
                                                     </MDBDropdown>
+                                                    <MDBBtn color="primary" className="ps-3 pe-3 ms-2" onClick={(e) => {}}>
+                                                        <MDBIcon fas icon="pen"/>
+                                                    </MDBBtn>
                                                 </MDBCol>
                                             </MDBRow>
 
