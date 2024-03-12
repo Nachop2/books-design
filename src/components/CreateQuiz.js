@@ -53,6 +53,9 @@ const CreateQuiz = ({ bookToBeEdited }) => {
             document.querySelector("#imprenta").value = bookToBeEdited.imprenta;
             document.querySelector("#imprenta").classList.add("active");
 
+            document.querySelector("#stock").value = bookToBeEdited.stock;
+            document.querySelector("#stock").classList.add("active");
+
             document.querySelector("#price").value = bookToBeEdited.price;
             document.querySelector("#price").classList.add("active");
 
