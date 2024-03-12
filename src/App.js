@@ -44,7 +44,7 @@ function App() {
         if (token) {
             setUserIsLoggedIn(true);
             const role = JSON.parse(localStorage.getItem("USER")).role
-            if(role == "mod"|| role == "admin"){
+            if (role == "mod" || role == "admin") {
                 setUserIsMod(true)
             }
             console.log();
@@ -68,20 +68,23 @@ function App() {
                             {/* Rutas protegidas (comprueban si el usuario inició sesión) */}
                             <Route element={<ProtectedRoute />}>
                                 <Route element={<Dashboard userIsModOrAdmin={userIsMod} />} path="/dashboard" />
-                                <Route element={<EditQuiz />} path="/quiz/edit/:quizId" />
                             </Route>
-                            <Route element={<ChangePassword/>} path="/password-reset/:token"/>
+                            <Route element={<ChangePassword />} path="/password-reset/:token" />
                             <Route element={<GuestRoute />}>
                                 <Route element={<Login onLogin={handleLogin} />} path="/login" />
                                 <Route element={<Register onLogin={handleLogin} />} path="/register" />
                             </Route>
-                            <Route element={<CreateQuiz quizToBeEdited={null} />} path="/book/create" />
+
+
+                            <Route element={<CreateQuiz bookToBeEdited={null} />} path="/book/create" />
+                            <Route element={<EditQuiz />} path="/book/edit/:bookId" />
+
 
                             <Route element={<Quiz />} path="/quiz/play/:id" />
                             <Route element={<Privacy />} path="/privacy" />
                             <Route element={<Terms />} path="/terms" />
 
-                            <Route element={<RecoverPassword/>} path="/recover-password"/>
+                            <Route element={<RecoverPassword />} path="/recover-password" />
                             <Route element={<NotFound />} path="*" />
                         </Route>
                     </Routes>
