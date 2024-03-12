@@ -88,14 +88,14 @@ const CreateQuiz = ({ bookToBeEdited }) => {
             // Use method spoofing for Laravel, since using PUT doesn't work properly
             formData.append('_method', 'PUT');
 
-            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/test/` + bookToBeEdited.test_id, {
+            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + bookToBeEdited.id, {
 
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'X-XSRF-TOKEN': decodeURIComponent(csrfToken), // Include the CSRF token in the headers
                 },
-                credentials: 'include', // Include cookies for the domain
+                //credentials: 'include', // Include cookies for the domain
                 body: formData,
             })
                 .then(response => response.json())
