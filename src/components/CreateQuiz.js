@@ -76,6 +76,7 @@ const CreateQuiz = ({ bookToBeEdited }) => {
         formData.append('isbn', document.querySelector("#isbn").value);
         formData.append('author', document.querySelector("#author").value);
         formData.append('imprenta', document.querySelector("#imprenta").value);
+        formData.append('stock', document.querySelector("#stock").value);
         formData.append('price', document.querySelector("#price").value);
         formData.append('sellingAt', document.querySelector("#sellingAt").value);
 
@@ -146,6 +147,7 @@ const CreateQuiz = ({ bookToBeEdited }) => {
                         <MDBInput className="mt-4" type='text' id='isbn' label='ISBN' />
                         <MDBInput className="mt-4" type='text' id='author' label='Autor' />
                         <MDBInput className="mt-4" type='text' id='imprenta' label='Imprenta' />
+                        <MDBInput className="mt-4" type='number' id='stock' label='Cantidad' />
                         <MDBInput className="mt-4" type='number' id='price' label='Precio de compra' />
                         <MDBInput className="mt-4" type='number' id='sellingAt' label='Precio de venta' />
 
