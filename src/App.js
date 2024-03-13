@@ -22,6 +22,8 @@ import ChangePassword from "./components/ChangePassword";
 import RefreshLocation from "./components/utils/RefreshLocation";
 import RecoverPassword from "./components/RecoverPassword";
 
+import InvoicePDF from "./components/PDFInvoiceGen/React Invoice Generator";
+
 function App() {
     const navigate = useNavigate();
     const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
@@ -84,6 +86,7 @@ function App() {
 
                             <Route element={<RecoverPassword />} path="/recover-password" />
                             <Route element={<NotFound />} path="*" />
+                            <Route element={<InvoicePDF/>} path="/pdf"/>
                         </Route>
                     </Routes>
                 </CreateQuizContextProvider>
