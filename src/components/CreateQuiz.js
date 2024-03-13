@@ -135,6 +135,12 @@ const CreateQuiz = ({ bookToBeEdited }) => {
 
     }
 
+    // <div className="alert alert-danger" role="alert">
+    //     <h6>Has cometido los siguientes errores al registrarte:</h6>
+    //     {Object.keys(errors).map((key) => (
+    //         <p key={key}>{key}: {errors[key]}</p>
+    //     ))}
+    // </div>
 
     return (
         <div className="d-flex justify-content-center align-content-center mt-5">
@@ -162,6 +168,7 @@ const CreateQuiz = ({ bookToBeEdited }) => {
                             <MDBIcon fas icon="check-double" /> {bookToBeEdited ? 'Guardar cambios' : 'Crear libro'}
                         </MDBBtn>
                     </MDBCardText>
+
                 </MDBCardBody>
             </MDBCard>
         </div>
