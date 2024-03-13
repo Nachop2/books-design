@@ -90,6 +90,9 @@ const Navbar = ({ userIsLoggedIn }) => {
                                 <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/book/create">
                                     <MDBIcon fas icon="book" /> Añadir libro
                                 </MDBBtn>
+                                <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/book/create">
+                                    <MDBIcon fas icon="receipt" /> Crear factura
+                                </MDBBtn>
                             </div>
                         </MDBNavbarItem>
                     </MDBNavbarNav>
