@@ -100,7 +100,7 @@ const Home = () => {
                 Swal.fire({
                     icon: "success",
                     title: "El libro se elimino con éxito",
-                    showConfirmButton: true,
+                    timer: 1000
                 })
                 fetchBooks();
             }
