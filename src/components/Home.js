@@ -111,9 +111,13 @@ const Home = () => {
                                                             <div className='mask'></div>
                                                         </MDBCardLink>
                                                     </MDBRipple> */}
+                                        <div style={{ height: "0px", width: "0px" }}>
+                                            <div style={{ borderRadius: "100%", backgroundColor: "red", height: "20px", width: "20px" }} >
+                                                <MDBIcon style={{ height: "20px", width: "20px" }} fas icon="book-skull" />
+                                            </div>
+                                        </div><i class="fas fa-book-skull"></i>
 
                                         <MDBCardBody>
-
                                             <MDBRow>
                                                 <MDBCol>
                                                     {/* href={`/quiz/play/${card.id}`} */}
@@ -124,6 +128,7 @@ const Home = () => {
                                                         <MDBBadge pill light color='primary' className="mb-3 me-1">
                                                             {name}
                                                         </MDBBadge>
+
                                                     ))}
                                                     {/* <MDBCardText>{card.text}</MDBCardText> */}
 
@@ -132,8 +137,9 @@ const Home = () => {
                                                     <MDBBadge pill light color='primary' className="p-2 me-2">
                                                         Cantidad: {card.stock}
                                                     </MDBBadge>
-                                                    <MDBBtn color="danger" className="ms-2" onClick={(e) => handleBook(e,card.id, "sell", 1)}>
+                                                    <MDBBtn color="danger" className="ms-2" onClick={(e) => handleBook(e, card.id, "sell", 1)}>
                                                         <MDBIcon fas icon="dollar-sign" /> Vender
+                                                        <MDBIcon fas icon="calendar-xmark" />
                                                     </MDBBtn>
                                                     <MDBDropdown>
 
@@ -147,7 +153,7 @@ const Home = () => {
                                                         </MDBDropdownMenu>
                                                     </MDBDropdown>
                                                     <MDBBtn color="primary" className="ps-3 pe-3 ms-2" onClick={() => navigate(`/book/edit/${card.id}`)}>
-                                                        <MDBIcon fas icon="pen"/>
+                                                        <MDBIcon fas icon="pen" />
                                                     </MDBBtn>
                                                 </MDBCol>
                                             </MDBRow>
