@@ -90,9 +90,18 @@ const Home = () => {
             });
             if (!response.ok) {
                 console.log(response);
-                //throw new Error("Failed to add books");
+                Swal.fire({
+                    icon: "error",
+                    title: "Hubo un problema eliminando el libro",
+                    showConfirmButton: true,
+                })
             } else {
                 console.log(await response.json());
+                Swal.fire({
+                    icon: "success",
+                    title: "El libro se elimino con éxito",
+                    showConfirmButton: true,
+                })
                 fetchBooks();
             }
         }
