@@ -7,7 +7,6 @@ import Home from "./components/Home";
 import Category from "./components/Category";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Quiz from "./components/Quiz";
 import { MDBContainer } from "mdb-react-ui-kit";
 import "./css/main.css";
 import Dashboard from "./components/Dashboard";
@@ -80,7 +79,6 @@ function App() {
                             <Route element={<EditQuiz />} path="/book/edit/:bookId" />
 
 
-                            <Route element={<Quiz />} path="/quiz/play/:id" />
                             <Route element={<Privacy />} path="/privacy" />
                             <Route element={<Terms />} path="/terms" />
 
