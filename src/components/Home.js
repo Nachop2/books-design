@@ -22,6 +22,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Home = () => {
     const [cards, setCards] = useState([]);
@@ -76,6 +77,42 @@ const Home = () => {
             fetchBooks();
         }
     }
+    const handleDelete = async (event, id) => {
+        event.preventDefault();
+
+        const bookDelete = async () => {
+            const formData = new FormData();
+            formData.append('_method', "DELETE");
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + id, {
+                method: 'POST',
+                //credentials: 'include'
+                body: formData,
+            });
+            if (!response.ok) {
+                console.log(response);
+                //throw new Error("Failed to add books");
+            } else {
+                console.log(await response.json());
+                fetchBooks();
+            }
+        }
+
+        Swal.fire({
+            icon: "warning",
+            text: "AVISO: Está apunto de BORRAR un libro. Esto significa que no podrá volver a verlo o editarlo. ¿Está seguro de eliminarlo de nuestra base de datos?",
+            showCancelButton: true,
+            confirmButtonText: "Sí, estoy seguro",
+            confirmButtonColor: "green",
+            cancelButtonText: "Cancelar",
+            cancelButtonColor: "red"
+        }).then(result => {
+            if (result.isConfirmed) {
+                bookDelete();
+            }
+        })
+
+
+    }
 
     return (
 
@@ -112,10 +149,10 @@ const Home = () => {
                                                         </MDBCardLink>
                                                     </MDBRipple> */}
                                         <div style={{ height: "0px", width: "0px" }}>
-                                            <div style={{ borderRadius: "100%", backgroundColor: "red", height: "20px", width: "20px" }} >
-                                                <MDBIcon style={{ height: "20px", width: "20px" }} fas icon="book-skull" />
-                                            </div>
-                                        </div><i class="fas fa-book-skull"></i>
+                                            <MDBIcon fas icon="times-circle" className="text-danger xButtonCSS" size="lg"
+                                                onClick={(e) => handleDelete(e, card.id)}
+                                            />
+                                        </div>
 
                                         <MDBCardBody>
                                             <MDBRow>
@@ -139,7 +176,6 @@ const Home = () => {
                                                     </MDBBadge>
                                                     <MDBBtn color="danger" className="ms-2" onClick={(e) => handleBook(e, card.id, "sell", 1)}>
                                                         <MDBIcon fas icon="dollar-sign" /> Vender
-                                                        <MDBIcon fas icon="calendar-xmark" />
                                                     </MDBBtn>
                                                     <MDBDropdown>
 
