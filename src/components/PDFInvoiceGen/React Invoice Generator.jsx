@@ -9,27 +9,29 @@ const InvoicePDF = () => {
                 <div className="app">
                     <h1 className="center fs-30">React Invoice Generator</h1>
                     <div className="page invoice-wrapper">
-                        <div className="download-pdf " title="Save PDF"><a download="0000001.pdf" href="blob:https://tuanpham-dev.github.io/3aab8233-1285-4e4c-8544-adcb083a4a8a"></a></div>
+                        <div className="download-pdf " title="Save PDF">
+                            <a download="0000001.pdf" href="blob:https://tuanpham-dev.github.io/3aab8233-1285-4e4c-8544-adcb083a4a8a"></a>
+                        </div>
                         <div className="view flex">
                             <div className="view w-50">
                                 <div className="image  logo">
                                     <button type="button" className="image__upload">Your Logo</button>
                                     <input tabIndex="-1" type="file" accept="image/*" className="image__file"></input>
                                 </div>
-                                <input type="text" className="input fs-20 bold" placeholder="Your Company" value="Cabildo de Fuerteventura"> </input>
+                                <input type="text" className="input fs-20 bold" placeholder="Your Company" defaultValue="Cabildo de Fuerteventura"> </input>
                                 <input type="text" className="input " placeholder="Your Name"></input>
                                 <input type="text" className="input " placeholder="Company's Address"> </input>
                                 <input type="text" className="input " placeholder="City, State Zip"> </input>
                                 <input readOnly="readOnly" type="text" className="input " placeholder="" value="United States"> </input>
                             </div>
                             <div className="view w-50">
-                                <input type="text" className="input fs-45 right bold" placeholder="Invoice" value="Factura"></input>
+                                <input type="text" className="input fs-45 right bold" placeholder="Invoice" defaultValue="Factura"></input>
                             </div>
                         </div>
 
                         <div className="view flex mt-40">
                             <div className="view w-55">
-                                <input type="text" className="input bold dark mb-5" placeholder="" value="Factura para:"></input>
+                                <input type="text" className="input bold dark mb-5" placeholder="" defaultValue="Factura para:"></input>
                                 <input type="text" className="input " placeholder="Your Client's Name"></input>
                                 <input type="text" className="input " placeholder="Client's Address"></input>
                                 <input type="text" className="input " placeholder="City, State Zip"></input>
@@ -38,20 +40,20 @@ const InvoicePDF = () => {
                             <div className="view w-45">
                                 <div className="view flex mb-5">
                                     <div className="view w-40">
-                                        <input type="text" className="input bold" placeholder="" value="Invoice#"></input>
+                                        <input type="text" className="input bold" placeholder="" defaultValue="Invoice#"></input>
                                     </div>
                                     <div className="view w-60">
-                                        <input type="text" className="input " placeholder="INV-12" value="0000001"></input>
+                                        <input type="text" className="input " placeholder="INV-12" defaultValue="0000001"></input>
                                     </div>
                                 </div>
                                 <div className="view flex mb-5">
                                     <div className="view w-40">
-                                        <input type="text" className="input bold" placeholder="" value="Invoice Date"></input>
+                                        <input type="text" className="input bold" placeholder="" defaultValue="Invoice Date"></input>
                                     </div>
                                     <div className="view w-60">
                                         <div className="react-datepicker-wrapper">
                                             <div className="react-datepicker__input-container">
-                                                <input type="text" className="input " value="Mar 13, 2024"></input>
+                                                <input type="text" className="input " defaultValue="Mar 13, 2024"></input>
                                             </div>
                                         </div>
                                     </div>
@@ -72,13 +74,13 @@ const InvoicePDF = () => {
                         </div>
                         <div className="view mt-30 bg-dark flex">
                             <div className="view w-48 p-4-8">
-                                <input type="text" className="input white bold" placeholder="" value="Item Description"></input></div>
+                                <input type="text" className="input white bold" placeholder="" defaultValue="Item Description"></input></div>
                             <div className="view w-17 p-4-8">
-                                <input type="text" className="input white bold right" placeholder="" value="Cantidad"></input></div>
+                                <input type="text" className="input white bold right" placeholder="" defaultValue="Cantidad"></input></div>
                             <div className="view w-17 p-4-8">
-                                <input type="text" className="input white bold right" placeholder="" value="Precio Ud."></input></div>
+                                <input type="text" className="input white bold right" placeholder="" defaultValue="Precio Ud."></input></div>
                             <div className="view w-18 p-4-8">
-                                <input type="text" className="input white bold right" placeholder="" value="Total"></input></div>
+                                <input type="text" className="input white bold right" placeholder="" defaultValue="Total"></input></div>
                         </div>
                         <div className="view row flex">
                             <div className="view w-48 p-4-8 pb-10">
