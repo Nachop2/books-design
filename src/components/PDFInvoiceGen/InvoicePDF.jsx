@@ -7,7 +7,6 @@ const InvoicePDF = () => {
 
             <div id="root">
                 <div className={style.app}>
-                    <h1 className={`${style.center} ${style.fs30}`}>React Invoice Generator</h1>
                     <div className={`page ${style.invoiceWrapper}`} >
                         <div className={style.downloadPDF} title="Save PDF">
                             <a download="0000001.pdf" href="blob:https://tuanpham-dev.github.io/3aab8233-1285-4e4c-8544-adcb083a4a8a"></a>
@@ -96,7 +95,7 @@ const InvoicePDF = () => {
                                 <span className={`${style.span} ${style.dark} ${style.right}`}>200.00</span>
                             </div>
                             <button className={`${style.link} ${style.row__remove}`} aria-label="Remove Row" title="Remove Row">
-                                <span className="icon icon-remove bg-red"></span></button>
+                                <span className={`${style.icon} ${style.iconRemove} ${style.bgred}`}></span></button>
                         </div>
                         <div className={`view ${style.row} ${style.flex}`}>
                             <div className={`view ${style.w48} ${style.p48} ${style.pb10}`}>
@@ -112,14 +111,14 @@ const InvoicePDF = () => {
                                 <span className={`${style.span} ${style.dark} ${style.right}`}>10.00</span>
                             </div>
                             <button className={`${style.link} ${style.row__remove}`} aria-label="Remove Row" title="Remove Row">
-                                <span className="icon icon-remove bg-red"></span >
+                                <span className={`${style.icon} ${style.iconRemove} ${style.bgred}`}></span >
                             </button >
                         </div >
 
                         <div className={`view ${style.flex}`}>
                             <div className={`view ${style.w50} ${style.mt10}`}>
-                                <button className="link">
-                                    <span className="icon icon-add bg-green mr-10"></span>
+                                <button className={`${style.link}`}>
+                                    <span className={` ${style.icon} ${style.iconAdd} ${style.bggreen} ${style.mr10}`}></span>
                                     Add Line Item
                                 </button>
                             </div>
@@ -151,14 +150,16 @@ const InvoicePDF = () => {
                                 </div>
                             </div>
 
-                            <div className={`view ${style.mt20}`}>
-                                <input type="text" className={`${style.input} ${style.bold} ${style.w100}`} placeholder="" defaultValue="Notas adicionales"></input>
-                                <textarea className={`${style.input} ${style.w100}`} placeholder="" style={{ height: 48 + "px" }}></textarea>
-                            </div>
-                            <div className={`view ${style.mt20}`}>
-                                <input type="text" className={`${style.input} ${style.bold} ${style.w100}`} placeholder="" defaultValue="Terminos y condiciones"></input>
-                                <textarea className={`${style.input} ${style.w100}`} placeholder="" style={{ height: 48 + "px" }}></textarea>
-                            </div>
+
+
+                        </div>
+                        <div className={`view ${style.mt20}`}>
+                            <input type="text" className={`${style.input} ${style.bold} ${style.w100}`} placeholder="" defaultValue="Notas adicionales"></input>
+                            <textarea className={`${style.input} ${style.w100}`} placeholder="" style={{ height: 48 + "px" }}></textarea>
+                        </div>
+                        <div className={`view ${style.mt20}`}>
+                            <input type="text" className={`${style.input} ${style.bold} ${style.w100}`} placeholder="" defaultValue="Terminos y condiciones"></input>
+                            <textarea className={`${style.input} ${style.w100}`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                     </div >
                 </div >
@@ -261,7 +262,7 @@ const InvoicePDF = () => {
     //                             value="100.00"></div>
     //                     <div className={`view ${style.w18} ${style.p48} ${style.pb10}`}><span className={`${style.span} ${style.dark} ${style.right}`}>200.00</span></div><button
     //                         className={`${style.link} ${style.row__remove}`} aria-label="Remove Row" title="Remove Row"><span
-    //                             className="icon icon-remove bg-red"></span></button>
+    //                             className={`${style.icon} ${style.iconRemove} ${style.bgred}`}></span></button>
     //                 </div>
     //                 <div className={`view ${style.row} ${style.flex}`}>
     //                     <div className={`view w-48 ${style.p48} ${style.pb10}`}><textarea className={`${style.input} ${style.dark}`}
@@ -272,7 +273,7 @@ const InvoicePDF = () => {
     //                             value="10.00"></div>
     //                     <div className={`view ${style.w18} ${style.p48} ${style.pb10}`}><span className={`${style.span} ${style.dark} ${style.right}`}>10.00</span></div><button
     //                         className={`${style.link} ${style.row__remove}`} aria-label="Remove Row" title="Remove Row"><span
-    //                             className="icon icon-remove bg-red"></span ></button >
+    //                             className={`${style.icon} ${style.iconRemove} ${style.bgred}`}></span ></button >
     //                 </div >
     //                 <div className={`view ${style.flex}`}>
     //                     <div className={`view w-50 mt-10"><button className="link"><span

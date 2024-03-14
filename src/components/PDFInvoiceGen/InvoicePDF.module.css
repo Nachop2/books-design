@@ -18,11 +18,11 @@
     background-color: #e3e3e3
 }
 
-.bg-red {
+.bgred {
     background-color: #f03434
 }
 
-.bg-green {
+.bggreen {
     background-color: #26a65b
 }
 
@@ -194,7 +194,7 @@ h1 {
     margin-bottom: 5px
 }
 
-.mr-10 {
+.mr10 {
     margin-right: 10px
 }
 
@@ -255,8 +255,8 @@ h1 {
     position: absolute
 }
 
-.icon-remove:after,
-.icon-remove:before {
+.iconRemove:after,
+.iconRemove:before {
     content: "";
     position: absolute;
     width: 2px;
@@ -266,18 +266,18 @@ h1 {
     background-color: #fff
 }
 
-.icon-remove:before {
+.iconRemove:before {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg)
 }
 
-.icon-remove:after {
+.iconRemove:after {
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg)
 }
 
-.icon-add:after,
-.icon-add:before {
+.iconAdd:after,
+.iconAdd:before {
     content: "";
     position: absolute;
     width: 2px;
@@ -287,7 +287,7 @@ h1 {
     background-color: #fff
 }
 
-.icon-add:after {
+.iconAdd:after {
     -webkit-transform: rotate(-90deg);
     transform: rotate(-90deg)
 }
