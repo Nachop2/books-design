@@ -34,11 +34,11 @@
     display: flex
 }
 
-.w-auto {
+.wauto {
     width: auto !important
 }
 
-.w-100 {
+.w100 {
     width: 100% !important
 }
 
@@ -198,7 +198,7 @@ h1 {
     margin-right: 10px
 }
 
-.ml-30 {
+.ml30 {
     margin-left: 30px
 }
 
