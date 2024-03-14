@@ -22,7 +22,7 @@ import ChangePassword from "./components/ChangePassword";
 import RefreshLocation from "./components/utils/RefreshLocation";
 import RecoverPassword from "./components/RecoverPassword";
 
-import InvoicePDF from "./components/PDFInvoiceGen/React Invoice Generator";
+import InvoicePDF from "./components/PDFInvoiceGen/InvoicePDF";
 
 function App() {
     const navigate = useNavigate();
