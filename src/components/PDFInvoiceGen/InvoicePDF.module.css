@@ -130,11 +130,11 @@ textarea {
     background: transparent;
     border-radius: 3px;
     outline: 0
+
+    
 }
-p.invoice{
-    color: red !important
-}
-p {
+
+p{
     font-family: Nunito, sans-serif;
     font-size: 14px;
     color: #555;
