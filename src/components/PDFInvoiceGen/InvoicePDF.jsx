@@ -1,4 +1,5 @@
 import style from "./InvoicePDF.module.css"
+import cabildo from "./logo-cabildo-i2.webp"
 const InvoicePDF = () => {
     return (
 
@@ -9,13 +10,12 @@ const InvoicePDF = () => {
                 <div className={style.app}>
                     <div className={`page ${style.invoiceWrapper}`} >
                         <div className={style.downloadPDF} title="Save PDF">
-                            <a download="0000001.pdf" href="blob:https://tuanpham-dev.github.io/3aab8233-1285-4e4c-8544-adcb083a4a8a"></a>
+                            <a download="0000001.pdf" href=""></a>
                         </div>
                         <div className={`view ${style.flex}`}>
                             <div className={`view ${style.w50}`}>
-                                <div className={`logo ${style.image}`}>
-                                    <button type="button" className={style.image__upload}>Your Logo</button>
-                                    <input tabIndex="-1" type="file" accept="image/*" className={style.image__file}></input>
+                                <div className={`logo ${style.image} ${style.mb5}`}>
+                                    <img className={`${style.image__img}`} src={cabildo} alt="logo" style={{maxWidth:100+"px"}}></img>
                                 </div>
                                 <input type="text" className={`${style.fs20} ${style.bold} ${style.input}`} placeholder="Your Company" defaultValue="Cabildo de Fuerteventura"></input>
                                 <input type="text" className={`${style.input}`} placeholder="Your Name"></input>
