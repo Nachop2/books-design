@@ -1,151 +1,157 @@
-import style from "./InvoicePDF.module.css"
+import styles from "./InvoicePDF.module.css"
+import TextPDF from "./TextPDF"
 import cabildo from "./logo-cabildo-i2.webp"
 const InvoicePDF = () => {
     return (
-
         <>
             <title>React Invoice Generator</title>
 
             <div id="root">
-                <div className={style.app}>
-                    <div className={`page ${style.invoiceWrapper}`} >
-                        <div className={style.downloadPDF} title="Save PDF">
+                <div className={styles.app}>
+                    <div className={`page ${styles.invoiceWrapper}`} >
+                        <div className={styles.downloadPDF} title="Save PDF">
                             <a download="0000001.pdf" href=""></a>
                         </div>
-                        <div className={`view ${style.flex}`}>
-                            <div className={`view ${style.w50}`}>
-                                <div className={`logo ${style.image} ${style.mb5}`}>
-                                    <img className={`${style.image__img}`} src={cabildo} alt="logo" style={{maxWidth:100+"px"}}></img>
+                        <div className={`view ${styles.flex}`}>
+                            <div className={`view ${styles.w50}`}>
+                                <div className={`logo ${styles.image} ${styles.mb5}`}>
+                                    <img className={`${styles.image__img}`} src={cabildo} alt="logo" style={{ maxWidth: 100 + "px" }}></img>
                                 </div>
-                                <input type="text" className={`${style.fs20} ${style.bold} ${style.input}`} placeholder="Your Company" defaultValue="Cabildo de Fuerteventura"></input>
-                                <input type="text" className={`${style.input}`} placeholder="Your Name"></input>
-                                <input type="text" className={`${style.input}`} placeholder="Company's Address"></input>
-                                <input type="text" className={`${style.input}`} placeholder="City, State Zip"></input>
-                                <input readOnly="readOnly" type="text" className={`${style.input}`} placeholder="" value="United States"></input>
+                                <TextPDF text="Cabildo de Fuerteventura" styling={`${styles.fs20} ${styles.bold} ${styles.input}`}></TextPDF>
+                                <TextPDF text="Uweeeeeeeeeu" styling={styles.input}></TextPDF>
+                                <input type="text" className={`${styles.input}`} placeholder="Your Name"></input>
+                                <input type="text" className={`${styles.input}`} placeholder="Company's Address"></input>
+                                <input type="text" className={`${styles.input}`} placeholder="City, State Zip"></input>
+                                <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input>
                             </div>
-                            <div className={`view ${style.w50}`}>
-                                <input type="text" className={`${style.input} ${style.fs45} ${style.right} ${style.bold}`} placeholder="Invoice" defaultValue="Factura"></input>
+                            <div className={`view ${styles.w50}`}>
+                                <TextPDF text="Factura" styling={`${styles.input} ${styles.fs45} ${styles.right} ${styles.bold}`}></TextPDF>
+
                             </div>
                         </div>
 
-                        <div className={`view ${style.flex} ${style.mt40}`}>
-                            <div className={`view ${style.w55}`}>
-                                <input type="text" className={`${style.input} ${style.bold} ${style.dark} ${style.mb5}`} placeholder="" defaultValue="Factura para:"></input>
-                                <input type="text" className={`${style.input}`} placeholder="Your Client's Name"></input>
-                                <input type="text" className={`${style.input}`} placeholder="Client's Address"></input>
-                                <input type="text" className={`${style.input}`} placeholder="City, State Zip"></input>
-                                <input readOnly="readOnly" type="text" className={`${style.input}`} placeholder="" value="Spain"></input>
+                        <div className={`view ${styles.flex} ${styles.mt40}`}>
+                            <div className={`view ${styles.w55}`}>
+                                <TextPDF text="Factura para:" styling={`${styles.input} ${styles.bold} ${styles.dark} ${styles.mb5}`}></TextPDF>
+                                <input type="text" className={`${styles.input}`} placeholder="Your Client's Name"></input>
+                                <input type="text" className={`${styles.input}`} placeholder="Client's Address"></input>
+                                <input type="text" className={`${styles.input}`} placeholder="City, State Zip"></input>
+                                <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="Spain"></input>
                             </div>
-                            <div className={`view ${style.w45}`}>
+                            <div className={`view ${styles.w45}`}>
                                 <div className={`view flex mb-5`}>
-                                    <div className={`view ${style.w40}`}>
-                                        <input type="text" className={`${style.input} ${style.bold}`} placeholder="" defaultValue="Invoice#"></input>
+                                    <div className={`view ${styles.w40}`}>
+                                        <TextPDF text="Invoice#" styling={`${styles.input}  ${styles.bold}`}></TextPDF>
                                     </div>
-                                    <div className={`view ${style.w60}`}>
-                                        <input type="text" className={`${style.input}`} placeholder="INV-12" defaultValue="0000001"></input>
+                                    <div className={`view ${styles.w60}`}>
+                                        <TextPDF text="0000001" styling={styles.input}></TextPDF>
                                     </div>
                                 </div>
-                                <div className={`view ${style.flex} ${style.mb5}`}>
-                                    <div className={`view ${style.w40}`}>
-                                        <input type="text" className={`${style.input} ${style.bold}`} placeholder="" defaultValue="Invoice Date"></input>
+                                <div className={`view ${styles.flex} ${styles.mb5}`}>
+                                    <div className={`view ${styles.w40}`}>
+                                        <input type="text" className={`${styles.input} ${styles.bold}`} placeholder="" defaultValue="Invoice Date"></input>
                                     </div>
-                                    <div className={`view ${style.w60}`}>
+                                    <div className={`view ${styles.w60}`}>
                                         <div className="react-datepicker-wrapper">
                                             <div className="react-datepicker__input-container">
-                                                <input type="text" className={`${style.input}`} defaultValue="Mar 13, 2024"></input>
+                                                <input type="text" className={`${styles.input}`} defaultValue="Mar 13, 2024"></input>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`view ${style.flex} ${style.mb5}`}>
-                                    <div className={`view ${style.w40}`}>
-                                        <input type="text" className={`${style.input} ${style.bold}`} placeholder="" defaultValue="Due Date"></input>
+                                <div className={`view ${styles.flex} ${styles.mb5}`}>
+                                    <div className={`view ${styles.w40}`}>
+                                        <input type="text" className={`${styles.input} ${styles.bold}`} placeholder="" defaultValue="Due Date"></input>
                                     </div>
-                                    <div className={`view ${style.w60}`}>
+                                    <div className={`view ${styles.w60}`}>
                                         <div className="react-datepicker-wrapper">
                                             <div className="react-datepicker__input-container">
-                                                <input type="text" className={`${style.input}`} defaultValue="Apr 12, 2024"></input>
+                                                <input type="text" className={`${styles.input}`} defaultValue="Apr 12, 2024"></input>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className={`view ${style.mt30} ${style.bgdark} ${style.flex}`}>
-                            <div className={`view ${style.w48} ${style.p48}`}>
-                                <input type="text" className={`${style.input} ${style.white} ${style.bold}`} placeholder="" defaultValue="Item Description"></input></div>
-                            <div className={`view ${style.w17} ${style.p48}`}>
-                                <input type="text" className={`${style.input} ${style.white} ${style.bold} ${style.right}`} placeholder="" defaultValue="Cantidad"></input></div>
-                            <div className={`view ${style.w17} ${style.p48}`}>
-                                <input type="text" className={`${style.input} ${style.white} ${style.bold} ${style.right}`} placeholder="" defaultValue="Precio Ud."></input></div>
-                            <div className={`view ${style.w18} ${style.p48}`}>
-                                <input type="text" className={`${style.input} ${style.white} ${style.bold} ${style.right}`} placeholder="" defaultValue="Total"></input></div>
+                        <div className={`view ${styles.mt30} ${styles.bgdark} ${styles.flex}`}>
+                            <div className={`view ${styles.w48} ${styles.p48}`}>
+                                <TextPDF text="Libros" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
+                            </div>
+                            <div className={`view ${styles.w17} ${styles.p48}`}>
+                                <TextPDF text="Cantidad" styling={`${styles.input} ${styles.white} ${styles.bold} ${styles.right}`}></TextPDF>
+                            </div>
+                            <div className={`view ${styles.w17} ${styles.p48}`}>
+                                <TextPDF text="Precio Ud." styling={`${styles.input} ${styles.white} ${styles.bold} ${styles.right}`}></TextPDF>
+                            </div>
+                            <div className={`view ${styles.w18} ${styles.p48}`}>
+                                <TextPDF text="Total" styling={`${styles.input} ${styles.white} ${styles.bold} ${styles.right}`}></TextPDF>
+                            </div>
                         </div>
-                        <div className={`view ${style.row} ${style.flex}`}>
-                            <div className={`view ${style.w48} ${style.p48} ${style.pb10}`}>
-                                <textarea className={`${style.input} ${style.dark}`} placeholder="Enter item name/description" style={{ height: 48 + "px" }}></textarea>
+                        <div className={`view ${styles.row} ${styles.flex}`}>
+                            <div className={`view ${styles.w48} ${styles.p48} ${styles.pb10}`}>
+                                <textarea className={`${styles.input} ${styles.dark}`} placeholder="Enter item name/description" style={{ height: 48 + "px" }}></textarea>
                             </div>
-                            <div className={`view ${style.w17} ${style.p48} ${style.pb10}`}>
-                                <input type="text" className={`${style.input} ${style.dark} ${style.right}`} placeholder="" defaultValue="2"></input>
+                            <div className={`view ${styles.w17} ${styles.p48} ${styles.pb10}`}>
+                                <input type="text" className={`${styles.input} ${styles.dark} ${styles.right}`} placeholder="" defaultValue="2"></input>
                             </div>
-                            <div className={`view ${style.w17} ${style.p48} ${style.pb10}`}>
-                                <input type="text" className={`${style.input} ${style.dark} ${style.right}`} placeholder="" defaultValue="100.00"></input>
+                            <div className={`view ${styles.w17} ${styles.p48} ${styles.pb10}`}>
+                                <input type="text" className={`${styles.input} ${styles.dark} ${styles.right}`} placeholder="" defaultValue="100.00"></input>
                             </div>
-                            <div className={`view ${style.w18} ${style.p48} ${style.pb10}`}>
-                                <span className={`${style.span} ${style.dark} ${style.right}`}>200.00</span>
+                            <div className={`view ${styles.w18} ${styles.p48} ${styles.pb10}`}>
+                                <span className={`${styles.span} ${styles.dark} ${styles.right}`}>200.00</span>
                             </div>
-                            <button className={`${style.link} ${style.row__remove}`} aria-label="Remove Row" title="Remove Row">
-                                <span className={`${style.icon} ${style.iconRemove} ${style.bgred}`}></span></button>
+                            <button className={`${styles.link} ${styles.row__remove}`} aria-label="Remove Row" title="Remove Row">
+                                <span className={`${styles.icon} ${styles.iconRemove} ${styles.bgred}`}></span></button>
                         </div>
-                        <div className={`view ${style.row} ${style.flex}`}>
-                            <div className={`view ${style.w48} ${style.p48} ${style.pb10}`}>
-                                <textarea className={`${style.input} ${style.dark}`} placeholder="Enter item name/description" style={{ height: 48 + "px" }}></textarea>
+                        <div className={`view ${styles.row} ${styles.flex}`}>
+                            <div className={`view ${styles.w48} ${styles.p48} ${styles.pb10}`}>
+                                <textarea className={`${styles.input} ${styles.dark}`} placeholder="Enter item name/description" style={{ height: 48 + "px" }}></textarea>
                             </div>
-                            <div className={`view ${style.w17} ${style.p48} ${style.pb10}`}>
-                                <input type="text" className={`${style.input} ${style.dark} ${style.right}`} placeholder="" defaultValue="1"></input>
+                            <div className={`view ${styles.w17} ${styles.p48} ${styles.pb10}`}>
+                                <input type="text" className={`${styles.input} ${styles.dark} ${styles.right}`} placeholder="" defaultValue="1"></input>
                             </div>
-                            <div className={`view ${style.w17} ${style.p48} ${style.pb10}`}>
-                                <input type="text" className={`${style.input} ${style.dark} ${style.right}`} placeholder="" defaultValue="10.00"></input>
+                            <div className={`view ${styles.w17} ${styles.p48} ${styles.pb10}`}>
+                                <input type="text" className={`${styles.input} ${styles.dark} ${styles.right}`} placeholder="" defaultValue="10.00"></input>
                             </div>
-                            <div className={`view ${style.w18} ${style.p48} ${style.pb10}`}>
-                                <span className={`${style.span} ${style.dark} ${style.right}`}>10.00</span>
+                            <div className={`view ${styles.w18} ${styles.p48} ${styles.pb10}`}>
+                                <span className={`${styles.span} ${styles.dark} ${styles.right}`}>10.00</span>
                             </div>
-                            <button className={`${style.link} ${style.row__remove}`} aria-label="Remove Row" title="Remove Row">
-                                <span className={`${style.icon} ${style.iconRemove} ${style.bgred}`}></span >
+                            <button className={`${styles.link} ${styles.row__remove}`} aria-label="Remove Row" title="Remove Row">
+                                <span className={`${styles.icon} ${styles.iconRemove} ${styles.bgred}`}></span >
                             </button >
                         </div >
 
-                        <div className={`view ${style.flex}`}>
-                            <div className={`view ${style.w50} ${style.mt10}`}>
-                                <button className={`${style.link}`}>
-                                    <span className={` ${style.icon} ${style.iconAdd} ${style.bggreen} ${style.mr10}`}></span>
+                        <div className={`view ${styles.flex}`}>
+                            <div className={`view ${styles.w50} ${styles.mt10}`}>
+                                <button className={`${styles.link}`}>
+                                    <span className={` ${styles.icon} ${styles.iconAdd} ${styles.bggreen} ${styles.mr10}`}></span>
                                     Add Line Item
                                 </button>
                             </div>
-                            <div className={`view ${style.w50} ${style.mt20}`}>
-                                <div className={`view ${style.flex}`}>
-                                    <div className={`view ${style.w50} ${style.p5}`}>
-                                        <input type="text" className={`${style.input}`} placeholder="" defaultValue="Total sin impuestos"></input>
+                            <div className={`view ${styles.w50} ${styles.mt20}`}>
+                                <div className={`view ${styles.flex}`}>
+                                    <div className={`view ${styles.w50} ${styles.p5}`}>
+                                        <input type="text" className={`${styles.input}`} placeholder="" defaultValue="Total sin impuestos"></input>
                                     </div>
-                                    <div className={`view ${style.w50} ${style.p5}`}>
-                                        <span className={`${style.span} ${style.right} ${style.bold} ${style.dark}`}>210.00</span>
-                                    </div>
-                                </div>
-                                <div className={`view ${style.flex}`}>
-                                    <div className={`view ${style.w50} ${style.p5}`}>
-                                        <input type="text" className={`${style.input}`} placeholder="" defaultValue="Impuestos (21%)"></input>
-                                    </div>
-                                    <div className={`view ${style.w50} ${style.p5}`}>
-                                        <span className={`${style.span} ${style.right} ${style.bold} ${style.dark}`}>44.10</span>
+                                    <div className={`view ${styles.w50} ${styles.p5}`}>
+                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>210.00</span>
                                     </div>
                                 </div>
-                                <div className={`view ${style.flex} ${style.bggray} ${style.p5}`}>
-                                    <div className={`view ${style.w50} ${style.p5}`}>
-                                        <input type="text" className={`${style.input} ${style.bold}`} placeholder="" defaultValue="TOTAL"></input>
+                                <div className={`view ${styles.flex}`}>
+                                    <div className={`view ${styles.w50} ${styles.p5}`}>
+                                        <input type="text" className={`${styles.input}`} placeholder="" defaultValue="Impuestos (21%)"></input>
                                     </div>
-                                    <div className={`view ${style.w50} ${style.p5} ${style.flex}`}>
-                                        <input type="text" className={`${style.input} ${style.dark} ${style.bold} ${style.right} ${style.ml30}`} placeholder="" defaultValue="€"></input>
-                                        <span className={`${style.span} ${style.right} ${style.bold} ${style.dark} ${style.wauto}`}>254.10</span>
+                                    <div className={`view ${styles.w50} ${styles.p5}`}>
+                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>44.10</span>
+                                    </div>
+                                </div>
+                                <div className={`view ${styles.flex} ${styles.bggray} ${styles.p5}`}>
+                                    <div className={`view ${styles.w50} ${styles.p5}`}>
+                                        <input type="text" className={`${styles.input} ${styles.bold}`} placeholder="" defaultValue="TOTAL"></input>
+                                    </div>
+                                    <div className={`view ${styles.w50} ${styles.p5} ${styles.flex}`}>
+                                        <input type="text" className={`${styles.input} ${styles.dark} ${styles.bold} ${styles.right} ${styles.ml30}`} placeholder="" defaultValue="€"></input>
+                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark} ${styles.wauto}`}>254.10</span>
                                     </div>
                                 </div>
                             </div>
@@ -153,13 +159,13 @@ const InvoicePDF = () => {
 
 
                         </div>
-                        <div className={`view ${style.mt20}`}>
-                            <input type="text" className={`${style.input} ${style.bold} ${style.w100}`} placeholder="" defaultValue="Notas adicionales"></input>
-                            <textarea className={`${style.input} ${style.w100}`} placeholder="" style={{ height: 48 + "px" }}></textarea>
+                        <div className={`view ${styles.mt20}`}>
+                            <input type="text" className={`${styles.input} ${styles.bold} ${styles.w100}`} placeholder="" defaultValue="Notas adicionales"></input>
+                            <textarea className={`${styles.input} ${styles.w100}`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
-                        <div className={`view ${style.mt20}`}>
-                            <input type="text" className={`${style.input} ${style.bold} ${style.w100}`} placeholder="" defaultValue="Terminos y condiciones"></input>
-                            <textarea className={`${style.input} ${style.w100}`} placeholder="" style={{ height: 48 + "px" }}></textarea>
+                        <div className={`view ${styles.mt20}`}>
+                            <input type="text" className={`${styles.input} ${styles.bold} ${styles.w100}`} placeholder="" defaultValue="Terminos y condiciones"></input>
+                            <textarea className={`${styles.input} ${styles.w100}`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                     </div >
                 </div >
