@@ -1,8 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { CreateQuizContext } from "./CreateQuizComponents/CreateQuizContext";
 import { useParams, useSearchParams } from "react-router-dom";
-import CreatedQuestions from "./CreateQuizComponents/CreatedQuestions";
-import CheckQuestions from "./CreateQuizComponents/CheckQuestions";
 import Swal from "sweetalert2";
 import {
     MDBBtn, MDBCard,
@@ -13,15 +10,11 @@ import {
     MDBTypography
 } from "mdb-react-ui-kit";
 
-import MultipleChoiceMain from "./CreateQuizComponents/MultipleChoiceComponents/MultipleChoiceMain";
-import TrueFalseMain from "./CreateQuizComponents/TrueFalseComponents/TrueFalseMain";
-import MultipleAnswerMain from "./CreateQuizComponents/MultipleAnswerComponents/MultipleAnswerMain";
 import { CategoryContext } from "./CategoryContext";
 
 
 const CreateQuiz = ({ bookToBeEdited }) => {
     const { categories, setCategories } = useContext(CategoryContext);
-    const { currentQuestionId, questions } = useContext(CreateQuizContext);
 
 
     const [selectedCategory, setSelectedCategory] = useState(""); // Controla la opción seleccionada del desplegable de categorías
