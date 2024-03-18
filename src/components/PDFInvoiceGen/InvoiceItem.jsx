@@ -8,7 +8,7 @@ import {
     MDBDropdownToggle,
 } from "mdb-react-ui-kit";
 
-const InvoiceItem = ({styles, item, handleQuantity, index }) => {
+const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, index }) => {
     let price = item.price
     price = price.toFixed(2);
     let total = (price * item.chosenQuantity).toFixed(2);
@@ -25,7 +25,7 @@ const InvoiceItem = ({styles, item, handleQuantity, index }) => {
 
                 <select value={item.chosenQuantity} className={`${styles.select} ${styles.dark} ${styles.right}`}>
                     {[...Array(15)].map((x, i) =>
-                        <option value={i + 1} onClick={(e) => handleQuantity(index,(i + 1))}>{i + 1}</option>
+                        <option value={i + 1} onClick={(e) => handleQuantity(index, (i + 1))}>{i + 1}</option>
                     )}
                 </select>
 
@@ -45,7 +45,8 @@ const InvoiceItem = ({styles, item, handleQuantity, index }) => {
             <div className={`view ${styles.w18} ${styles.p48} ${styles.pb10}`}>
                 <TextPDF text={total + "€"} styling={`${styles.span} ${styles.dark} ${styles.right}`}></TextPDF>
             </div>
-            <button className={`${styles.link} ${styles.row__remove}`} aria-label="Remove Row" title="Remove Row">
+            <button className={`${styles.link} ${styles.row__remove}`} aria-label="Remove Row" title="Remove Row"
+            onClick={()=>{handleDelete(index)}}>
                 <span className={`${styles.icon} ${styles.iconRemove} ${styles.bgred}`}></span></button>
         </div>
     )

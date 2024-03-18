@@ -28,6 +28,21 @@ const InvoicePDF = () => {
         itemCopy[index].chosenQuantity = quantity
         setItems(itemCopy);
     }
+    const handleDelete = (index) => {
+        let itemCopy = [...items];
+        itemCopy.splice(index, 1)
+        setItems(itemCopy);
+    }
+    const handleAdd = () => {
+        console.log("e");
+        let itemCopy = [...items];
+        itemCopy.push({
+            id: 4,
+            chosenQuantity: 4,
+            price: 20
+        })
+        setItems(itemCopy);
+    }
 
     let totalNoTax = 0;
     items.forEach(element => {
@@ -129,7 +144,10 @@ const InvoicePDF = () => {
 
                         {
                             items.map((e, index) => {
-                                return <InvoiceItem styles={styles} item={e} handleQuantity={handleQuantity} index={index}></InvoiceItem>
+                                return <InvoiceItem styles={styles} item={e}
+                                    handleQuantity={handleQuantity}
+                                    handleDelete={handleDelete}
+                                    index={index}></InvoiceItem>
                             })
                         }
 
@@ -137,7 +155,8 @@ const InvoicePDF = () => {
 
                         <div className={`view ${styles.flex}`}>
                             <div className={`view ${styles.w50} ${styles.mt10}`}>
-                                <button className={`${styles.link}`}>
+                                <button className={`${styles.link}`}
+                                onClick={() => handleAdd()}>
                                     <span className={` ${styles.icon} ${styles.iconAdd} ${styles.bggreen} ${styles.mr10}`}></span>
                                     Add Line Item
                                 </button>
