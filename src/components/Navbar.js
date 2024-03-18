@@ -82,9 +82,6 @@ const Navbar = ({ userIsLoggedIn }) => {
                                         <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/login">
                                             <MDBIcon fas icon="sign-in-alt" /> Iniciar sesión
                                         </MDBBtn>
-                                        <MDBBtn color="success" href="/register">
-                                            <MDBIcon fas icon="user-plus" /> Registrarse
-                                        </MDBBtn>
                                     </>
                                 )}
                                 <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/book/create">
