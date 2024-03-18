@@ -3,6 +3,37 @@ import TextPDF from "./TextPDF"
 import cabildo from "./logo-cabildo-i2.webp"
 import InvoiceItem from "./InvoiceItem"
 const InvoicePDF = () => {
+
+    const items = [
+        {
+            id: 1,
+            chosenQuantity: 1,
+            price: 10
+        },
+        {
+            id: 4,
+            chosenQuantity: 4,
+            price: 20
+        },
+        {
+            id: 1,
+            chosenQuantity: 2,
+            price: 100
+        }
+    ]
+
+    
+    let totalNoTax = 0;
+    items.forEach(element => {
+        totalNoTax += element.price * element.chosenQuantity
+    });
+    let taxes = totalNoTax*0.21
+    let total = taxes + totalNoTax
+    totalNoTax = totalNoTax.toFixed(2) + "€";
+    taxes = taxes.toFixed(2) + "€";
+    total = total.toFixed(2) + "€";
+
+
     return (
         <>
             <title>React Invoice Generator</title>
@@ -90,11 +121,14 @@ const InvoicePDF = () => {
                                 <TextPDF text="Total" styling={`${styles.input} ${styles.white} ${styles.bold} ${styles.right}`}></TextPDF>
                             </div>
                         </div>
-                        
-                        <InvoiceItem styles={styles} quantity={3} price={10}></InvoiceItem>
-                        <InvoiceItem styles={styles} quantity={2} price={100}></InvoiceItem>
-                        <InvoiceItem styles={styles} quantity={1} price={5}></InvoiceItem>
-                        
+
+
+                       {
+                        items.map((e) => {
+                            return <InvoiceItem styles={styles} quantity={e.chosenQuantity} price={e.price}></InvoiceItem>
+                        })
+                       }
+
 
 
                         <div className={`view ${styles.flex}`}>
@@ -110,7 +144,7 @@ const InvoicePDF = () => {
                                         <TextPDF text="Total sin impuestos" styling={`${styles.input}`}></TextPDF>
                                     </div>
                                     <div className={`view ${styles.w50} ${styles.p5}`}>
-                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>210.00€</span>
+                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>{totalNoTax}</span>
                                     </div>
                                 </div>
                                 <div className={`view ${styles.flex}`}>
@@ -118,7 +152,7 @@ const InvoicePDF = () => {
                                         <TextPDF text="Impuestos (21%)" styling={`${styles.input}`}></TextPDF>
                                     </div>
                                     <div className={`view ${styles.w50} ${styles.p5}`}>
-                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>44.10€</span>
+                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>{taxes}</span>
                                     </div>
                                 </div>
                                 <div className={`view ${styles.flex} ${styles.bggray} ${styles.p5}`}>
@@ -129,7 +163,7 @@ const InvoicePDF = () => {
                                     <div className={`view ${styles.w50} ${styles.p5} ${styles.flex}`}>
                                         <TextPDF text="" styling={`${styles.input} ${styles.dark} ${styles.bold} ${styles.right} ${styles.ml30}`}></TextPDF>
 
-                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark} ${styles.wauto}`}>254.10€</span>
+                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark} ${styles.wauto}`}>{total}</span>
                                     </div>
                                 </div>
                             </div>
