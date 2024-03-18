@@ -2,9 +2,9 @@ import styles from "./InvoicePDF.module.css"
 import TextPDF from "./TextPDF"
 import cabildo from "./logo-cabildo-i2.webp"
 import InvoiceItem from "./InvoiceItem"
+import { useState } from "react"
 const InvoicePDF = () => {
-
-    const items = [
+    const [items, setItems] = useState([
         {
             id: 1,
             chosenQuantity: 1,
@@ -20,14 +20,20 @@ const InvoicePDF = () => {
             chosenQuantity: 2,
             price: 100
         }
-    ]
+    ]);
 
-    
+
+    const handleQuantity = (index, quantity) => {
+        let itemCopy = [...items];
+        itemCopy[index].chosenQuantity = quantity
+        setItems(itemCopy);
+    }
+
     let totalNoTax = 0;
     items.forEach(element => {
         totalNoTax += element.price * element.chosenQuantity
     });
-    let taxes = totalNoTax*0.21
+    let taxes = totalNoTax * 0.21
     let total = taxes + totalNoTax
     totalNoTax = totalNoTax.toFixed(2) + "€";
     taxes = taxes.toFixed(2) + "€";
@@ -123,11 +129,11 @@ const InvoicePDF = () => {
                         </div>
 
 
-                       {
-                        items.map((e) => {
-                            return <InvoiceItem styles={styles} quantity={e.chosenQuantity} price={e.price}></InvoiceItem>
-                        })
-                       }
+                        {
+                            items.map((e, index) => {
+                                return <InvoiceItem styles={styles} item={e} handleQuantity={handleQuantity} index={index}></InvoiceItem>
+                            })
+                        }
 
 
 
