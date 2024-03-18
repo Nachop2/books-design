@@ -3,7 +3,7 @@
 }
 
 .white {
-    color: #fff
+    color: #fff !important
 }
 
 .bg-white {
@@ -130,11 +130,9 @@ textarea {
     background: transparent;
     border-radius: 3px;
     outline: 0
-
-    
 }
 
-p{
+.input {
     font-family: Nunito, sans-serif;
     font-size: 14px;
     color: #555;
@@ -142,6 +140,7 @@ p{
     border-radius: 3px;
     outline: 0
 }
+
 
 
 button {
