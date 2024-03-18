@@ -87,9 +87,7 @@ const InvoicePDF = () => {
                                 </div>
                                 <div className={`view ${styles.flex} ${styles.mb5}`}>
                                     <div className={`view ${styles.w40}`}>
-                                        <input type="text" className={`${styles.input} ${styles.bold}`} placeholder="" defaultValue="Invoice Date"></input>
-                                        {/* <TextPDF text="Invoice Date" styling={`${styles.input} ${styles.bold}`}></TextPDF> */}
-
+                                        <TextPDF text="Invoice Date" styling={`${styles.input} ${styles.bold}`}></TextPDF>
                                     </div>
                                     <div className={`view ${styles.w60}`}>
                                         <div className="react-datepicker-wrapper">
@@ -101,7 +99,7 @@ const InvoicePDF = () => {
                                 </div>
                                 <div className={`view ${styles.flex} ${styles.mb5}`}>
                                     <div className={`view ${styles.w40}`}>
-                                        <input type="text" className={`${styles.input} ${styles.bold}`} placeholder="" defaultValue="Due Date"></input>
+                                        <TextPDF text="Due Date" styling={`${styles.input} ${styles.bold}`}></TextPDF>
                                     </div>
                                     <div className={`view ${styles.w60}`}>
                                         <div className="react-datepicker-wrapper">
