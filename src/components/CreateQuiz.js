@@ -16,17 +16,6 @@ import { CategoryContext } from "./CategoryContext";
 const CreateQuiz = ({ bookToBeEdited }) => {
     const { categories, setCategories } = useContext(CategoryContext);
 
-
-    const [selectedCategory, setSelectedCategory] = useState(""); // Controla la opción seleccionada del desplegable de categorías
-    const [selectedQuestionType, setSelectedQuestionType] = useState("");
-    const [selectedVisibility, setSelectedVisibility] = useState(""); // Controla la opción seleccionada del desplegable de visibilidad
-    const [selectedCategories, setSelectedCategories] = useState([ // Lista de categorías seleccionadas
-        { id: 1, name: "Sin categorizar", created_at: "", updated_at: "" }
-    ]);
-
-    const { preguntas, setPreguntas } = questions;
-    const { idPreguntaActual, setIdPreguntaActual } = currentQuestionId;
-
     const [searchParams, setSearchParams] = useSearchParams();
 
 
