@@ -18,7 +18,7 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, index }) => {
     return (
         <div className={`view ${styles.row} ${styles.flex}`}>
             <div className={`view ${styles.w48} ${styles.p48} ${styles.pb10}`}>
-                <textarea className={`${styles.input} ${styles.dark}`} placeholder="Enter item name/description" style={{ height: 48 + "px" }}></textarea>
+                <TextPDF text={item.title} styling={`${styles.input} ${styles.dark}`}></TextPDF>
             </div>
             <div className={`view ${styles.w17} ${styles.p48} ${styles.pb10}`}>
                 {/* <TextPDF text={quantity} styling={`${styles.input} ${styles.dark} ${styles.right}`}></TextPDF> */}
@@ -46,7 +46,7 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, index }) => {
                 <TextPDF text={total + "€"} styling={`${styles.span} ${styles.dark} ${styles.right}`}></TextPDF>
             </div>
             <button className={`${styles.link} ${styles.row__remove}`} aria-label="Remove Row" title="Remove Row"
-            onClick={()=>{handleDelete(index)}}>
+                onClick={() => { handleDelete(index) }}>
                 <span className={`${styles.icon} ${styles.iconRemove} ${styles.bgred}`}></span></button>
         </div>
     )
