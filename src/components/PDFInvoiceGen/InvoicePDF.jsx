@@ -2,7 +2,7 @@ import styles from "./InvoicePDF.module.css"
 import TextPDF from "./TextPDF"
 import cabildo from "./logo-cabildo-i2.webp"
 import InvoiceItem from "./InvoiceItem"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import CardList from "../CardList"
 import {
     MDBBtn,
@@ -17,61 +17,74 @@ import {
 } from 'mdb-react-ui-kit';
 import CardMenu from "../CardComponents/CardMenu"
 import CardSearch from "../CardComponents/CardSearch"
+import { BookInvoiceContext } from "../BookInvoiceContext"
 const InvoicePDF = () => {
-
+    const { invoiceBooks, setInvoiceBooks } = useContext(BookInvoiceContext)
     const [basicModal, setBasicModal] = useState(false);
 
     const toggleOpen = () => setBasicModal(!basicModal);
+    const [items, setItems] = useState([]);
+    const [prices, setPrices] = useState(["0.00€", "0.00€", "0.00€"])
 
-    const [items, setItems] = useState([
-        {
-            id: 1,
-            chosenQuantity: 1,
-            price: 10
-        },
-        {
-            id: 4,
-            chosenQuantity: 4,
-            price: 20
-        },
-        {
-            id: 1,
-            chosenQuantity: 2,
-            price: 100
-        }
-    ]);
+
+
+    useEffect(() => {
+
+        let totalNoTax = 0;
+
+        invoiceBooks.forEach(element => {
+            totalNoTax += element.price * element.chosenQuantity
+            console.log(element);
+        });
+        let taxes = totalNoTax * 0.24;
+        let total = taxes + totalNoTax
+
+        totalNoTax = totalNoTax.toFixed(2) + "€";
+        taxes = taxes.toFixed(2) + "€";
+        total = total.toFixed(2) + "€";
+        setBasicModal(false);
+        setItems(invoiceBooks)
+        setPrices([totalNoTax, taxes, total]);
+    }, [invoiceBooks]);
+    // console.log(bookTest());
+
+
+    // const [items, setItems] = useState([
+    //     {
+    //         id: 1,
+    //         chosenQuantity: 1,
+    //         price: 10
+    //     },
+    //     {
+    //         id: 4,
+    //         chosenQuantity: 4,
+    //         price: 20
+    //     },
+    //     {
+    //         id: 1,
+    //         chosenQuantity: 2,
+    //         price: 100
+    //     }
+    // ]);
 
 
     const handleQuantity = (index, quantity) => {
         let itemCopy = [...items];
         itemCopy[index].chosenQuantity = quantity
-        setItems(itemCopy);
+        setInvoiceBooks(itemCopy);
     }
     const handleDelete = (index) => {
         let itemCopy = [...items];
+        console.log(itemCopy)
         itemCopy.splice(index, 1)
-        setItems(itemCopy);
-    }
-    const handleAdd = () => {
-        console.log("e");
-        let itemCopy = [...items];
-        itemCopy.push({
-            id: 4,
-            chosenQuantity: 4,
-            price: 20
-        })
-        setItems(itemCopy);
+        console.log(itemCopy)
+
+        setInvoiceBooks(itemCopy);
+
     }
 
-    let totalNoTax = 0;
-    items.forEach(element => {
-        totalNoTax += element.price * element.chosenQuantity
-    });
-    let taxes = totalNoTax * 0.21
-    let total = taxes + totalNoTax
-    totalNoTax = totalNoTax.toFixed(2) + "€";
-    taxes = taxes.toFixed(2) + "€";
-    total = total.toFixed(2) + "€";
+
+
 
 
     return (
@@ -174,8 +187,8 @@ const InvoicePDF = () => {
 
                         <div className={`view ${styles.flex}`}>
                             <div className={`view ${styles.w50} ${styles.mt10}`}>
-                                
-                                <MDBBtn color={"success"} onClick={()=> {toggleOpen();handleAdd()}} className="px-3"> <MDBIcon fas icon="plus" className="me-2"/>Añadir Libro</MDBBtn>
+
+                                <MDBBtn color={"success"} onClick={() => { toggleOpen() }} className="px-3"> <MDBIcon fas icon="plus" className="me-2" />Añadir Libro</MDBBtn>
                                 <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex='-1'>
                                     <MDBModalDialog centered={true} size="lg">
                                         <MDBModalContent>
@@ -196,7 +209,7 @@ const InvoicePDF = () => {
                                         <TextPDF text="Total sin impuestos" styling={`${styles.input}`}></TextPDF>
                                     </div>
                                     <div className={`view ${styles.w50} ${styles.p5}`}>
-                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>{totalNoTax}</span>
+                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>{prices[0]}</span>
                                     </div>
                                 </div>
                                 <div className={`view ${styles.flex}`}>
@@ -204,7 +217,7 @@ const InvoicePDF = () => {
                                         <TextPDF text="Impuestos (21%)" styling={`${styles.input}`}></TextPDF>
                                     </div>
                                     <div className={`view ${styles.w50} ${styles.p5}`}>
-                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>{taxes}</span>
+                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>{prices[1]}</span>
                                     </div>
                                 </div>
                                 <div className={`view ${styles.flex} ${styles.bggray} ${styles.p5}`}>
@@ -215,7 +228,7 @@ const InvoicePDF = () => {
                                     <div className={`view ${styles.w50} ${styles.p5} ${styles.flex}`}>
                                         <TextPDF text="" styling={`${styles.input} ${styles.dark} ${styles.bold} ${styles.right} ${styles.ml30}`}></TextPDF>
 
-                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark} ${styles.wauto}`}>{total}</span>
+                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark} ${styles.wauto}`}>{prices[2]}</span>
                                     </div>
                                 </div>
                             </div>
