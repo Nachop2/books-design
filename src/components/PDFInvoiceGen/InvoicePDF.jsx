@@ -23,7 +23,6 @@ const InvoicePDF = () => {
     const [basicModal, setBasicModal] = useState(false);
 
     const toggleOpen = () => setBasicModal(!basicModal);
-    const [items, setItems] = useState([]);
     const [prices, setPrices] = useState(["0.00€", "0.00€", "0.00€"])
 
 
@@ -43,44 +42,18 @@ const InvoicePDF = () => {
         taxes = taxes.toFixed(2) + "€";
         total = total.toFixed(2) + "€";
         setBasicModal(false);
-        setItems(invoiceBooks)
         setPrices([totalNoTax, taxes, total]);
     }, [invoiceBooks]);
-    // console.log(bookTest());
-
-
-    // const [items, setItems] = useState([
-    //     {
-    //         id: 1,
-    //         chosenQuantity: 1,
-    //         price: 10
-    //     },
-    //     {
-    //         id: 4,
-    //         chosenQuantity: 4,
-    //         price: 20
-    //     },
-    //     {
-    //         id: 1,
-    //         chosenQuantity: 2,
-    //         price: 100
-    //     }
-    // ]);
-
 
     const handleQuantity = (index, quantity) => {
-        let itemCopy = [...items];
+        let itemCopy = [...invoiceBooks];
         itemCopy[index].chosenQuantity = quantity
         setInvoiceBooks(itemCopy);
     }
     const handleDelete = (index) => {
-        let itemCopy = [...items];
-        console.log(itemCopy)
+        let itemCopy = [...invoiceBooks];
         itemCopy.splice(index, 1)
-        console.log(itemCopy)
-
         setInvoiceBooks(itemCopy);
-
     }
 
 
@@ -175,7 +148,7 @@ const InvoicePDF = () => {
 
 
                         {
-                            items.map((e, index) => {
+                            invoiceBooks.map((e, index) => {
                                 return <InvoiceItem styles={styles} item={e}
                                     handleQuantity={handleQuantity}
                                     handleDelete={handleDelete}
