@@ -3,7 +3,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import GuestRoute from "./components/GuestRoute";
 import Layout from "./components/layouts/Layout";
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
+import CardList from "./components/CardList";
 import Category from "./components/Category";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -61,7 +61,7 @@ function App() {
                             {/* Redirige a "/home" desde la ruta raíz, "/" */}
                             <Route element={<Navigate to="/home" replace />} path="/" />
 
-                            <Route element={<Home />} path="/home" />
+                            <Route element={<CardList />} path="/home" />
                             <Route element={<Category />} path="/category/:categoryName/:pageNumber" />
 
                             {/* Rutas protegidas (comprueban si el usuario inició sesión) */}
