@@ -1,33 +1,59 @@
 import { createContext, useEffect, useState } from "react";
 
-const BookInvoiceContext = createContext();
+const BookInvoiceContext = createContext(null);
 
 const BookInvoiceContextProvider = ({ children }) => {
-    const [categories, setCategories] = useState([]);
+    const [invoiceBooks, setInvoiceBooks] = useState([]);
 
-    // Conseguir los datos de las categorías existentes:
-    useEffect(() => {
-        const fetchCategories = async () => {
-            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/categories`, {
-                
-                method: 'GET'
+    const fetchBook = async () => {
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/categories`, {
+
+            method: 'GET'
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setInvoiceBooks(data);
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    setCategories(data);
-                })
-                .catch(error => console.error("error", error));
-        };
+            .catch(error => console.error("error", error));
+    };
 
-        fetchCategories();
-    }, []);
+    const bookTest = async (id) => {
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + id, {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            .then(book => {
+                console.log(book);
+                //setInvoiceBooks(data);
+
+
+                const prepareCards = {
+                    id: book.id,
+                    title: book.name,
+                    stock: book.stock,
+                    chosenQuantity: 1,
+                    text: book.description || "Sin descripción",
+                    price: parseInt(book.sellingAt),
+                    category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
+                    //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
+                };
+
+                let invoiceCopy = [...invoiceBooks];
+                invoiceCopy.push(prepareCards)
+                console.log(invoiceCopy);
+
+                setInvoiceBooks(invoiceCopy);
+            })
+            .catch(error => console.error("error", error));
+        console.log(invoiceBooks);
+    }
 
     return (
-        <BookInvoiceContext.Provider value={{ categories, setCategories }}>
+        <BookInvoiceContext.Provider value={{ list: setInvoiceBooks, setInvoiceBooks, bookTest, invoiceBooks }}>
             {children}
         </BookInvoiceContext.Provider>
     );
 }
 
-export { BookInvoiceContext, BookInvoiceContextProvider};
+export { BookInvoiceContext, BookInvoiceContextProvider };
