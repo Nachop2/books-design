@@ -40,7 +40,7 @@ const CardMenu = ({ enabledButtons = true }) => {
     }, []);
 
     const handleBook = async (event, id, type, amount) => {
-        event.preventDefault();
+        //event.preventDefault();
         const formData = new FormData();
         formData.append('_method', "PUT");
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + type + '/' + id + '/' + amount, {
