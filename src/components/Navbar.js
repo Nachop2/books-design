@@ -5,10 +5,11 @@ import {
     MDBIcon, MDBNavbar, MDBNavbarBrand, MDBNavbarItem, MDBNavbarLink, MDBNavbarNav, MDBNavbarToggler
 } from "mdb-react-ui-kit";
 import logo from "../images/logo.png";
-import { CategoryContext } from "./CategoryContext";
+// import { CategoryContext } from "./CategoryContext";
+
 
 const Navbar = ({ userIsLoggedIn }) => {
-    const { categories, setCategories } = useContext(CategoryContext);
+    // const { categories, setCategories } = useContext(CategoryContext);
     const navigate = useNavigate();
     const [openBasic, setOpenBasic] = useState(false);
 

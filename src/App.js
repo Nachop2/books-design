@@ -15,7 +15,7 @@ import Terms from "./components/Terms";
 import CreateQuiz from "./components/CreateQuiz";
 import { useEffect, useState } from "react";
 import NotFound from "./components/NotFound";
-import { CategoryContextProvider } from "./components/CategoryContext";
+import { BookInvoiceContextProvider } from "./components/BookInvoiceContext";
 import EditQuiz from "./components/EditQuiz";
 import ChangePassword from "./components/ChangePassword";
 import RefreshLocation from "./components/utils/RefreshLocation";
@@ -53,7 +53,7 @@ function App() {
 
     return (
         <MDBContainer className="p-0" style={{ height: "100vh" }}>
-            <CategoryContextProvider>
+            <BookInvoiceContextProvider>
                     {/* <RefreshLocation/> */}
                     <Navbar userIsLoggedIn={userIsLoggedIn} />
                     <Routes>
@@ -87,7 +87,7 @@ function App() {
                             <Route element={<InvoicePDF/>} path="/pdf"/>
                         </Route>
                     </Routes>
-            </CategoryContextProvider>
+            </BookInvoiceContextProvider>
         </MDBContainer>
     );
 }

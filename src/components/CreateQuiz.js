@@ -10,11 +10,9 @@ import {
     MDBTypography
 } from "mdb-react-ui-kit";
 
-import { CategoryContext } from "./CategoryContext";
 
 
 const CreateQuiz = ({ bookToBeEdited }) => {
-    const { categories, setCategories } = useContext(CategoryContext);
 
     const [searchParams, setSearchParams] = useSearchParams();
 

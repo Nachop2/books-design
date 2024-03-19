@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 
-const CategoryContext = createContext();
+const BookInvoiceContext = createContext();
 
-const CategoryContextProvider = ({ children }) => {
+const BookInvoiceContextProvider = ({ children }) => {
     const [categories, setCategories] = useState([]);
 
     // Conseguir los datos de las categorías existentes:
@@ -24,10 +24,10 @@ const CategoryContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <CategoryContext.Provider value={{ categories, setCategories }}>
+        <BookInvoiceContext.Provider value={{ categories, setCategories }}>
             {children}
-        </CategoryContext.Provider>
+        </BookInvoiceContext.Provider>
     );
 }
 
-export { CategoryContext, CategoryContextProvider };
+export { BookInvoiceContext, BookInvoiceContextProvider};

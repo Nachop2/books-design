@@ -175,7 +175,7 @@ const InvoicePDF = () => {
                         <div className={`view ${styles.flex}`}>
                             <div className={`view ${styles.w50} ${styles.mt10}`}>
                                 
-                                <MDBBtn color={"success"} onClick={toggleOpen} className="px-3"> <MDBIcon fas icon="plus" className="me-2"/>Añadir Libro</MDBBtn>
+                                <MDBBtn color={"success"} onClick={()=> {toggleOpen();handleAdd()}} className="px-3"> <MDBIcon fas icon="plus" className="me-2"/>Añadir Libro</MDBBtn>
                                 <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex='-1'>
                                     <MDBModalDialog centered={true} size="lg">
                                         <MDBModalContent>
