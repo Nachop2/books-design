@@ -3,7 +3,26 @@ import TextPDF from "./TextPDF"
 import cabildo from "./logo-cabildo-i2.webp"
 import InvoiceItem from "./InvoiceItem"
 import { useState } from "react"
+import CardList from "../CardList"
+import {
+    MDBBtn,
+    MDBModal,
+    MDBModalDialog,
+    MDBModalContent,
+    MDBModalHeader,
+    MDBModalTitle,
+    MDBModalBody,
+    MDBModalFooter,
+    MDBIcon,
+} from 'mdb-react-ui-kit';
+import CardMenu from "../CardComponents/CardMenu"
+import CardSearch from "../CardComponents/CardSearch"
 const InvoicePDF = () => {
+
+    const [basicModal, setBasicModal] = useState(false);
+
+    const toggleOpen = () => setBasicModal(!basicModal);
+
     const [items, setItems] = useState([
         {
             id: 1,
@@ -155,11 +174,21 @@ const InvoicePDF = () => {
 
                         <div className={`view ${styles.flex}`}>
                             <div className={`view ${styles.w50} ${styles.mt10}`}>
-                                <button className={`${styles.link}`}
-                                onClick={() => handleAdd()}>
-                                    <span className={` ${styles.icon} ${styles.iconAdd} ${styles.bggreen} ${styles.mr10}`}></span>
-                                    Add Line Item
-                                </button>
+                                
+                                <MDBBtn color={"success"} onClick={toggleOpen} className="px-3"> <MDBIcon fas icon="plus" className="me-2"/>Añadir Libro</MDBBtn>
+                                <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex='-1'>
+                                    <MDBModalDialog centered={true} size="lg">
+                                        <MDBModalContent>
+                                            <div className="mx-3">
+                                                <CardSearch></CardSearch>
+                                            </div>
+                                            <MDBModalBody>
+                                                <CardMenu enabledButtons={false}></CardMenu>
+                                            </MDBModalBody>
+
+                                        </MDBModalContent>
+                                    </MDBModalDialog>
+                                </MDBModal>
                             </div>
                             <div className={`view ${styles.w50} ${styles.mt20}`}>
                                 <div className={`view ${styles.flex}`}>
