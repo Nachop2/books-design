@@ -14,6 +14,8 @@ import {
     MDBModalBody,
     MDBModalFooter,
     MDBIcon,
+    MDBRow,
+    MDBCol,
 } from 'mdb-react-ui-kit';
 import CardMenu from "../CardComponents/CardMenu"
 import CardSearch from "../CardComponents/CardSearch"
@@ -32,8 +34,9 @@ const InvoicePDF = () => {
         let totalNoTax = 0;
 
         invoiceBooks.forEach(element => {
-            totalNoTax += element.price * element.chosenQuantity
-            console.log(element);
+            if (element.donation == false) {
+                totalNoTax += element.price * element.chosenQuantity
+            }
         });
         let taxes = totalNoTax * 0.24;
         let total = taxes + totalNoTax
@@ -131,22 +134,23 @@ const InvoicePDF = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={`view ${styles.mt30} ${styles.bgdark} ${styles.flex}`}>
-                            <div className={`view ${styles.w48} ${styles.p48}`}>
+                        <MDBRow className={`${styles.bgdark} align-items-center mx-0 py-1 text-end mt-4`}>
+                            <MDBCol className={`col-4 text-start px-2`}>
                                 <TextPDF text="Libros" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
-                            </div>
-                            <div className={`view ${styles.w17} ${styles.p48}`}>
-                                <TextPDF text="Cantidad" styling={`${styles.input} ${styles.white} ${styles.bold} ${styles.right}`}></TextPDF>
-                            </div>
-                            <div className={`view ${styles.w17} ${styles.p48}`}>
-                                <TextPDF text="Precio Ud." styling={`${styles.input} ${styles.white} ${styles.bold} ${styles.right}`}></TextPDF>
-                            </div>
-                            <div className={`view ${styles.w18} ${styles.p48}`}>
-                                <TextPDF text="Total" styling={`${styles.input} ${styles.white} ${styles.bold} ${styles.right}`}></TextPDF>
-                            </div>
-                        </div>
-
-
+                            </MDBCol>
+                            <MDBCol className={`text-center px-2 col-2`}>
+                                <TextPDF text="Cantidad" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
+                            </MDBCol>
+                            <MDBCol className={`text-center px-2 col-2`}>
+                                <TextPDF text="Donacion?" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
+                            </MDBCol>
+                            <MDBCol className={` text-center px-2 col-2`}>
+                                <TextPDF text="Precio Ud." styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
+                            </MDBCol>
+                            <MDBCol className={` text-end pe-3 col-2`}>
+                                <TextPDF text="Total" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
+                            </MDBCol>
+                        </MDBRow>
                         {
                             invoiceBooks.map((e, index) => {
                                 return <InvoiceItem styles={styles} item={e}
@@ -155,6 +159,8 @@ const InvoicePDF = () => {
                                     index={index}></InvoiceItem>
                             })
                         }
+                        
+
 
 
 
