@@ -8,6 +8,7 @@ import {
     MDBDropdownItem,
     MDBDropdownMenu,
     MDBDropdownToggle,
+    MDBIcon,
     MDBRow,
 } from "mdb-react-ui-kit";
 
@@ -29,7 +30,7 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
 
     return (
         <>
-            <MDBRow className="align-items-center mx-0 mt-1">
+            <MDBRow className="align-items-center mx-0 mt-1 theHover">
                 <MDBCol className="col-4 px-2">
                     <TextPDF text={item.title} styling={`${styles.input} ${styles.dark}`}></TextPDF>
                 </MDBCol>
@@ -44,7 +45,7 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
 
                 </MDBCol>
                 <MDBCol className="text-center px-2 col-2">
-                    <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' aria-label='...' onClick={() =>{handleDonation(index)}}></MDBCheckbox>
+                    <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' aria-label='...' onClick={() => { handleDonation(index) }}></MDBCheckbox>
                 </MDBCol>
                 <MDBCol className="col-2 px-2 col-2">
                     <TextPDF text={price + "€"} styling={`${styles.input} ${styles.dark} text-center`}></TextPDF>
@@ -52,6 +53,11 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
                 <MDBCol className="px-2 col-1 col-2">
                     <TextPDF text={total + "€"} styling={`${styles.span} ${styles.dark} text-end`}></TextPDF>
                 </MDBCol>
+                <div style={{ height: "0px", width: "0px" }} className="xVoid">
+                    <MDBIcon fas icon="times-circle" className="text-danger xButtonCSSInvoice" size="lg"
+                        onClick={(e) => handleDelete(e, card.id)}
+                    />
+                </div>
             </MDBRow>
 
 
@@ -60,7 +66,7 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
 
 
 
-            
+
         </>
 
     )

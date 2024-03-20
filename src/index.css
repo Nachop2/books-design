@@ -17,3 +17,20 @@ code {
 
   cursor: pointer;
 }
+
+.xButtonCSSInvoice {
+  position: relative;
+  top: -30px;
+  cursor: pointer;
+}
+
+.xButtonCSSInvoice:hover {
+  display: none !important;
+
+}
+
+
+.xVoid{
+  position: relative;
+  right: -98%;
+}
