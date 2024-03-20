@@ -2,6 +2,8 @@ import { MDBBadge, MDBBtn, MDBCard, MDBCardBody, MDBCardLink, MDBCardTitle, MDBC
 import { useContext, useEffect, useState } from "react";
 import { BookInvoiceContext } from "../BookInvoiceContext";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const CardMenu = ({ enabledButtons = true }) => {
 
     const {bookTest} = useContext(BookInvoiceContext);
