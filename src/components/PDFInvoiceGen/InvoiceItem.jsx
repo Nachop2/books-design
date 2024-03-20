@@ -11,7 +11,7 @@ import {
     MDBRow,
 } from "mdb-react-ui-kit";
 
-const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, index }) => {
+const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonation, index }) => {
 
     let price = 0;
     let total = 0;
@@ -44,7 +44,7 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, index }) => {
 
                 </MDBCol>
                 <MDBCol className="text-center px-2 col-2">
-                    <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' aria-label='...'></MDBCheckbox>
+                    <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' aria-label='...' onClick={() =>{handleDonation(index)}}></MDBCheckbox>
                 </MDBCol>
                 <MDBCol className="col-2 px-2 col-2">
                     <TextPDF text={price + "€"} styling={`${styles.input} ${styles.dark} text-center`}></TextPDF>

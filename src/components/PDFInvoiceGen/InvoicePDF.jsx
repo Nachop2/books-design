@@ -59,6 +59,12 @@ const InvoicePDF = () => {
         setInvoiceBooks(itemCopy);
     }
 
+    const handleDonation = (index) =>{
+        let itemCopy = [...invoiceBooks];
+        itemCopy[index].donation = !itemCopy[index].donation;
+        setInvoiceBooks(itemCopy);
+    }
+
 
 
 
@@ -156,6 +162,7 @@ const InvoicePDF = () => {
                                 return <InvoiceItem styles={styles} item={e}
                                     handleQuantity={handleQuantity}
                                     handleDelete={handleDelete}
+                                    handleDonation={handleDonation}
                                     index={index}></InvoiceItem>
                             })
                         }
