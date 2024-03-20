@@ -23,9 +23,9 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, index }) => {
             <div className={`view ${styles.w17} ${styles.p48} ${styles.pb10}`}>
                 {/* <TextPDF text={quantity} styling={`${styles.input} ${styles.dark} ${styles.right}`}></TextPDF> */}
 
-                <select value={item.chosenQuantity} className={`${styles.select} ${styles.dark} ${styles.right}`}>
-                    {[...Array(15)].map((x, i) =>
-                        <option value={i + 1} onClick={(e) => handleQuantity(index, (i + 1))}>{i + 1}</option>
+                <select value={item.chosenQuantity} className={`${styles.select} ${styles.dark} ${styles.right}`}  style={{maxHeight: 50+"px"}}>
+                    {[...Array(item.stock)].map((x, i) =>
+                        <option value={i + 1} onClick={(e) => handleQuantity(index, (i + 1),e)} >{i + 1}</option>
                     )}
                 </select>
 
