@@ -229,11 +229,6 @@ const InvoicePDF = () => {
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                         <div className={`view ${styles.mt20}`}>
-                            <input type="text" className={`${styles.input} fw-bold w-100`} placeholder="" defaultValue="Notas adicionales"></input>
-                            
-                            <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
-                        </div>
-                        <div className={`view ${styles.mt20}`}>
                             <input type="text" className={`${styles.input} fw-bold w-100`} placeholder="" defaultValue="Terminos y condiciones"></input>
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
