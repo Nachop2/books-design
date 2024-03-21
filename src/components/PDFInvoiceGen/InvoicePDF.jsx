@@ -151,7 +151,7 @@ const InvoicePDF = () => {
                                 <TextPDF text="Donacion?" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
                             </MDBCol>
                             <MDBCol className={` text-center px-2 col-2`}>
-                                <TextPDF text="Precio Ud." styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
+                                <TextPDF text="Precio Ud." styling={`${styles.input} ${styles.white} ${styles.bold} ${styles.w100}`}></TextPDF>
                             </MDBCol>
                             <MDBCol className={` text-end pe-3 col-2`}>
                                 <TextPDF text="Total" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
