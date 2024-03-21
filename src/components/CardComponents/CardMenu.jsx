@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 const CardMenu = ({ enabledButtons = true }) => {
 
-    const {bookTest} = useContext(BookInvoiceContext);
+    const { bookTest } = useContext(BookInvoiceContext);
     const navigate = useNavigate();
     const [cards, setCards] = useState([]);
 
@@ -108,84 +108,94 @@ const CardMenu = ({ enabledButtons = true }) => {
             <MDBRow className="row-cols-1 row-cols-md-12 g-4">
                 {
                     cards.map((card, i) => (
-                        <MDBCol key={i}>
-                            <MDBCard>
-                                <div className='hover-overlay'>
-                                    {/* <MDBRipple rippleTag='div' className='bg-image hover-zoom'>
+                        <>
+                            {/* Detect if card has 0 stock and do stuff
+                            {enabledButtons ?
+                                null :
+                                card.stock > 0 ?
+                                    <h1>EEE</h1> : null
+                            } */}
+
+                            <MDBCol key={i}>
+                                <MDBCard>
+                                    <div className='hover-overlay'>
+                                        {/* <MDBRipple rippleTag='div' className='bg-image hover-zoom'>
                                     <MDBCardImage src={card.image} alt={card.title} position="top" />
                                     <MDBCardLink href={`/quiz/play/${card.id}`}>
                                         <div className='mask'></div>
                                     </MDBCardLink>
                                 </MDBRipple> */}
-                                    {enabledButtons ?
-                                        <div style={{ height: "0px", width: "0px" }}>
-                                            <MDBIcon fas icon="times-circle" className="text-danger xButtonCSS" size="lg"
-                                                onClick={(e) => handleDelete(e, card.id)}
-                                            />
-                                        </div>
-                                        : null}
+                                        {enabledButtons ?
+                                            <div style={{ height: "0px", width: "0px" }}>
+                                                <MDBIcon fas icon="times-circle" className="text-danger xButtonCSS" size="lg"
+                                                    onClick={(e) => handleDelete(e, card.id)}
+                                                />
+                                            </div>
+                                            : null}
 
-                                    <MDBCardBody>
-                                        <MDBRow>
-                                            <MDBCol>
-                                                {/* href={`/quiz/play/${card.id}`} */}
-                                                <MDBCardLink>
-                                                    <MDBCardTitle>{card.title}</MDBCardTitle>
-                                                </MDBCardLink>
-                                                {card.category_names.map(name => (
-                                                    <MDBBadge pill light color='primary' className="mb-3 me-1">
-                                                        {name}
+                                        <MDBCardBody>
+                                            <MDBRow>
+                                                <MDBCol>
+                                                    {/* href={`/quiz/play/${card.id}`} */}
+                                                    <MDBCardLink>
+                                                        <MDBCardTitle>{card.title}</MDBCardTitle>
+                                                    </MDBCardLink>
+                                                    {card.category_names.map(name => (
+                                                        <MDBBadge pill light color='primary' className="mb-3 me-1">
+                                                            {name}
+                                                        </MDBBadge>
+
+                                                    ))}
+                                                    {/* <MDBCardText>{card.text}</MDBCardText> */}
+
+                                                </MDBCol>
+                                                <MDBCol className="d-flex" style={{ justifyContent: "flex-end", alignItems: "center" }}>
+                                                    <MDBBadge pill light color='primary' className="p-2 me-2">
+                                                        Cantidad: {card.stock}
                                                     </MDBBadge>
+                                                    <MDBBadge pill light color='primary' className="p-2 me-2">
+                                                        Precio: {card.price}
+                                                    </MDBBadge>
+                                                    {enabledButtons ?
+                                                        <>
+                                                            <MDBBtn color="danger" className="ms-2" onClick={(e) => handleBook(e, card.id, "sell", 1)}>
+                                                                <MDBIcon fas icon="dollar-sign" /> Vender
+                                                            </MDBBtn>
+                                                            <MDBDropdown>
+                                                                <MDBDropdownToggle color="success" className="ms-2" ><MDBIcon fas icon="plus" /> Añadir</MDBDropdownToggle>
+                                                                {/* onClick={() => handleBook(card.id, "add")} */}
+                                                                <MDBDropdownMenu>
+                                                                    {[...Array(15)].map((x, i) =>
+                                                                        <MDBDropdownItem link={true} key={i + 1} onClick={(e) => handleBook(e, card.id, "add", i + 1)}>{i + 1}</MDBDropdownItem>
+                                                                    )}
+                                                                </MDBDropdownMenu>
+                                                            </MDBDropdown>
+                                                            <MDBBtn color="primary" className="ps-3 pe-3 ms-2" onClick={() => navigate(`/book/edit/${card.id}`)}>
+                                                                <MDBIcon fas icon="pen" />
+                                                            </MDBBtn>
+                                                        </>
+                                                        : null
+                                                    }
 
-                                                ))}
-                                                {/* <MDBCardText>{card.text}</MDBCardText> */}
-
-                                            </MDBCol>
-                                            <MDBCol className="d-flex" style={{ justifyContent: "flex-end", alignItems: "center" }}>
-                                                <MDBBadge pill light color='primary' className="p-2 me-2">
-                                                    Cantidad: {card.stock}
-                                                </MDBBadge>
-                                                <MDBBadge pill light color='primary' className="p-2 me-2">
-                                                    Precio: {card.price}
-                                                </MDBBadge>
-                                                {enabledButtons ?
-                                                    <>
-                                                        <MDBBtn color="danger" className="ms-2" onClick={(e) => handleBook(e, card.id, "sell", 1)}>
-                                                            <MDBIcon fas icon="dollar-sign" /> Vender
-                                                        </MDBBtn>
-                                                        <MDBDropdown>
-                                                            <MDBDropdownToggle color="success" className="ms-2" ><MDBIcon fas icon="plus" /> Añadir</MDBDropdownToggle>
-                                                            {/* onClick={() => handleBook(card.id, "add")} */}
-                                                            <MDBDropdownMenu>
-                                                                {[...Array(15)].map((x, i) =>
-                                                                    <MDBDropdownItem link={true} key={i + 1} onClick={(e) => handleBook(e, card.id, "add", i + 1)}>{i + 1}</MDBDropdownItem>
-                                                                )}
-                                                            </MDBDropdownMenu>
-                                                        </MDBDropdown>
-                                                        <MDBBtn color="primary" className="ps-3 pe-3 ms-2" onClick={() => navigate(`/book/edit/${card.id}`)}>
-                                                            <MDBIcon fas icon="pen" />
-                                                        </MDBBtn>
-                                                    </>
-                                                    : null
-                                                }
-
-                                            </MDBCol>
-                                        </MDBRow>
+                                                </MDBCol>
+                                            </MDBRow>
 
 
-                                    </MDBCardBody>
-                                    {!enabledButtons ?
-                                    <div
-                                        className='mask rounded-3'
-                                        style={{
-                                            background: 'rgba(0, 0, 255, 0.075)',
-                                            cursor: "pointer"
-                                        }}
-                                        onClick={() => bookTest(card.id)}
-                                    ></div>:null}
-                                </div>
-                            </MDBCard>
-                        </MDBCol>
+                                        </MDBCardBody>
+                                        {!enabledButtons ?
+                                            <div
+                                                className='mask rounded-3'
+                                                style={{
+                                                    background: 'rgba(0, 0, 255, 0.075)',
+                                                    cursor: "pointer"
+                                                }}
+                                                onClick={() => bookTest(card.id)}
+                                            ></div> : null}
+                                    </div>
+                                </MDBCard>
+                            </MDBCol>
+                        </>
+
                     ))
                 }
             </MDBRow>
