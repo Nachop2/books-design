@@ -59,7 +59,7 @@ const InvoicePDF = () => {
         setInvoiceBooks(itemCopy);
     }
 
-    const handleDonation = (index) =>{
+    const handleDonation = (index) => {
         let itemCopy = [...invoiceBooks];
         itemCopy[index].donation = !itemCopy[index].donation;
         setInvoiceBooks(itemCopy);
@@ -167,7 +167,7 @@ const InvoicePDF = () => {
                                     index={index}></InvoiceItem>
                             })
                         }
-                        
+
 
 
 
@@ -191,33 +191,33 @@ const InvoicePDF = () => {
                                 </MDBModal>
                             </div>
                             <div className={`view w-50 ${styles.mt20}`}>
-                                <div className={`view d-flex`}>
-                                    <div className={`view w-50 ${styles.p5}`}>
+
+                                <MDBRow className={`view mx-0 align-items-center`}>
+                                    <MDBCol className={`view w-50 `}>
                                         <TextPDF text="Total sin impuestos" styling={`${styles.input}`}></TextPDF>
-                                    </div>
-                                    <div className={`view w-50 ${styles.p5}`}>
+                                    </MDBCol>
+                                    <MDBCol className={`view w-50 ${styles.p5}`}>
                                         <span className={`${styles.span} text-end fw-bold ${styles.dark}`}>{prices[0]}</span>
-                                    </div>
-                                </div>
-                                <div className={`view d-flex`}>
-                                    <div className={`view w-50 ${styles.p5}`}>
+
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className={`view mx-0 align-items-center`}>
+                                    <MDBCol className={`view w-50 `}>
                                         <TextPDF text="Impuestos (21%)" styling={`${styles.input}`}></TextPDF>
-                                    </div>
-                                    <div className={`view w-50 ${styles.p5}`}>
+                                    </MDBCol>
+                                    <MDBCol className={`view w-50 ${styles.p5} justify-content-end`}>
                                         <span className={`${styles.span} text-end fw-bold ${styles.dark}`}>{prices[1]}</span>
-                                    </div>
-                                </div>
-                                <div className={`view d-flex ${styles.bggray} ${styles.p5}`}>
-                                    <div className={`view w-50 ${styles.p5}`}>
-                                        <TextPDF text="TOTAL" styling={`${styles.span} text-end fw-bold w-auto `}></TextPDF>
+                                    </MDBCol>
+                                </MDBRow>
 
-                                    </div>
-                                    <div className={`view w-50 ${styles.p5} d-flex`}>
-                                        <TextPDF text="" styling={`${styles.input} ${styles.dark} fw-bold text-end ${styles.ml30}`}></TextPDF>
-
-                                        <span className={`${styles.span} text-end fw-bold ${styles.dark} w-auto`}>{prices[2]}</span>
-                                    </div>
-                                </div>
+                                <MDBRow className={`view ${styles.bggray} py-1 mx-0 align-items-center`}>
+                                    <MDBCol className={`view justify-content-end`}>
+                                        <TextPDF text="TOTAL" styling={`${styles.span} text-end fw-bold w-auto  `}></TextPDF>
+                                    </MDBCol>
+                                    <MDBCol className={`view pe-2 d-flex justify-content-end `}>
+                                        <span className={`${styles.span} text-end fw-bold ${styles.dark} w-auto `}>{prices[2]}</span>
+                                    </MDBCol>
+                                </MDBRow>
                             </div>
 
 
@@ -225,7 +225,7 @@ const InvoicePDF = () => {
                         </div>
                         <div className={`view ${styles.mt20}`}>
                             <input type="text" className={`${styles.input} fw-bold w-100`} placeholder="" defaultValue="Notas adicionales"></input>
-                            
+
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                         <div className={`view ${styles.mt20}`}>
@@ -234,7 +234,7 @@ const InvoicePDF = () => {
                         </div>
                     </div >
                     <div>
-                        <MDBBtn className="bg-success mt-4"><MDBIcon fas icon="save" className="me-2" size="lg"/>Guardar</MDBBtn>
+                        <MDBBtn className="bg-success mt-4"><MDBIcon fas icon="save" className="me-2" size="lg" />Guardar</MDBBtn>
                     </div>
                 </div >
 
