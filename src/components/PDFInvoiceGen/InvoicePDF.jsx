@@ -79,27 +79,28 @@ const InvoicePDF = () => {
                         <div className={styles.downloadPDF} title="Save PDF">
                             <a download="0000001.pdf" href=""></a>
                         </div>
-                        <div className={`view ${styles.flex}`}>
-                            <div className={`view ${styles.w50}`}>
-                                <div className={`logo ${styles.image} ${styles.mb5}`}>
-                                    <img className={`${styles.image__img}`} src={cabildo} alt="logo" style={{ maxWidth: 100 + "px" }}></img>
+                        <div className="view d-flex">
+                            <div className="view w-50">
+                                <div className={`logo d-inline-block ${styles.mb5}`}>
+                                    <img className="d-block" src={cabildo} alt="logo" style={{ maxWidth: 100 + "px" }}></img>
                                 </div>
-                                <TextPDF text="Cabildo de Fuerteventura" styling={`${styles.fs20} ${styles.bold} ${styles.input}`}></TextPDF>
-                                <TextPDF text="Uweeeeeeeeeu" styling={styles.input}></TextPDF>
+                                <TextPDF text="Cabildo de Fuerteventura" styling={`fs-5 fw-bold ${styles.input}`}></TextPDF>
+
+                                {/* //<TextPDF text="text" styling={styles.input}></TextPDF> */}
                                 <input type="text" className={`${styles.input}`} placeholder="Your Name"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="Company's Address"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="City, State Zip"></input>
                                 <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input>
                             </div>
-                            <div className={`view ${styles.w50}`}>
-                                <TextPDF text="Factura" styling={`${styles.input} ${styles.fs45} ${styles.right} ${styles.bold}`}></TextPDF>
+                            <div className={`view w-50`}>
+                                <TextPDF text="Factura" styling={`${styles.input} ${styles.fs45} text-end fw-bold`}></TextPDF>
 
                             </div>
                         </div>
 
-                        <div className={`view ${styles.flex} ${styles.mt40}`}>
+                        <div className={`view d-flex ${styles.mt40}`}>
                             <div className={`view ${styles.w55}`}>
-                                <TextPDF text="Factura para:" styling={`${styles.input} ${styles.bold} ${styles.dark} ${styles.mb5}`}></TextPDF>
+                                <TextPDF text="Factura para:" styling={`${styles.input} fw-bold ${styles.dark} ${styles.mb5}`}></TextPDF>
                                 <input type="text" className={`${styles.input}`} placeholder="Your Client's Name"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="Client's Address"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="City, State Zip"></input>
@@ -108,15 +109,15 @@ const InvoicePDF = () => {
                             <div className={`view ${styles.w45}`}>
                                 <div className={`view flex mb-5`}>
                                     <div className={`view ${styles.w40}`}>
-                                        <TextPDF text="Invoice#" styling={`${styles.input}  ${styles.bold}`}></TextPDF>
+                                        <TextPDF text="Invoice#" styling={`${styles.input}  fw-bold`}></TextPDF>
                                     </div>
                                     <div className={`view ${styles.w60}`}>
                                         <TextPDF text="0000001" styling={styles.input}></TextPDF>
                                     </div>
                                 </div>
-                                <div className={`view ${styles.flex} ${styles.mb5}`}>
+                                <div className={`view d-flex ${styles.mb5}`}>
                                     <div className={`view ${styles.w40}`}>
-                                        <TextPDF text="Invoice Date" styling={`${styles.input} ${styles.bold}`}></TextPDF>
+                                        <TextPDF text="Invoice Date" styling={`${styles.input} fw-bold`}></TextPDF>
                                     </div>
                                     <div className={`view ${styles.w60}`}>
                                         <div className="react-datepicker-wrapper">
@@ -126,9 +127,9 @@ const InvoicePDF = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`view ${styles.flex} ${styles.mb5}`}>
+                                <div className={`view d-flex ${styles.mb5}`}>
                                     <div className={`view ${styles.w40}`}>
-                                        <TextPDF text="Due Date" styling={`${styles.input} ${styles.bold}`}></TextPDF>
+                                        <TextPDF text="Due Date" styling={`${styles.input} fw-bold`}></TextPDF>
                                     </div>
                                     <div className={`view ${styles.w60}`}>
                                         <div className="react-datepicker-wrapper">
@@ -142,19 +143,19 @@ const InvoicePDF = () => {
                         </div>
                         <MDBRow className={`${styles.bgdark} align-items-center mx-0 py-1 text-end mt-4`}>
                             <MDBCol className={`col-4 text-start px-2`}>
-                                <TextPDF text="Libros" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
+                                <TextPDF text="Libros" styling={`${styles.input} text-white fw-bold`}></TextPDF>
                             </MDBCol>
                             <MDBCol className={`text-center px-2 col-2`}>
-                                <TextPDF text="Cantidad" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
+                                <TextPDF text="Cantidad" styling={`${styles.input} text-white fw-bold`}></TextPDF>
                             </MDBCol>
                             <MDBCol className={`text-center px-2 col-2`}>
-                                <TextPDF text="Donacion?" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
+                                <TextPDF text="Donacion?" styling={`${styles.input} text-white fw-bold`}></TextPDF>
                             </MDBCol>
                             <MDBCol className={` text-center px-2 col-2`}>
-                                <TextPDF text="Precio Ud." styling={`${styles.input} ${styles.white} ${styles.bold} ${styles.w100}`}></TextPDF>
+                                <TextPDF text="Precio Ud." styling={`${styles.input} text-white fw-bold w-100`}></TextPDF>
                             </MDBCol>
                             <MDBCol className={` text-end pe-3 col-2`}>
-                                <TextPDF text="Total" styling={`${styles.input} ${styles.white} ${styles.bold}`}></TextPDF>
+                                <TextPDF text="Total" styling={`${styles.input} text-white fw-bold`}></TextPDF>
                             </MDBCol>
                         </MDBRow>
                         {
@@ -171,8 +172,8 @@ const InvoicePDF = () => {
 
 
 
-                        <div className={`view ${styles.flex}`}>
-                            <div className={`view ${styles.w50} ${styles.mt10}`}>
+                        <div className={`view d-flex`}>
+                            <div className={`view w-50 ${styles.mt10}`}>
 
                                 <MDBBtn color={"success"} onClick={() => { toggleOpen() }} className="px-3"> <MDBIcon fas icon="plus" className="me-2" />Añadir Libro</MDBBtn>
                                 <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex='-1'>
@@ -189,32 +190,32 @@ const InvoicePDF = () => {
                                     </MDBModalDialog>
                                 </MDBModal>
                             </div>
-                            <div className={`view ${styles.w50} ${styles.mt20}`}>
-                                <div className={`view ${styles.flex}`}>
-                                    <div className={`view ${styles.w50} ${styles.p5}`}>
+                            <div className={`view w-50 ${styles.mt20}`}>
+                                <div className={`view d-flex`}>
+                                    <div className={`view w-50 ${styles.p5}`}>
                                         <TextPDF text="Total sin impuestos" styling={`${styles.input}`}></TextPDF>
                                     </div>
-                                    <div className={`view ${styles.w50} ${styles.p5}`}>
-                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>{prices[0]}</span>
+                                    <div className={`view w-50 ${styles.p5}`}>
+                                        <span className={`${styles.span} text-end fw-bold ${styles.dark}`}>{prices[0]}</span>
                                     </div>
                                 </div>
-                                <div className={`view ${styles.flex}`}>
-                                    <div className={`view ${styles.w50} ${styles.p5}`}>
+                                <div className={`view d-flex`}>
+                                    <div className={`view w-50 ${styles.p5}`}>
                                         <TextPDF text="Impuestos (21%)" styling={`${styles.input}`}></TextPDF>
                                     </div>
-                                    <div className={`view ${styles.w50} ${styles.p5}`}>
-                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark}`}>{prices[1]}</span>
+                                    <div className={`view w-50 ${styles.p5}`}>
+                                        <span className={`${styles.span} text-end fw-bold ${styles.dark}`}>{prices[1]}</span>
                                     </div>
                                 </div>
-                                <div className={`view ${styles.flex} ${styles.bggray} ${styles.p5}`}>
-                                    <div className={`view ${styles.w50} ${styles.p5}`}>
-                                        <TextPDF text="TOTAL" styling={`${styles.span} ${styles.right} ${styles.bold} ${styles.wauto} `}></TextPDF>
+                                <div className={`view d-flex ${styles.bggray} ${styles.p5}`}>
+                                    <div className={`view w-50 ${styles.p5}`}>
+                                        <TextPDF text="TOTAL" styling={`${styles.span} text-end fw-bold w-auto `}></TextPDF>
 
                                     </div>
-                                    <div className={`view ${styles.w50} ${styles.p5} ${styles.flex}`}>
-                                        <TextPDF text="" styling={`${styles.input} ${styles.dark} ${styles.bold} ${styles.right} ${styles.ml30}`}></TextPDF>
+                                    <div className={`view w-50 ${styles.p5} d-flex`}>
+                                        <TextPDF text="" styling={`${styles.input} ${styles.dark} fw-bold text-end ${styles.ml30}`}></TextPDF>
 
-                                        <span className={`${styles.span} ${styles.right} ${styles.bold} ${styles.dark} ${styles.wauto}`}>{prices[2]}</span>
+                                        <span className={`${styles.span} text-end fw-bold ${styles.dark} w-auto`}>{prices[2]}</span>
                                     </div>
                                 </div>
                             </div>
@@ -223,14 +224,23 @@ const InvoicePDF = () => {
 
                         </div>
                         <div className={`view ${styles.mt20}`}>
-                            <input type="text" className={`${styles.input} ${styles.bold} ${styles.w100}`} placeholder="" defaultValue="Notas adicionales"></input>
-                            <textarea className={`${styles.input} ${styles.w100}`} placeholder="" style={{ height: 48 + "px" }}></textarea>
+                            <input type="text" className={`${styles.input} fw-bold w-100`} placeholder="" defaultValue="Notas adicionales"></input>
+                            
+                            <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                         <div className={`view ${styles.mt20}`}>
-                            <input type="text" className={`${styles.input} ${styles.bold} ${styles.w100}`} placeholder="" defaultValue="Terminos y condiciones"></input>
-                            <textarea className={`${styles.input} ${styles.w100}`} placeholder="" style={{ height: 48 + "px" }}></textarea>
+                            <input type="text" className={`${styles.input} fw-bold w-100`} placeholder="" defaultValue="Notas adicionales"></input>
+                            
+                            <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
+                        </div>
+                        <div className={`view ${styles.mt20}`}>
+                            <input type="text" className={`${styles.input} fw-bold w-100`} placeholder="" defaultValue="Terminos y condiciones"></input>
+                            <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                     </div >
+                    <div>
+                        <MDBBtn className="bg-success mt-4"><MDBIcon fas icon="save" className="me-2" size="lg"/>Guardar</MDBBtn>
+                    </div>
                 </div >
 
             </div >
