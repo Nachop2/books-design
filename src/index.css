@@ -20,17 +20,18 @@ code {
 
 .xButtonCSSInvoice {
   position: relative;
-  top: -30px;
+  top: -44px;
   cursor: pointer;
 }
 
-.xButtonCSSInvoice:hover {
-  display: none !important;
-
+.row:hover .xVoid{
+  display: block;
 }
 
 
+
 .xVoid{
+  display: none;
   position: relative;
   right: -98%;
 }

@@ -53,9 +53,9 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
                 <MDBCol className="px-2 col-1 col-2">
                     <TextPDF text={total + "€"} styling={`${styles.span} ${styles.dark} text-end`}></TextPDF>
                 </MDBCol>
-                <div style={{ height: "0px", width: "0px" }} className="xVoid">
-                    <MDBIcon fas icon="times-circle" className="text-danger xButtonCSSInvoice" size="lg"
-                        onClick={(e) => handleDelete(e, card.id)}
+                <div style={{ height: "0px", width: "0px" }} className="xVoid ">
+                    <MDBIcon fas icon="times-circle" className="text-danger xButtonCSSInvoice py-3 pe-2" size="lg"
+                        onClick={(e) => handleDelete(index)}
                     />
                 </div>
             </MDBRow>
