@@ -18,7 +18,12 @@ const BookInvoiceContextProvider = ({ children }) => {
             .catch(error => console.error("error", error));
     };
 
-    const bookTest = async (id) => {
+    const bookTest = async (id, reset=false) => {
+
+        if(reset){
+            setInvoiceBooks([]);
+        }
+
         await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + id, {
             method: 'GET'
         })

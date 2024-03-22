@@ -41,8 +41,14 @@ const CardMenu = ({ enabledButtons = true }) => {
         fetchBooks();
     }, []);
 
+    const handleSell = async (id) =>{
+        bookTest(id,true);
+        navigate(`/pdf`)
+    }
+
     const handleBook = async (event, id, type, amount) => {
         //event.preventDefault();
+
         const formData = new FormData();
         formData.append('_method', "PUT");
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + type + '/' + id + '/' + amount, {
@@ -158,7 +164,7 @@ const CardMenu = ({ enabledButtons = true }) => {
                                                     </MDBBadge>
                                                     {enabledButtons ?
                                                         <>
-                                                            <MDBBtn color="danger" className="ms-2" onClick={(e) => handleBook(e, card.id, "sell", 1)}>
+                                                            <MDBBtn color="danger" disabled={card.stock <= 0} className="ms-2" onClick={(e) => handleSell(card.id)}>
                                                                 <MDBIcon fas icon="dollar-sign" /> Vender
                                                             </MDBBtn>
                                                             <MDBDropdown>
