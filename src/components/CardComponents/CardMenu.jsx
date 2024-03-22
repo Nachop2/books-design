@@ -41,8 +41,8 @@ const CardMenu = ({ enabledButtons = true }) => {
         fetchBooks();
     }, []);
 
-    const handleSell = async (id) =>{
-        bookTest(id,true);
+    const handleSell = async (id) => {
+        bookTest(id, true);
         navigate(`/pdf`)
     }
 
@@ -189,14 +189,24 @@ const CardMenu = ({ enabledButtons = true }) => {
 
                                         </MDBCardBody>
                                         {!enabledButtons ?
-                                            <div
-                                                className='mask rounded-3'
-                                                style={{
-                                                    background: 'rgba(0, 0, 255, 0.075)',
-                                                    cursor: "pointer"
-                                                }}
-                                                onClick={() => bookTest(card.id)}
-                                            ></div> : null}
+                                            card.stock > 0 ?
+                                                <div
+                                                    className='mask rounded-3'
+                                                    style={{
+                                                        background: 'rgba(0, 0, 255, 0.075)',
+                                                        cursor: "pointer"
+                                                    }}
+                                                    onClick={() => bookTest(card.id)}
+                                                ></div>
+                                                :
+                                                <div
+                                                    className='mask rounded-3'
+                                                    style={{
+                                                        background: 'rgba(255, 0, 0, 0.075)',
+                                                        cursor: "not-allowed"
+                                                    }}
+                                                ></div> : null}
+
                                     </div>
                                 </MDBCard>
                             </MDBCol>
