@@ -4,6 +4,7 @@ import cabildo from "./logo-cabildo-i2.webp"
 import InvoiceItem from "./InvoiceItem"
 import { useContext, useEffect, useState } from "react"
 import CardList from "../CardList"
+import Swal from "sweetalert2"
 import {
     MDBBtn,
     MDBModal,
@@ -65,6 +66,38 @@ const InvoicePDF = () => {
         setInvoiceBooks(itemCopy);
     }
 
+    const saveInvoice = async () => {
+
+
+        const formData = new FormData();
+        formData.append('clientName', document.querySelector("#clientName").value);
+        formData.append('clientAddress', document.querySelector("#clientAddress").value);
+        // formData.append('clientCity', document.querySelector("#clientCity").value);
+        formData.append('clientCity', "Puerto");
+
+        formData.append('clientZip', document.querySelector("#clientZip").value);
+        formData.append('clientCountry', document.querySelector("#clientCountry").value);
+        // formData.append('invoiceDate', document.querySelector("#invoiceDate").value);
+
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/invoice`, {
+
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+            },
+            //credentials: 'include', // Include cookies for the domain
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire({
+                    icon: "success",
+                    title: "La factura fue creada con éxito",
+                    showConfirmButton: true,
+                })
+            })
+            .catch(error => console.error('Error:', error));
+    }
 
 
 
@@ -101,10 +134,10 @@ const InvoicePDF = () => {
                         <div className={`view d-flex ${styles.mt40}`}>
                             <div className={`view ${styles.w55}`}>
                                 <TextPDF text="Factura para:" styling={`${styles.input} fw-bold ${styles.dark} ${styles.mb5}`}></TextPDF>
-                                <input type="text" className={`${styles.input}`} placeholder="Your Client's Name"></input>
-                                <input type="text" className={`${styles.input}`} placeholder="Client's Address"></input>
-                                <input type="text" className={`${styles.input}`} placeholder="City, State Zip"></input>
-                                <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="Spain"></input>
+                                <input type="text" className={`${styles.input}`} placeholder="Your Client's Name" id="clientName"></input>
+                                <input type="text" className={`${styles.input}`} placeholder="Client's Address" id="clientAddress"></input>
+                                <input type="text" className={`${styles.input}`} placeholder="City, State Zip" id="clientZip"></input>
+                                <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="Spain" id="clientCountry"></input>
                             </div>
                             <div className={`view ${styles.w45}`}>
                                 <MDBRow>
@@ -229,7 +262,7 @@ const InvoicePDF = () => {
                         </div>
                     </div >
                     <div>
-                        <MDBBtn className="bg-success mt-4"><MDBIcon fas icon="save" className="me-2" size="lg" />Guardar</MDBBtn>
+                        <MDBBtn className="bg-success mt-4" onClick={() =>saveInvoice()}><MDBIcon fas icon="save" className="me-2" size="lg" />Guardar</MDBBtn>
                     </div>
                 </div >
 
