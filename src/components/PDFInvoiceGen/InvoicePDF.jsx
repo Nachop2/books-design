@@ -79,8 +79,8 @@ const InvoicePDF = () => {
                         <div className={styles.downloadPDF} title="Save PDF">
                             <a download="0000001.pdf" href=""></a>
                         </div>
-                        <div className="view d-flex">
-                            <div className="view w-50">
+                        <MDBRow>
+                            <MDBCol>
                                 <div className={`logo d-inline-block ${styles.mb5}`}>
                                     <img className="d-block" src={cabildo} alt="logo" style={{ maxWidth: 100 + "px" }}></img>
                                 </div>
@@ -91,12 +91,12 @@ const InvoicePDF = () => {
                                 <input type="text" className={`${styles.input}`} placeholder="Company's Address"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="City, State Zip"></input>
                                 <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input>
-                            </div>
-                            <div className={`view w-50`}>
+                            </MDBCol>
+                            <MDBCol>
                                 <TextPDF text="Factura" styling={`${styles.input} ${styles.fs45} text-end fw-bold`}></TextPDF>
+                            </MDBCol>
+                        </MDBRow>
 
-                            </div>
-                        </div>
 
                         <div className={`view d-flex ${styles.mt40}`}>
                             <div className={`view ${styles.w55}`}>
@@ -171,10 +171,8 @@ const InvoicePDF = () => {
 
 
 
-
-                        <div className={`view d-flex`}>
-                            <div className={`view w-50 ${styles.mt10}`}>
-
+                        <MDBRow className="mx-0">
+                            <MDBCol className="mt-2 px-0">
                                 <MDBBtn color={"success"} onClick={() => { toggleOpen() }} className="px-3"> <MDBIcon fas icon="plus" className="me-2" />Añadir Libro</MDBBtn>
                                 <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex='-1'>
                                     <MDBModalDialog centered={true} size="lg">
@@ -185,31 +183,27 @@ const InvoicePDF = () => {
                                             <MDBModalBody>
                                                 <CardMenu enabledButtons={false}></CardMenu>
                                             </MDBModalBody>
-
                                         </MDBModalContent>
                                     </MDBModalDialog>
                                 </MDBModal>
-                            </div>
-                            <div className={`view w-50 ${styles.mt20}`}>
-
+                            </MDBCol>
+                            <MDBCol className="mt-4 px-0">
                                 <MDBRow className={`view mx-0 align-items-center`}>
-                                    <MDBCol className={`view w-50 `}>
+                                    <MDBCol>
                                         <TextPDF text="Total sin impuestos" styling={`${styles.input}`}></TextPDF>
                                     </MDBCol>
-                                    <MDBCol className={`view w-50 ${styles.p5}`}>
+                                    <MDBCol className={`${styles.p5}`}>
                                         <span className={`${styles.span} text-end fw-bold ${styles.dark}`}>{prices[0]}</span>
-
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={`view mx-0 align-items-center`}>
-                                    <MDBCol className={`view w-50 `}>
+                                    <MDBCol>
                                         <TextPDF text="Impuestos (21%)" styling={`${styles.input}`}></TextPDF>
                                     </MDBCol>
-                                    <MDBCol className={`view w-50 ${styles.p5} justify-content-end`}>
+                                    <MDBCol className={`view ${styles.p5} justify-content-end`}>
                                         <span className={`${styles.span} text-end fw-bold ${styles.dark}`}>{prices[1]}</span>
                                     </MDBCol>
                                 </MDBRow>
-
                                 <MDBRow className={`view ${styles.bggray} py-1 mx-0 align-items-center`}>
                                     <MDBCol className={`view justify-content-end`}>
                                         <TextPDF text="TOTAL" styling={`${styles.span} text-end fw-bold w-auto  `}></TextPDF>
@@ -218,11 +212,10 @@ const InvoicePDF = () => {
                                         <span className={`${styles.span} text-end fw-bold ${styles.dark} w-auto `}>{prices[2]}</span>
                                     </MDBCol>
                                 </MDBRow>
-                            </div>
+                            </MDBCol>
+                        </MDBRow>
 
-
-
-                        </div>
+                        
                         <div className={`view ${styles.mt20}`}>
                             <input type="text" className={`${styles.input} fw-bold w-100`} placeholder="" defaultValue="Notas adicionales"></input>
 
