@@ -107,38 +107,40 @@ const InvoicePDF = () => {
                                 <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="Spain"></input>
                             </div>
                             <div className={`view ${styles.w45}`}>
-                                <div className={`view flex mb-5`}>
-                                    <div className={`view ${styles.w40}`}>
-                                        <TextPDF text="Invoice#" styling={`${styles.input}  fw-bold`}></TextPDF>
-                                    </div>
-                                    <div className={`view ${styles.w60}`}>
-                                        <TextPDF text="0000001" styling={styles.input}></TextPDF>
-                                    </div>
-                                </div>
-                                <div className={`view d-flex ${styles.mb5}`}>
-                                    <div className={`view ${styles.w40}`}>
-                                        <TextPDF text="Invoice Date" styling={`${styles.input} fw-bold`}></TextPDF>
-                                    </div>
-                                    <div className={`view ${styles.w60}`}>
-                                        <div className="react-datepicker-wrapper">
-                                            <div className="react-datepicker__input-container">
-                                                <input type="text" className={`${styles.input}`} defaultValue="Mar 13, 2024"></input>
+                                <MDBRow>
+                                    <MDBRow>
+                                        <MDBCol className="col-5">
+                                            <TextPDF text="Invoice#" styling={`${styles.input}  fw-bold`}></TextPDF>
+                                        </MDBCol>
+                                        <MDBCol >
+                                            <TextPDF text="0000001" styling={`${styles.input} `}></TextPDF>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <MDBCol className="col-5 pe-0">
+                                            <TextPDF text="Invoice Date" styling={`${styles.input} fw-bold px-0`}></TextPDF>
+                                        </MDBCol>
+                                        <MDBCol className="" >
+                                            <div className="react-datepicker-wrapper">
+                                                <div className="react-datepicker__input-container">
+                                                    <input type="text" className={`${styles.input}`} defaultValue="Mar 13, 2024"></input>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className={`view d-flex ${styles.mb5}`}>
-                                    <div className={`view ${styles.w40}`}>
-                                        <TextPDF text="Due Date" styling={`${styles.input} fw-bold`}></TextPDF>
-                                    </div>
-                                    <div className={`view ${styles.w60}`}>
-                                        <div className="react-datepicker-wrapper">
-                                            <div className="react-datepicker__input-container">
-                                                <input type="text" className={`${styles.input}`} defaultValue="Apr 12, 2024"></input>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <MDBCol className="col-5 pe-0">
+                                            <TextPDF text="Due Date" styling={`${styles.input} fw-bold px-0`}></TextPDF>
+                                        </MDBCol>
+                                        <MDBCol className="" >
+                                            <div className="react-datepicker-wrapper">
+                                                <div className="react-datepicker__input-container">
+                                                    <input type="text" className={`${styles.input}`} defaultValue="Apr 12, 2024"></input>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBRow>
                             </div>
                         </div>
                         <MDBRow className={`${styles.bgdark} align-items-center mx-0 py-1 text-end mt-4`}>
@@ -215,7 +217,7 @@ const InvoicePDF = () => {
                             </MDBCol>
                         </MDBRow>
 
-                        
+
                         <div className={`view ${styles.mt20}`}>
                             <input type="text" className={`${styles.input} fw-bold w-100`} placeholder="" defaultValue="Notas adicionales"></input>
 
