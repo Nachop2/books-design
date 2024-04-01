@@ -69,6 +69,9 @@ const InvoicePDF = () => {
     const saveInvoice = async () => {
 
 
+
+
+
         const formData = new FormData();
         formData.append('clientName', document.querySelector("#clientName").value);
         formData.append('clientAddress', document.querySelector("#clientAddress").value);
@@ -79,6 +82,18 @@ const InvoicePDF = () => {
         formData.append('clientCountry', document.querySelector("#clientCountry").value);
         // formData.append('invoiceDate', document.querySelector("#invoiceDate").value);
 
+        invoiceBooks.forEach((book, index) => {
+            let bookData = {
+                id: book.id,
+                chosenQuantity: book.chosenQuantity,
+                donation: book.donation
+            }
+            console.log(bookData);
+            formData.append(`books[${index}][id]`, book.id);
+            formData.append(`books[${index}][chosenQuantity]`, book.chosenQuantity);
+            formData.append(`books[${index}][donation]`, book.donation);
+        });
+
         await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/invoice`, {
 
             method: 'POST',
@@ -88,13 +103,30 @@ const InvoicePDF = () => {
             //credentials: 'include', // Include cookies for the domain
             body: formData,
         })
-            .then(response => response.json())
+            .then(async response => {
+                let jsonResponse = await response.json()
+                if(response.ok){
+                    Swal.fire({
+                        icon: "success",
+                        title: "La factura fue creada con éxito",
+                        showConfirmButton: true,
+                    })
+                }else{
+
+                    let errors = [];
+
+
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Hubo errores en la creacion de la factura ",
+                        showConfirmButton: true,
+                    })
+                }
+            })
             .then(data => {
-                Swal.fire({
-                    icon: "success",
-                    title: "La factura fue creada con éxito",
-                    showConfirmButton: true,
-                })
+                console.log(data);
+                
             })
             .catch(error => console.error('Error:', error));
     }
