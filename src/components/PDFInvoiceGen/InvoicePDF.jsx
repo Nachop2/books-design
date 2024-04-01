@@ -252,17 +252,16 @@ const InvoicePDF = () => {
 
 
                         <div className={`view ${styles.mt20}`}>
-                            <input type="text" className={`${styles.input} fw-bold w-100`} placeholder="" defaultValue="Notas adicionales"></input>
-
+                            <TextPDF text="Notas adicionales" styling={`${styles.input} fw-bold w-100 `}></TextPDF>
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                         <div className={`view ${styles.mt20}`}>
-                            <input type="text" className={`${styles.input} fw-bold w-100`} placeholder="" defaultValue="Terminos y condiciones"></input>
+                            <TextPDF text="Terminos y condiciones" styling={`${styles.input} fw-bold w-100 `}></TextPDF>
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                     </div >
                     <div>
-                        <MDBBtn className="bg-success mt-4" onClick={() =>saveInvoice()}><MDBIcon fas icon="save" className="me-2" size="lg" />Guardar</MDBBtn>
+                        <MDBBtn className="bg-success mt-4" onClick={() => saveInvoice()}><MDBIcon fas icon="save" className="me-2" size="lg" />Guardar</MDBBtn>
                     </div>
                 </div >
 
