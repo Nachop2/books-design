@@ -11,10 +11,9 @@ code {
 }
 
 .xButtonCSS {
-  position: relative;
+  position: absolute !important;
   top: -7.5px;
   left: -7.5px;
-
   cursor: pointer;
 }
 
@@ -28,7 +27,15 @@ code {
   display: block;
 }
 
+.pdfPad{
+  padding: 4px 12px 4px 0;
+  margin: 2px 0px;
+}
 
+.pdfFont{
+  font-family: sans-serif;
+  font-size: 0.875rem;
+}
 
 .xVoid{
   display: none;

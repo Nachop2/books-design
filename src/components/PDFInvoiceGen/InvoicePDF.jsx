@@ -21,6 +21,8 @@ import {
 import CardMenu from "../CardComponents/CardMenu"
 import CardSearch from "../CardComponents/CardSearch"
 import { BookInvoiceContext } from "../BookInvoiceContext"
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+
 const InvoicePDF = () => {
     const { invoiceBooks, setInvoiceBooks } = useContext(BookInvoiceContext)
     const [basicModal, setBasicModal] = useState(false);
@@ -105,13 +107,13 @@ const InvoicePDF = () => {
         })
             .then(async response => {
                 let jsonResponse = await response.json()
-                if(response.ok){
+                if (response.ok) {
                     Swal.fire({
                         icon: "success",
                         title: "La factura fue creada con éxito",
                         showConfirmButton: true,
                     })
-                }else{
+                } else {
 
                     let errors = [];
 
@@ -126,7 +128,7 @@ const InvoicePDF = () => {
             })
             .then(data => {
                 console.log(data);
-                
+
             })
             .catch(error => console.error('Error:', error));
     }
@@ -136,36 +138,32 @@ const InvoicePDF = () => {
 
     return (
         <>
-            <title>React Invoice Generator</title>
-
             <div id="root">
                 <div className={styles.app}>
                     <div className={`page ${styles.invoiceWrapper}`} >
-                        <div className={styles.downloadPDF} title="Save PDF">
-                            <a download="0000001.pdf" href=""></a>
-                        </div>
                         <MDBRow>
                             <MDBCol>
                                 <div className={`logo d-inline-block ${styles.mb5}`}>
                                     <img className="d-block" src={cabildo} alt="logo" style={{ maxWidth: 100 + "px" }}></img>
                                 </div>
-                                <TextPDF text="Cabildo de Fuerteventura" styling={`fs-5 fw-bold ${styles.input}`}></TextPDF>
+                                <Text className={`fs-5 fw-bold d-inline-block pdfPad pdfFont`}>Cabildo de Fuerteventura</Text>
 
-                                {/* //<TextPDF text="text" styling={styles.input}></TextPDF> */}
                                 <input type="text" className={`${styles.input}`} placeholder="Your Name"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="Company's Address"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="City, State Zip"></input>
                                 <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input>
                             </MDBCol>
                             <MDBCol>
-                                <TextPDF text="Factura" styling={`${styles.input} ${styles.fs45} text-end fw-bold`}></TextPDF>
+                                <Text className={`w-100 d-inline-block pdfPad ${styles.fs45} text-end fw-bold`} style={{ fontFamily: "sans-serif" }}>Factura</Text>
                             </MDBCol>
                         </MDBRow>
 
 
                         <div className={`view d-flex ${styles.mt40}`}>
                             <div className={`view ${styles.w55}`}>
-                                <TextPDF text="Factura para:" styling={`${styles.input} fw-bold ${styles.dark} ${styles.mb5}`}></TextPDF>
+                                <Text className={`w-100 pdfPad d-inline-block fw-bold mt-0 ${styles.mb5} text-black`} style={{ fontFamily: "sans-serif" }}>Factura para:</Text>
+
+                                {/* <TextPDF text="Factura para:" styling={`${styles.input} fw-bold text-black ${styles.mb5}`}></TextPDF> */}
                                 <input type="text" className={`${styles.input}`} placeholder="Your Client's Name" id="clientName"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="Client's Address" id="clientAddress"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="City, State Zip" id="clientZip"></input>
@@ -175,15 +173,15 @@ const InvoicePDF = () => {
                                 <MDBRow>
                                     <MDBRow>
                                         <MDBCol className="col-5">
-                                            <TextPDF text="Invoice#" styling={`${styles.input}  fw-bold`}></TextPDF>
+                                            <Text className={`w-100 pdfPad d-inline-block fw-bold pdfFont`}>Invoice#</Text>
                                         </MDBCol>
                                         <MDBCol >
-                                            <TextPDF text="0000001" styling={`${styles.input} `}></TextPDF>
+                                            <Text className={`w-100 pdfPad d-inline-block pdfFont`}>0000001</Text>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol className="col-5 pe-0">
-                                            <TextPDF text="Invoice Date" styling={`${styles.input} fw-bold px-0`}></TextPDF>
+                                            <Text className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Invoice Date</Text>
                                         </MDBCol>
                                         <MDBCol className="" >
                                             <div className="react-datepicker-wrapper">
@@ -195,7 +193,7 @@ const InvoicePDF = () => {
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol className="col-5 pe-0">
-                                            <TextPDF text="Due Date" styling={`${styles.input} fw-bold px-0`}></TextPDF>
+                                            <Text className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Due Date</Text>
                                         </MDBCol>
                                         <MDBCol className="" >
                                             <div className="react-datepicker-wrapper">
@@ -210,19 +208,19 @@ const InvoicePDF = () => {
                         </div>
                         <MDBRow className={`${styles.bgdark} align-items-center mx-0 py-1 text-end mt-4`}>
                             <MDBCol className={`col-4 text-start px-2`}>
-                                <TextPDF text="Libros" styling={`${styles.input} text-white fw-bold`}></TextPDF>
+                                <Text className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Libros</Text>
                             </MDBCol>
                             <MDBCol className={`text-center px-2 col-2`}>
-                                <TextPDF text="Cantidad" styling={`${styles.input} text-white fw-bold`}></TextPDF>
+                                <Text className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Cantidad</Text>
                             </MDBCol>
                             <MDBCol className={`text-center px-2 col-2`}>
-                                <TextPDF text="Donacion?" styling={`${styles.input} text-white fw-bold`}></TextPDF>
+                                <Text className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Donacion?</Text>
                             </MDBCol>
                             <MDBCol className={` text-center px-2 col-2`}>
-                                <TextPDF text="Precio Ud." styling={`${styles.input} text-white fw-bold w-100`}></TextPDF>
+                                <Text className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Precio Ud.</Text>
                             </MDBCol>
                             <MDBCol className={` text-end pe-3 col-2`}>
-                                <TextPDF text="Total" styling={`${styles.input} text-white fw-bold`}></TextPDF>
+                                <Text className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Total</Text>
                             </MDBCol>
                         </MDBRow>
                         {
@@ -257,26 +255,27 @@ const InvoicePDF = () => {
                             <MDBCol className="mt-4 px-0">
                                 <MDBRow className={`view mx-0 align-items-center`}>
                                     <MDBCol>
-                                        <TextPDF text="Total sin impuestos" styling={`${styles.input}`}></TextPDF>
+                                        <Text className={`w-100 pdfPad d-inline-block pdfFont`}>Total sin impuestos</Text>
                                     </MDBCol>
                                     <MDBCol className={`${styles.p5}`}>
-                                        <span className={`${styles.span} text-end fw-bold ${styles.dark}`}>{prices[0]}</span>
+                                        <span className={`${styles.span} text-end fw-bold text-black`}>{prices[0]}</span>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={`view mx-0 align-items-center`}>
                                     <MDBCol>
-                                        <TextPDF text="Impuestos (21%)" styling={`${styles.input}`}></TextPDF>
+                                        <Text className={`w-100 pdfPad d-inline-block pdfFont`}>Impuestos (21%)</Text>
+
                                     </MDBCol>
                                     <MDBCol className={`view ${styles.p5} justify-content-end`}>
-                                        <span className={`${styles.span} text-end fw-bold ${styles.dark}`}>{prices[1]}</span>
+                                        <span className={`${styles.span} text-end fw-bold text-black`}>{prices[1]}</span>
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={`view ${styles.bggray} py-1 mx-0 align-items-center`}>
                                     <MDBCol className={`view justify-content-end`}>
-                                        <TextPDF text="TOTAL" styling={`${styles.span} text-end fw-bold w-auto  `}></TextPDF>
+                                        <Text className={`pdfPad d-inline-block pdfFont text-end fw-bold w-auto`}>TOTAL</Text>
                                     </MDBCol>
                                     <MDBCol className={`view pe-2 d-flex justify-content-end `}>
-                                        <span className={`${styles.span} text-end fw-bold ${styles.dark} w-auto `}>{prices[2]}</span>
+                                        <span className={`${styles.span} text-end fw-bold text-black w-auto `}>{prices[2]}</span>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
@@ -284,11 +283,11 @@ const InvoicePDF = () => {
 
 
                         <div className={`view ${styles.mt20}`}>
-                            <TextPDF text="Notas adicionales" styling={`${styles.input} fw-bold w-100 `}></TextPDF>
+                            <Text className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Notas adicionales</Text>
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                         <div className={`view ${styles.mt20}`}>
-                            <TextPDF text="Terminos y condiciones" styling={`${styles.input} fw-bold w-100 `}></TextPDF>
+                        <Text className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Terminos y condiciones</Text>
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                     </div >
