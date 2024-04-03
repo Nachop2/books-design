@@ -133,17 +133,17 @@ const CardMenu = ({ enabledButtons = true }) => {
                                 </MDBRipple> */}
                                         {enabledButtons ?
                                             <MDBBtn floating className="xButtonCSS" color="danger" size="sm"
-                                            onClick={(e) => handleDelete(e, card.id)}
+                                                onClick={(e) => handleDelete(e, card.id)}
                                             >
                                                 <MDBIcon className="xIcon" fas icon="times" color="white" size="lg"
-                                                fixed={true}/>
+                                                    fixed={true} />
                                             </MDBBtn>
 
                                             : null}
 
                                         <MDBCardBody>
                                             <MDBRow>
-                                                <MDBCol>
+                                                <MDBCol className="text-center text-lg-start">
                                                     {/* href={`/quiz/play/${card.id}`} */}
                                                     <MDBCardLink>
                                                         <MDBCardTitle>{card.title}</MDBCardTitle>
@@ -157,17 +157,20 @@ const CardMenu = ({ enabledButtons = true }) => {
                                                     {/* <MDBCardText>{card.text}</MDBCardText> */}
 
                                                 </MDBCol>
-                                                <MDBCol className="d-flex" style={{ justifyContent: "flex-end", alignItems: "center" }}>
+                                                <MDBCol className="d-flex align-items-center justify-content-center justify-content-lg-end " >
                                                     <MDBBadge pill light color='primary' className="p-2 me-2">
                                                         Cantidad: {card.stock}
                                                     </MDBBadge>
                                                     <MDBBadge pill light color='primary' className="p-2 me-2">
                                                         Precio: {card.price}
                                                     </MDBBadge>
+
                                                     {enabledButtons ?
                                                         <>
-                                                            <MDBBtn color="danger" disabled={card.stock <= 0} className="ms-2" onClick={(e) => handleSell(card.id)}>
-                                                                <MDBIcon fas icon="dollar-sign" /> Vender
+                                                            <MDBBtn color="danger" disabled={card.stock <= 0} className="ms-2 text-nowrap " onClick={(e) => handleSell(card.id)}
+                                                                style={{ minWidth: "fit-content" }}>
+                                                                <MDBIcon fas icon="dollar-sign" className="me-1" />
+                                                                Vender
                                                             </MDBBtn>
                                                             <MDBDropdown>
                                                                 <MDBDropdownToggle color="success" className="ms-2" ><MDBIcon fas icon="plus" /> Añadir</MDBDropdownToggle>
@@ -178,7 +181,8 @@ const CardMenu = ({ enabledButtons = true }) => {
                                                                     )}
                                                                 </MDBDropdownMenu>
                                                             </MDBDropdown>
-                                                            <MDBBtn color="primary" className="ps-3 pe-3 ms-2" onClick={() => navigate(`/book/edit/${card.id}`)}>
+                                                            <MDBBtn color="primary" className="ps-3 pe-3 ms-2" onClick={() => navigate(`/book/edit/${card.id}`)}
+                                                                style={{ minWidth: "fit-content" }}>
                                                                 <MDBIcon fas icon="pen" />
                                                             </MDBBtn>
                                                         </>
@@ -187,8 +191,6 @@ const CardMenu = ({ enabledButtons = true }) => {
 
                                                 </MDBCol>
                                             </MDBRow>
-
-
                                         </MDBCardBody>
                                         {!enabledButtons ?
                                             card.stock > 0 ?
