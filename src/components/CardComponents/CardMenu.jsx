@@ -132,10 +132,11 @@ const CardMenu = ({ enabledButtons = true }) => {
                                     </MDBCardLink>
                                 </MDBRipple> */}
                                         {enabledButtons ?
-                                            <MDBBtn floating className="xButtonCSS" color="danger" size="sm">
-                                                <MDBIcon fas icon="times" color="white" size="lg"
-                                                    onClick={(e) => handleDelete(e, card.id)}
-                                                />
+                                            <MDBBtn floating className="xButtonCSS" color="danger" size="sm"
+                                            onClick={(e) => handleDelete(e, card.id)}
+                                            >
+                                                <MDBIcon className="xIcon" fas icon="times" color="white" size="lg"
+                                                fixed={true}/>
                                             </MDBBtn>
 
                                             : null}
