@@ -134,6 +134,7 @@ const CardMenu = ({ enabledButtons = true }) => {
                                         {enabledButtons ?
                                             <MDBBtn floating className="xButtonCSS" color="danger" size="sm"
                                                 onClick={(e) => handleDelete(e, card.id)}
+                                                aria-label="delete book"
                                             >
                                                 <MDBIcon className="xIcon" fas icon="times" color="white" size="lg"
                                                     fixed={true} />
@@ -145,9 +146,7 @@ const CardMenu = ({ enabledButtons = true }) => {
                                             <MDBRow>
                                                 <MDBCol className="text-center text-lg-start">
                                                     {/* href={`/quiz/play/${card.id}`} */}
-                                                    <MDBCardLink>
-                                                        <MDBCardTitle>{card.title}</MDBCardTitle>
-                                                    </MDBCardLink>
+                                                        <MDBCardTitle className="text-primary">{card.title}</MDBCardTitle>
                                                     {card.category_names.map(name => (
                                                         <MDBBadge pill light color='primary' className="mb-3 me-1">
                                                             {name}
@@ -168,7 +167,8 @@ const CardMenu = ({ enabledButtons = true }) => {
                                                     {enabledButtons ?
                                                         <>
                                                             <MDBBtn color="danger" disabled={card.stock <= 0} className="ms-2 text-nowrap " onClick={(e) => handleSell(card.id)}
-                                                                style={{ minWidth: "fit-content" }}>
+                                                                style={{ minWidth: "fit-content" }}
+                                                                aria-label="sell book">
                                                                 <MDBIcon fas icon="dollar-sign" className="me-1" />
                                                                 Vender
                                                             </MDBBtn>
@@ -182,7 +182,8 @@ const CardMenu = ({ enabledButtons = true }) => {
                                                                 </MDBDropdownMenu>
                                                             </MDBDropdown>
                                                             <MDBBtn color="primary" className="ps-3 pe-3 ms-2" onClick={() => navigate(`/book/edit/${card.id}`)}
-                                                                style={{ minWidth: "fit-content" }}>
+                                                                style={{ minWidth: "fit-content" }}
+                                                                aria-label="edit book">
                                                                 <MDBIcon fas icon="pen" />
                                                             </MDBBtn>
                                                         </>
