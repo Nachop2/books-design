@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-const BookInvoiceContext = createContext(null);
+const BookInvoiceContext = createContext({ invoiceBooks: [], setInvoiceBooks: () => {} });
 
 const BookInvoiceContextProvider = ({ children }) => {
     const [invoiceBooks, setInvoiceBooks] = useState([]);
@@ -56,7 +56,7 @@ const BookInvoiceContextProvider = ({ children }) => {
     }
 
     return (
-        <BookInvoiceContext.Provider value={{ list: setInvoiceBooks, setInvoiceBooks, bookTest, invoiceBooks }}>
+        <BookInvoiceContext.Provider value={{setInvoiceBooks, bookTest, invoiceBooks }}>
             {children}
         </BookInvoiceContext.Provider>
     );

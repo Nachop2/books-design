@@ -11,18 +11,7 @@ const PdfRender = () => {
         <div className="w-100">
             <PDFViewer className="w-100 vh-100">
                 <Document>
-                    <Page>
-                        
-                        <MDBRow>
-                            <MDBCol>
-                                <Text>AA</Text>
-                            </MDBCol>
-                            <MDBCol>
-                            <Text>EEE</Text>
-
-                            </MDBCol>
-                        </MDBRow>
-                    </Page>
+                    <InvoicePDF></InvoicePDF>
                 </Document>
             </PDFViewer>
         </div>
