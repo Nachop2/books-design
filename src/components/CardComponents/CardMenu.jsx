@@ -1,57 +1,44 @@
 import { MDBBadge, MDBBtn, MDBCard, MDBCardBody, MDBCardLink, MDBCardTitle, MDBCol, MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle, MDBIcon, MDBRow } from "mdb-react-ui-kit";
 import { useContext, useEffect, useState } from "react";
-import { BookInvoiceContext } from "../BookInvoiceContext";
+import { BookInvoiceContext } from "../BookContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CardMenu = ({ enabledButtons = true }) => {
+const CardMenu = ({enabledButtons = true}) => {
 
-    const { bookTest } = useContext(BookInvoiceContext);
+    const { bookTest, books, fetchBooks } = useContext(BookInvoiceContext);
     const navigate = useNavigate();
     const [cards, setCards] = useState([]);
 
-    const fetchBooks = async () => {
-        try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/books`, {
-                method: 'GET',
-                //credentials: 'include'
-            });
-            if (!response.ok) {
-                throw new Error("Failed to fetch books");
-            }
-            const booksData = await response.json();
-            console.log(booksData);
-
-            const prepareCards = booksData.map(book => ({
-                id: book.id,
-                title: book.name,
-                stock: book.stock,
-                price: parseInt(book.sellingAt).toFixed(2) + "€",
-                text: book.description || "Sin descripción",
-                category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
-                //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
-            }));
-            setCards(prepareCards);
-        }
-        catch (error) {
-            console.error(error);
-        }
-    };
-    useEffect(() => {
+    useEffect(()=>{
         fetchBooks();
-    }, []);
+    },[])
+
+    useEffect(() => {
+        const prepareCards = books.map(book => ({
+            id: book.id,
+            title: book.name,
+            stock: book.stock,
+            price: parseInt(book.sellingAt).toFixed(2) + "€",
+            text: book.description || "Sin descripción",
+            category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
+            //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
+        }));
+        setCards(prepareCards);
+    },[books])
+
 
     const handleSell = async (id) => {
         bookTest(id, true);
         navigate(`/pdf`)
     }
 
-    const handleBook = async (event, id, type, amount) => {
+    const handleBook = async (event, id, amount) => {
         //event.preventDefault();
 
         const formData = new FormData();
         formData.append('_method', "PUT");
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + type + '/' + id + '/' + amount, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/add/` + id + '/' + amount, {
             method: 'POST',
             //credentials: 'include'
             body: formData,
@@ -146,7 +133,7 @@ const CardMenu = ({ enabledButtons = true }) => {
                                             <MDBRow>
                                                 <MDBCol className="text-center text-lg-start">
                                                     {/* href={`/quiz/play/${card.id}`} */}
-                                                        <MDBCardTitle className="text-primary">{card.title}</MDBCardTitle>
+                                                    <MDBCardTitle className="text-primary">{card.title}</MDBCardTitle>
                                                     {card.category_names.map(name => (
                                                         <MDBBadge pill light color='primary' className="mb-3 me-1">
                                                             {name}
@@ -177,7 +164,7 @@ const CardMenu = ({ enabledButtons = true }) => {
                                                                 {/* onClick={() => handleBook(card.id, "add")} */}
                                                                 <MDBDropdownMenu>
                                                                     {[...Array(15)].map((x, i) =>
-                                                                        <MDBDropdownItem link={true} key={i + 1} onClick={(e) => handleBook(e, card.id, "add", i + 1)}>{i + 1}</MDBDropdownItem>
+                                                                        <MDBDropdownItem link={true} key={i + 1} onClick={(e) => handleBook(e, card.id, i + 1)}>{i + 1}</MDBDropdownItem>
                                                                     )}
                                                                 </MDBDropdownMenu>
                                                             </MDBDropdown>

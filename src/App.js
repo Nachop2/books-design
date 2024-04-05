@@ -15,13 +15,13 @@ import Terms from "./components/Terms";
 import CreateQuiz from "./components/CreateQuiz";
 import { useEffect, useState } from "react";
 import NotFound from "./components/NotFound";
-import { BookInvoiceContextProvider } from "./components/BookInvoiceContext";
 import EditQuiz from "./components/EditQuiz";
 import ChangePassword from "./components/ChangePassword";
 import RefreshLocation from "./components/utils/RefreshLocation";
 import RecoverPassword from "./components/RecoverPassword";
 import InvoicePDF from "./components/PDFInvoiceGen/InvoicePDF";
 import PdfRender from "./components/PDFInvoiceGen/PdfRender";
+import { BookInvoiceContextProvider } from "./components/BookContext";
 function App() {
     const navigate = useNavigate();
     const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
@@ -83,12 +83,12 @@ function App() {
 
                         <Route element={<RecoverPassword />} path="/recover-password" />
                         <Route element={<NotFound />} path="*" />
-                        <Route element={<InvoicePDF/>} path="/pdf"/>
-                        <Route element={<PdfRender />} path="/view"/>
+                        <Route element={<InvoicePDF />} path="/pdf" />
+                        <Route element={<PdfRender />} path="/view" />
                     </Route>
                 </Routes>
             </BookInvoiceContextProvider>
-        </MDBContainer>
+        </MDBContainer >
     );
 }
 
