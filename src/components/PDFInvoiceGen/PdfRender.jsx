@@ -11,7 +11,7 @@ const PdfRender = () => {
         <div className="w-100">
             <PDFViewer className="w-100 vh-100">
                 <Document>
-                    <InvoicePDF></InvoicePDF>
+                    <InvoicePDF pdf={true}></InvoicePDF>
                 </Document>
             </PDFViewer>
         </div>

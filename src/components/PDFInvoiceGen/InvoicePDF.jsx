@@ -23,7 +23,7 @@ import CardSearch from "../CardComponents/CardSearch"
 import { BookInvoiceContext } from "../BookInvoiceContext"
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
-const InvoicePDF = () => {
+const InvoicePDF = ({ pdf = false }) => {
     const { invoiceBooks, setInvoiceBooks } = useContext(BookInvoiceContext)
     const [basicModal, setBasicModal] = useState(false);
 
@@ -238,19 +238,24 @@ const InvoicePDF = () => {
 
                         <MDBRow className="mx-0">
                             <MDBCol className="mt-2 px-0">
-                                <MDBBtn color={"success"} onClick={() => { toggleOpen() }} className="px-3"> <MDBIcon fas icon="plus" className="me-2" />Añadir Libro</MDBBtn>
-                                <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex='-1'>
-                                    <MDBModalDialog centered={true} size="lg">
-                                        <MDBModalContent>
-                                            <div className="mx-3">
-                                                <CardSearch></CardSearch>
-                                            </div>
-                                            <MDBModalBody>
-                                                <CardMenu enabledButtons={false}></CardMenu>
-                                            </MDBModalBody>
-                                        </MDBModalContent>
-                                    </MDBModalDialog>
-                                </MDBModal>
+                                {!pdf ?
+                                    <>
+                                        <MDBBtn color={"success"} onClick={() => { toggleOpen() }} className="px-3"> <MDBIcon fas icon="plus" className="me-2" />Añadir Libro</MDBBtn>
+                                        <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex='-1'>
+                                            <MDBModalDialog centered={true} size="lg">
+                                                <MDBModalContent>
+                                                    <div className="mx-3">
+                                                        <CardSearch></CardSearch>
+                                                    </div>
+                                                    <MDBModalBody>
+                                                        <CardMenu enabledButtons={false}></CardMenu>
+                                                    </MDBModalBody>
+                                                </MDBModalContent>
+                                            </MDBModalDialog>
+                                        </MDBModal>
+                                    </>:null
+                                }
+
                             </MDBCol>
                             <MDBCol className="mt-4 px-0">
                                 <MDBRow className={`view mx-0 align-items-center`}>
