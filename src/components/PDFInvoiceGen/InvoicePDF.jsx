@@ -69,11 +69,6 @@ const InvoicePDF = ({ pdf = false }) => {
     }
 
     const saveInvoice = async () => {
-
-
-
-
-
         const formData = new FormData();
         formData.append('clientName', document.querySelector("#clientName").value);
         formData.append('clientAddress', document.querySelector("#clientAddress").value);
@@ -146,7 +141,7 @@ const InvoicePDF = ({ pdf = false }) => {
                                 <div className={`logo d-inline-block ${styles.mb5}`}>
                                     <img className="d-block" src={cabildo} alt="logo" style={{ maxWidth: 100 + "px" }}></img>
                                 </div>
-                                <Text className={`fs-5 fw-bold d-inline-block pdfPad pdfFont`}>Cabildo de Fuerteventura</Text>
+                                <p className={`fs-5 fw-bold d-inline-block pdfPad pdfFont`}>Cabildo de Fuerteventura</p>
 
                                 <input type="text" className={`${styles.input}`} placeholder="Your Name"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="Company's Address"></input>
@@ -154,16 +149,16 @@ const InvoicePDF = ({ pdf = false }) => {
                                 <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input>
                             </MDBCol>
                             <MDBCol>
-                                <Text className={`w-100 d-inline-block pdfPad ${styles.fs45} text-end fw-bold`} style={{ fontFamily: "sans-serif" }}>Factura</Text>
+                                <p className={`w-100 d-inline-block pdfPad ${styles.fs45} text-end fw-bold`} style={{ fontFamily: "sans-serif" }}>Factura</p>
                             </MDBCol>
                         </MDBRow>
 
 
                         <div className={`view d-flex ${styles.mt40}`}>
                             <div className={`view ${styles.w55}`}>
-                                <Text className={`w-100 pdfPad d-inline-block fw-bold mt-0 ${styles.mb5} text-black`} style={{ fontFamily: "sans-serif" }}>Factura para:</Text>
+                                <p className={`w-100 pdfPad d-inline-block fw-bold mt-0 ${styles.mb5} text-black`} style={{ fontFamily: "sans-serif" }}>Factura para:</p>
 
-                                {/* <TextPDF text="Factura para:" styling={`${styles.input} fw-bold text-black ${styles.mb5}`}></TextPDF> */}
+                                {/* <pPDF text="Factura para:" styling={`${styles.input} fw-bold text-black ${styles.mb5}`}></TextPDF> */}
                                 <input type="text" className={`${styles.input}`} placeholder="Your Client's Name" id="clientName"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="Client's Address" id="clientAddress"></input>
                                 <input type="text" className={`${styles.input}`} placeholder="City, State Zip" id="clientZip"></input>
@@ -173,15 +168,15 @@ const InvoicePDF = ({ pdf = false }) => {
                                 <MDBRow>
                                     <MDBRow>
                                         <MDBCol className="col-5">
-                                            <Text className={`w-100 pdfPad d-inline-block fw-bold pdfFont`}>Invoice#</Text>
+                                            <p className={`w-100 pdfPad d-inline-block fw-bold pdfFont`}>Invoice#</p>
                                         </MDBCol>
                                         <MDBCol >
-                                            <Text className={`w-100 pdfPad d-inline-block pdfFont`}>0000001</Text>
+                                            <p className={`w-100 pdfPad d-inline-block pdfFont`}>0000001</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol className="col-5 pe-0">
-                                            <Text className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Invoice Date</Text>
+                                            <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Invoice Date</p>
                                         </MDBCol>
                                         <MDBCol className="" >
                                             <div className="react-datepicker-wrapper">
@@ -193,7 +188,7 @@ const InvoicePDF = ({ pdf = false }) => {
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol className="col-5 pe-0">
-                                            <Text className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Due Date</Text>
+                                            <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Due Date</p>
                                         </MDBCol>
                                         <MDBCol className="" >
                                             <div className="react-datepicker-wrapper">
@@ -208,19 +203,19 @@ const InvoicePDF = ({ pdf = false }) => {
                         </div>
                         <MDBRow className={`${styles.bgdark} align-items-center mx-0 py-1 text-end mt-4`}>
                             <MDBCol className={`col-4 text-start px-2`}>
-                                <Text className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Libros</Text>
+                                <p className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Libros</p>
                             </MDBCol>
                             <MDBCol className={`text-center px-2 col-2`}>
-                                <Text className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Cantidad</Text>
+                                <p className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Cantidad</p>
                             </MDBCol>
                             <MDBCol className={`text-center px-2 col-2`}>
-                                <Text className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Donacion?</Text>
+                                <p className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Donacion?</p>
                             </MDBCol>
                             <MDBCol className={` text-center px-2 col-2`}>
-                                <Text className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Precio Ud.</Text>
+                                <p className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Precio Ud.</p>
                             </MDBCol>
                             <MDBCol className={` text-end pe-3 col-2`}>
-                                <Text className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Total</Text>
+                                <p className={`pdfPad d-inline-block pdfFont text-white fw-bold`}>Total</p>
                             </MDBCol>
                         </MDBRow>
                         {
@@ -260,7 +255,7 @@ const InvoicePDF = ({ pdf = false }) => {
                             <MDBCol className="mt-4 px-0">
                                 <MDBRow className={`view mx-0 align-items-center`}>
                                     <MDBCol>
-                                        <Text className={`w-100 pdfPad d-inline-block pdfFont`}>Total sin impuestos</Text>
+                                        <p className={`w-100 pdfPad d-inline-block pdfFont`}>Total sin impuestos</p>
                                     </MDBCol>
                                     <MDBCol className={`${styles.p5}`}>
                                         <span className={`${styles.span} text-end fw-bold text-black`}>{prices[0]}</span>
@@ -268,7 +263,7 @@ const InvoicePDF = ({ pdf = false }) => {
                                 </MDBRow>
                                 <MDBRow className={`view mx-0 align-items-center`}>
                                     <MDBCol>
-                                        <Text className={`w-100 pdfPad d-inline-block pdfFont`}>Impuestos (21%)</Text>
+                                        <p className={`w-100 pdfPad d-inline-block pdfFont`}>Impuestos (21%)</p>
 
                                     </MDBCol>
                                     <MDBCol className={`view ${styles.p5} justify-content-end`}>
@@ -277,7 +272,7 @@ const InvoicePDF = ({ pdf = false }) => {
                                 </MDBRow>
                                 <MDBRow className={`view ${styles.bggray} py-1 mx-0 align-items-center`}>
                                     <MDBCol className={`view justify-content-end`}>
-                                        <Text className={`pdfPad d-inline-block pdfFont text-end fw-bold w-auto`}>TOTAL</Text>
+                                        <p className={`pdfPad d-inline-block pdfFont text-end fw-bold w-auto`}>TOTAL</p>
                                     </MDBCol>
                                     <MDBCol className={`view pe-2 d-flex justify-content-end `}>
                                         <span className={`${styles.span} text-end fw-bold text-black w-auto `}>{prices[2]}</span>
@@ -288,11 +283,11 @@ const InvoicePDF = ({ pdf = false }) => {
 
 
                         <div className={`view ${styles.mt20}`}>
-                            <Text className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Notas adicionales</Text>
+                            <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Notas adicionales</p>
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                         <div className={`view ${styles.mt20}`}>
-                        <Text className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Terminos y condiciones</Text>
+                        <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Terminos y condiciones</p>
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                     </div >
@@ -302,12 +297,6 @@ const InvoicePDF = ({ pdf = false }) => {
                 </div >
 
             </div >
-            {/* <script>!function (e) {function r(r) { for (var n, i, a = r[0], l = r[1], c = r[2], p = 0, s = []; p < a.length; p++)i = a[p], Object.prototype.hasOwnProperty.call(o, i) && o[i] && s.push(o[i][0]), o[i] = 0; for (n in l) Object.prototype.hasOwnProperty.call(l, n) && (e[n] = l[n]); for (f && f(r); s.length;)s.shift()(); return u.push.apply(u, c || []), t() } function t() { for (var e, r = 0; r < u.length; r++) { for (var t = u[r], n = !0, a = 1; a < t.length; a++) { var l = t[a]; 0 !== o[l] && (n = !1) } n && (u.splice(r--, 1), e = i(i.s = t[0])) } return e } var n = { }, o = {1: 0 }, u = []; function i(r) { if (n[r]) return n[r].exports; var t = n[r] = {i: r, l: !1, exports: { } }; return e[r].call(t.exports, t, t.exports, i), t.l = !0, t.exports } i.m = e, i.c = n, i.d = function (e, r, t) {i.o(e, r) || Object.defineProperty(e, r, { enumerable: !0, get: t })}, i.r = function (e) {"undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 })}, i.t = function (e, r) { if (1 & r && (e = i(e)), 8 & r) return e; if (4 & r && "object" == typeof e && e && e.__esModule) return e; var t = Object.create(null); if (i.r(t), Object.defineProperty(t, "default", {enumerable: !0, value: e }), 2 & r && "string" != typeof e) for (var n in e) i.d(t, n, function (r) { return e[r] }.bind(null, n)); return t }, i.n = function (e) { var r = e && e.__esModule ? function () { return e.default } : function () { return e }; return i.d(r, "a", r), r }, i.o = function (e, r) { return Object.prototype.hasOwnProperty.call(e, r) }, i.p = "/react-invoice-generator/"; var a = this["webpackJsonpinvoice-generator"] = this["webpackJsonpinvoice-generator"] || [], l = a.push.bind(a); a.push = r, a = a.slice(); for (var c = 0; c < a.length; c++)r(a[c]); var f = l; t() }([])</script> */}
-            <script src="React%20Invoice%20Generator_files/2.c4d5f900.chunk.js"></script>
-            <script src="React%20Invoice%20Generator_files/main.34d1fa92.chunk.js"></script>
-            {/* <textarea tabIndex="-1" aria-hidden="true" 
-            style={{minHeight: "0px", maxHeight: "none", height: "0px"}}
-            style="min-height: 0px !important; max-height: none !important; height: 0px !important; visibility: hidden !important; overflow: hidden !important; position: absolute !important; z-index: -1000 !important; top: 0px !important; right: 0px !important; border-width: 1px; box-sizing: border-box; font-family: Nunito, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; letter-spacing: normal; line-height: normal; padding: 4px 12px 4px 0px; tab-size: 8; text-indent: 0px; text-rendering: optimizelegibility; text-transform: none; width: 630px; word-break: normal" defaultValue={"x"}></textarea > */}
         </>
     )
 }
