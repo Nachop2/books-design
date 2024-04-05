@@ -25,8 +25,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import CardMenu from "./CardComponents/CardMenu";
 import CardSearch from "./CardComponents/CardSearch";
-const CardList = ({buttons = true}) => {
-    const navigate = useNavigate();
+const CardList = ({ buttons = true }) => {
 
     return (
         <div className="mt-5">
