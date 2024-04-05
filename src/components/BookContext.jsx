@@ -45,7 +45,7 @@ const BookInvoiceContextProvider = ({ children }) => {
             const newData = await response.json();
             console.log(newData);
 
-            setBooks(newData)
+            setBooks(newData.data)
         }
         catch (error) {
             console.error(error);
