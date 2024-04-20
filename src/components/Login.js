@@ -101,7 +101,7 @@ const Login = ({ onLogin }) => {
 
                             <MDBRow className='mb-4'>
                                 <MDBCol className='d-flex justify-content-center'>
-                                    <MDBCheckbox id='rememberMe' label='Remember me' defaultChecked />
+                                    <MDBCheckbox id='rememberMe' label='Recuerdame' defaultChecked />
                                 </MDBCol>
                                 <MDBCol>
                                     <Link to="/recover-password">¿Se olvidó de la contraseña?</Link>
@@ -112,28 +112,6 @@ const Login = ({ onLogin }) => {
                                 Iniciar sesión
                             </MDBBtn>
 
-                            <div className='text-center'>
-                                <p>
-                                    ¿No eres miembro? <Link to="/register">Regístrate</Link>
-                                </p>
-                                <p>o inicia sesión con:</p>
-
-                                <MDBBtn floating color="secondary" className='mx-1'>
-                                    <MDBIcon fab icon='facebook-f' />
-                                </MDBBtn>
-
-                                <MDBBtn floating color="secondary" className='mx-1'>
-                                    <MDBIcon fab icon='google' />
-                                </MDBBtn>
-
-                                <MDBBtn floating color="secondary" className='mx-1'>
-                                    <MDBIcon fab icon='twitter' />
-                                </MDBBtn>
-
-                                <MDBBtn floating color="secondary" className='mx-1'>
-                                    <MDBIcon fab icon='github' />
-                                </MDBBtn>
-                            </div>
                         </form>
                     </MDBCardText>
                 </MDBCardBody>
