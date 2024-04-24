@@ -13,7 +13,11 @@ const CardMenu = ({enabledButtons = true}) => {
     useEffect(()=>{
         fetchBooks();
     },[])
-
+    const token = document.cookie
+    .split('; ')
+    .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+    ?.split('=')[1];
+    
     useEffect(() => {
         const prepareCards = books.map(book => ({
             id: book.id,
@@ -40,7 +44,13 @@ const CardMenu = ({enabledButtons = true}) => {
         formData.append('_method', "PUT");
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/add/` + id + '/' + amount, {
             method: 'POST',
-            //credentials: 'include'
+            headers: {
+                'Accept': 'application/json',
+                //'Content-Type': 'application/json',
+                //'X-Requested-With': 'XMLHttpRequest',
+                'X-XSRF-TOKEN': decodeURIComponent(token), // Include the CSRF token in the headers
+            },
+            credentials: 'include',
             body: formData,
         });
         if (!response.ok) {

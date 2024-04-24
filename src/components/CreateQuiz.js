@@ -15,7 +15,10 @@ import {
 const CreateQuiz = ({ bookToBeEdited }) => {
 
     const [searchParams, setSearchParams] = useSearchParams();
-
+    const csrfToken = document.cookie
+    .split('; ')
+    .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+    ?.split('=')[1];
 
 
     useEffect(() => {
@@ -49,10 +52,7 @@ const CreateQuiz = ({ bookToBeEdited }) => {
     }, []);
 
     const saveToAccount = async () => {
-        const csrfToken = document.cookie
-            .split('; ')
-            .find(cookie => cookie.startsWith('XSRF-TOKEN='))
-            ?.split('=')[1];
+        
 
         const formData = new FormData();
         formData.append('name', document.querySelector("#name").value);
@@ -73,20 +73,19 @@ const CreateQuiz = ({ bookToBeEdited }) => {
             formData.append('_method', 'PUT');
 
             await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + bookToBeEdited.id, {
-
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'X-XSRF-TOKEN': decodeURIComponent(csrfToken), // Include the CSRF token in the headers
                 },
-                //credentials: 'include', // Include cookies for the domain
+                credentials: 'include', // Include cookies for the domain
                 body: formData,
             })
                 .then(response => response.json())
                 .then(data => {
                     Swal.fire({
                         icon: "success",
-                        title: "El cuestionario fue actualizado con éxito",
+                        title: "El libro fue actualizado con éxito",
                         showConfirmButton: true,
                     })
                 })
@@ -99,7 +98,7 @@ const CreateQuiz = ({ bookToBeEdited }) => {
                     'Accept': 'application/json',
                     'X-XSRF-TOKEN': decodeURIComponent(csrfToken), // Include the CSRF token in the headers
                 },
-                //credentials: 'include', // Include cookies for the domain
+                credentials: 'include', // Include cookies for the domain
                 body: formData,
             })
                 .then(response => response.json())

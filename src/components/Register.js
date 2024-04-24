@@ -17,7 +17,6 @@ const Register = ({ onLogin }) => {
         e.preventDefault();
 
         const cookie = await fetch(`${process.env.REACT_APP_BACKEND_URL}/sanctum/csrf-cookie`, {
-            
             method: 'GET',
             credentials: 'include'
         });
@@ -122,23 +121,6 @@ const Register = ({ onLogin }) => {
                                 <p>
                                     ¿Ya eres un miembro? <Link to="/login">Inicia sesión</Link>
                                 </p>
-                                <p>o inicia sesión con:</p>
-
-                                <MDBBtn floating color="secondary" className='mx-1'>
-                                    <MDBIcon fab icon='facebook-f' />
-                                </MDBBtn>
-
-                                <MDBBtn floating color="secondary" className='mx-1'>
-                                    <MDBIcon fab icon='google' />
-                                </MDBBtn>
-
-                                <MDBBtn floating color="secondary" className='mx-1'>
-                                    <MDBIcon fab icon='twitter' />
-                                </MDBBtn>
-
-                                <MDBBtn floating color="secondary" className='mx-1'>
-                                    <MDBIcon fab icon='github' />
-                                </MDBBtn>
                             </div>
                         </form>
                     </MDBCardText>

@@ -48,9 +48,7 @@ const Navbar = ({ userIsLoggedIn }) => {
 
                 <MDBCollapse navbar open={openBasic} style={{ height: "fit-content;" }}>
                     <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
-                        <MDBNavbarItem>
-                            <MDBNavbarLink href="/home">Inicio</MDBNavbarLink>
-                        </MDBNavbarItem>
+
 
                         {/* <MDBNavbarItem>
                             <MDBDropdown>
@@ -68,14 +66,18 @@ const Navbar = ({ userIsLoggedIn }) => {
                             <div className="d-grid gap-2 p-1 d-lg-flex">
                                 {userIsLoggedIn ? (
                                     <>
-                                        <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/dashboard">
-                                            <MDBIcon fas icon="table" /> Menú
-                                        </MDBBtn>
-                                        <MDBBtn color="warning" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/quiz/create">
-                                            <MDBIcon fas icon="plus-circle" /> Crear cuestionario
-                                        </MDBBtn>
+                                        
                                         <MDBBtn color="info" onClick={onLogout}>
                                             <MDBIcon fas icon="sign-out-alt" /> Cerrar sesión
+                                        </MDBBtn>
+                                        <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/home">
+                                            <MDBIcon fas icon="book" /> Lista de libros
+                                        </MDBBtn>
+                                        <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/book/create">
+                                            <MDBIcon fas icon="book" /> Añadir libro
+                                        </MDBBtn>
+                                        <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/pdf">
+                                            <MDBIcon fas icon="receipt" /> Crear factura
                                         </MDBBtn>
                                     </>
                                 ) : (
@@ -85,12 +87,7 @@ const Navbar = ({ userIsLoggedIn }) => {
                                         </MDBBtn>
                                     </>
                                 )}
-                                <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/book/create">
-                                    <MDBIcon fas icon="book" /> Añadir libro
-                                </MDBBtn>
-                                <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/pdf">
-                                    <MDBIcon fas icon="receipt" /> Crear factura
-                                </MDBBtn>
+
                             </div>
                         </MDBNavbarItem>
                     </MDBNavbarNav>

@@ -58,14 +58,26 @@ function App() {
                 <Routes>
                     <Route element={<Layout />} path="/">
                         {/* Redirige a "/home" desde la ruta raíz, "/" */}
-                        <Route element={<Navigate to="/home" replace />} path="/" />
 
-                        <Route element={<CardList />} path="/home" />
-                        <Route element={<Category />} path="/category/:categoryName/:pageNumber" />
 
                         {/* Rutas protegidas (comprueban si el usuario inició sesión) */}
                         <Route element={<ProtectedRoute />}>
-                            <Route element={<Dashboard userIsModOrAdmin={userIsMod} />} path="/dashboard" />
+                            <Route element={<Navigate to="/home" replace />} path="/" />
+
+                            <Route element={<CardList />} path="/home" />
+                            <Route element={<Category />} path="/category/:categoryName/:pageNumber" />
+                            <Route element={<CreateQuiz bookToBeEdited={null} />} path="/book/create" />
+                            <Route element={<EditQuiz />} path="/book/edit/:bookId" />
+
+
+                            <Route element={<Privacy />} path="/privacy" />
+                            <Route element={<Terms />} path="/terms" />
+
+                            <Route element={<RecoverPassword />} path="/recover-password" />
+                            <Route element={<NotFound />} path="*" />
+                            <Route element={<InvoicePDF />} path="/pdf" />
+                            <Route element={<PdfRender />} path="/view" />
+                            {/* <Route element={<Dashboard userIsModOrAdmin={userIsMod} />} path="/dashboard" /> */}
                         </Route>
                         <Route element={<ChangePassword />} path="/password-reset/:token" />
                         <Route element={<GuestRoute />}>
@@ -74,17 +86,7 @@ function App() {
                         </Route>
 
 
-                        <Route element={<CreateQuiz bookToBeEdited={null} />} path="/book/create" />
-                        <Route element={<EditQuiz />} path="/book/edit/:bookId" />
 
-
-                        <Route element={<Privacy />} path="/privacy" />
-                        <Route element={<Terms />} path="/terms" />
-
-                        <Route element={<RecoverPassword />} path="/recover-password" />
-                        <Route element={<NotFound />} path="*" />
-                        <Route element={<InvoicePDF />} path="/pdf" />
-                        <Route element={<PdfRender />} path="/view" />
                     </Route>
                 </Routes>
             </BookInvoiceContextProvider>

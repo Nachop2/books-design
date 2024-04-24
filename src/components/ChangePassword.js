@@ -11,6 +11,8 @@ import {
 } from "mdb-react-ui-kit";
 import Swal from "sweetalert2";
 
+
+
 const ChangePassword = () => {
     const navigate = useNavigate();
     const { token } = useParams(); // Token de la URL del mensaje por email para cambiar la contraseña
