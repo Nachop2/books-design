@@ -101,7 +101,7 @@ const Login = ({ onLogin }) => {
 
                             <MDBRow className='mb-4'>
                                 <MDBCol className='d-flex justify-content-center'>
-                                    <MDBCheckbox id='rememberMe' label='Remember me' defaultChecked />
+                                    <MDBCheckbox id='rememberMe' label='Recuerdame' defaultChecked />
                                 </MDBCol>
                                 <MDBCol>
                                     <Link to="/recover-password">¿Se olvidó de la contraseña?</Link>
@@ -111,12 +111,6 @@ const Login = ({ onLogin }) => {
                             <MDBBtn type='submit' className='mb-4' block onClick={login}>
                                 Iniciar sesión
                             </MDBBtn>
-
-                            <div className='text-center'>
-                                <p>
-                                    ¿No eres miembro? <Link to="/register">Regístrate</Link>
-                                </p>
-                            </div>
                         </form>
                     </MDBCardText>
                 </MDBCardBody>
