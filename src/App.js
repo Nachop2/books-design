@@ -76,6 +76,7 @@ function App() {
                             <Route element={<RecoverPassword />} path="/recover-password" />
                             <Route element={<NotFound />} path="*" />
                             <Route element={<InvoicePDF />} path="/pdf" />
+                            <Route element={<InvoicePDF view={true} />} path="/pdf/:invoiceID" />
                             <Route element={<PdfRender />} path="/view" />
                             {/* <Route element={<Dashboard userIsModOrAdmin={userIsMod} />} path="/dashboard" /> */}
                         </Route>

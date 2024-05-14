@@ -22,9 +22,11 @@ import CardMenu from "../CardComponents/CardMenu"
 import CardSearch from "../CardComponents/CardSearch"
 import { BookInvoiceContext } from "../BookContext"
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { useParams } from "react-router-dom"
 
-const InvoicePDF = ({ pdf = false }) => {
-    const { invoiceBooks, setInvoiceBooks } = useContext(BookInvoiceContext)
+const InvoicePDF = ({ pdf = false, view = false }) => {
+    const { invoiceID } = useParams();
+    const { bookTest, invoiceBooks, setInvoiceBooks } = useContext(BookInvoiceContext)
     const [basicModal, setBasicModal] = useState(false);
 
     const toggleOpen = () => setBasicModal(!basicModal);
@@ -51,6 +53,56 @@ const InvoicePDF = ({ pdf = false }) => {
         setPrices([totalNoTax, taxes, total]);
     }, [invoiceBooks]);
 
+    useEffect(() => {
+        if (invoiceID != null) {
+            const fetchInvoice = async () => {
+                try {
+                    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/invoice/${invoiceID}`, {
+                        method: 'GET',
+                    });
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch quiz data");
+                    }
+                    const invoiceData = await response.json();
+                    console.log(invoiceData)
+                    document.querySelector("#clientName").value = invoiceData.clientName;
+                    
+                    document.querySelector("#clientAddress").value = invoiceData.clientAddress;
+                    // formData.append('clientCity', document.querySelector("#clientCity").value);
+                    
+                    document.querySelector("#clientZip").value = invoiceData.clientZip;
+
+                    document.querySelector("#clientCountry").value = invoiceData.clientCountry
+
+                    let invoiceCopy = [];
+                    invoiceData.books.forEach(book => {
+                        const prepareCards = {
+                            id: book.id,
+                            title: book.name,
+                            stock: book.stock,
+                            chosenQuantity: book.pivot.amountSold,
+                            donation: book.pivot.donation,
+                            text: book.description || "Sin descripción",
+                            price: parseInt(book.sellingAt),
+                            category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
+                            //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
+                        };
+                        invoiceCopy.push(prepareCards)
+                        console.log(invoiceCopy);
+        
+                    });
+                    setInvoiceBooks(invoiceCopy);    
+
+                    console.log(invoiceData);
+                }
+                catch (error) {
+                    console.error(error);
+                }
+            };
+            fetchInvoice()
+        }
+    },[])
+
     const handleQuantity = (index, quantity) => {
         let itemCopy = [...invoiceBooks];
         itemCopy[index].chosenQuantity = quantity
@@ -69,6 +121,16 @@ const InvoicePDF = ({ pdf = false }) => {
     }
 
     const saveInvoice = async () => {
+        const cookie = await fetch(`${process.env.REACT_APP_BACKEND_URL}/sanctum/csrf-cookie`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+        const token = document.cookie
+            .split('; ')
+            .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+            ?.split('=')[1];
+
+
         const formData = new FormData();
         formData.append('clientName', document.querySelector("#clientName").value);
         formData.append('clientAddress', document.querySelector("#clientAddress").value);
@@ -92,13 +154,15 @@ const InvoicePDF = ({ pdf = false }) => {
         });
 
         await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/invoice`, {
-
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
+                //'Content-Type': 'application/json',
+                //'X-Requested-With': 'XMLHttpRequest',
+                'X-XSRF-TOKEN': decodeURIComponent(token), // Include the CSRF token in the headers
             },
-            //credentials: 'include', // Include cookies for the domain
-            body: formData,
+            credentials: 'include', // Include cookies in the request
+            body: formData
         })
             .then(async response => {
                 let jsonResponse = await response.json()
@@ -248,7 +312,7 @@ const InvoicePDF = ({ pdf = false }) => {
                                                 </MDBModalContent>
                                             </MDBModalDialog>
                                         </MDBModal>
-                                    </>:null
+                                    </> : null
                                 }
 
                             </MDBCol>
@@ -287,7 +351,7 @@ const InvoicePDF = ({ pdf = false }) => {
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                         <div className={`view ${styles.mt20}`}>
-                        <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Terminos y condiciones</p>
+                            <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Terminos y condiciones</p>
                             <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                         </div>
                     </div >
