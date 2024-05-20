@@ -54,7 +54,7 @@ const Layout = ({ userIsLoggedIn }) => {
 
 
                         <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                            © 2024 Copyright:
+                            © 2024 Copyright/Derechos de autor:
                             <a className='text-white' href=''>
                                 Cabildo de Fuerteventura
                             </a>
