@@ -56,7 +56,7 @@ function App() {
                 {/* <RefreshLocation/> */}
                 <Navbar userIsLoggedIn={userIsLoggedIn} />
                 <Routes>
-                    <Route element={<Layout />} path="/">
+                    <Route element={<Layout userIsLoggedIn={userIsLoggedIn}/>} path="/">
                         {/* Redirige a "/home" desde la ruta raíz, "/" */}
 
 
