@@ -35,7 +35,7 @@ const Layout = ({ userIsLoggedIn }) => {
                                                 </MDBCol>
                                                 <MDBCol>
                                                 <a href='#' className='text-white'>
-                                                    Link 3
+                                                    Link 3 cabildo Fuerteventura
                                                 </a>
                                                 </MDBCol>
                                                 <MDBCol>
@@ -54,7 +54,7 @@ const Layout = ({ userIsLoggedIn }) => {
 
 
                         <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                            © 2024 Copyright/Derechos de autor :
+                            © 2024 Copyright/Derechos de autor:
                             <a className='text-white' href=''>
                                 Cabildo de Fuerteventura
                             </a>
