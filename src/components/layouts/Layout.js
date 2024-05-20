@@ -54,9 +54,9 @@ const Layout = ({ userIsLoggedIn }) => {
 
 
                         <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                            © 2020 Copyright:
-                            <a className='text-white' href='https://mdbootstrap.com/'>
-                                MDBootstrap.com
+                            © 2024 Copyright:
+                            <a className='text-white' href=''>
+                                Cabildo de Fuerteventura
                             </a>
                         </div>
                     </MDBFooter>
