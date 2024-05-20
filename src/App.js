@@ -65,7 +65,6 @@ function App() {
                             <Route element={<Navigate to="/home" replace />} path="/" />
 
                             <Route element={<CardList />} path="/home" />
-                            <Route element={<Category />} path="/category/:categoryName/:pageNumber" />
                             <Route element={<CreateQuiz bookToBeEdited={null} />} path="/book/create" />
                             <Route element={<EditQuiz />} path="/book/edit/:bookId" />
 
