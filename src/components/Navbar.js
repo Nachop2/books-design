@@ -13,8 +13,25 @@ const Navbar = ({ userIsLoggedIn }) => {
     const navigate = useNavigate();
     const [openBasic, setOpenBasic] = useState(false);
 
-    const onLogout = () => {
+    const onLogout = async () => {
         // Borrar almacenamiento local
+
+        const csrfToken = document.cookie
+        .split('; ')
+        .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+        ?.split('=')[1];
+
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                //'Content-Type': 'application/json',
+                //'X-Requested-With': 'XMLHttpRequest',
+                'X-XSRF-TOKEN': decodeURIComponent(csrfToken), // Include the CSRF token in the headers
+            },
+            credentials: 'include', // Include cookies in the request
+        });
+
         localStorage.removeItem("USER");
         localStorage.removeItem("XSRF-TOKEN");
 
@@ -22,7 +39,7 @@ const Navbar = ({ userIsLoggedIn }) => {
         // Borrar la cookie del inicio de sesión
         // (poner una fecha pasada de caducidad debería hacer que el navegador borre dicha cookie)
         document.cookie = 'XSRF-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        document.cookie = 'laravel_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'laravel_session; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
         // Redirigir a la página de inicio
         window.location.reload();
