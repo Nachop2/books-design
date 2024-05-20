@@ -65,14 +65,14 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                     }
                     const invoiceData = await response.json();
                     console.log(invoiceData)
-                    document.querySelector("#clientName").value = invoiceData.clientName;
-                    
-                    document.querySelector("#clientAddress").value = invoiceData.clientAddress;
-                    // formData.append('clientCity', document.querySelector("#clientCity").value);
-                    
-                    document.querySelector("#clientZip").value = invoiceData.clientZip;
+                    document.querySelector("#clientName").textContent = invoiceData.clientName;
 
-                    document.querySelector("#clientCountry").value = invoiceData.clientCountry
+                    document.querySelector("#clientAddress").textContent = invoiceData.clientAddress;
+                    // formData.append('clientCity', document.querySelector("#clientCity").value);
+
+                    document.querySelector("#clientZip").textContent = invoiceData.clientZip;
+
+                    document.querySelector("#clientCountry").textContent = invoiceData.clientCountry
 
                     let invoiceCopy = [];
                     invoiceData.books.forEach(book => {
@@ -89,9 +89,9 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                         };
                         invoiceCopy.push(prepareCards)
                         console.log(invoiceCopy);
-        
+
                     });
-                    setInvoiceBooks(invoiceCopy);    
+                    setInvoiceBooks(invoiceCopy);
 
                     console.log(invoiceData);
                 }
@@ -101,7 +101,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
             };
             fetchInvoice()
         }
-    },[])
+    }, [])
 
     const handleQuantity = (index, quantity) => {
         let itemCopy = [...invoiceBooks];
@@ -206,11 +206,23 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                     <img className="d-block" src={cabildo} alt="logo" style={{ maxWidth: 100 + "px" }}></img>
                                 </div>
                                 <p className={`fs-5 fw-bold d-inline-block pdfPad pdfFont`}>Cabildo de Fuerteventura</p>
+                                {!view ? (
+                                    <>
+                                        <input type="text" className={`${styles.input}`} placeholder="Your Name"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="Company's Address"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="City, State Zip"></input>
+                                        <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Your Name">Tu nombre</p>
+                                        <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Company's Address">Compañia</p>
+                                        <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="City, State Zip">Ciudad</p>
+                                        <p readOnly="readOnly" type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="" value="United States">España</p>
+                                    </>
+                                )}
 
-                                <input type="text" className={`${styles.input}`} placeholder="Your Name"></input>
-                                <input type="text" className={`${styles.input}`} placeholder="Company's Address"></input>
-                                <input type="text" className={`${styles.input}`} placeholder="City, State Zip"></input>
-                                <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input>
+                                {/* <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input> */}
                             </MDBCol>
                             <MDBCol>
                                 <p className={`w-100 d-inline-block pdfPad ${styles.fs45} text-end fw-bold`} style={{ fontFamily: "sans-serif" }}>Factura</p>
@@ -223,10 +235,22 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                 <p className={`w-100 pdfPad d-inline-block fw-bold mt-0 ${styles.mb5} text-black`} style={{ fontFamily: "sans-serif" }}>Factura para:</p>
 
                                 {/* <pPDF text="Factura para:" styling={`${styles.input} fw-bold text-black ${styles.mb5}`}></TextPDF> */}
-                                <input type="text" className={`${styles.input}`} placeholder="Your Client's Name" id="clientName"></input>
-                                <input type="text" className={`${styles.input}`} placeholder="Client's Address" id="clientAddress"></input>
-                                <input type="text" className={`${styles.input}`} placeholder="City, State Zip" id="clientZip"></input>
-                                <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="Spain" id="clientCountry"></input>
+                                {!view ? (
+                                    <>
+                                        <input type="text" className={`${styles.input}`} placeholder="Your Client's Name" id="clientName"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="Client's Address" id="clientAddress"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="City, State Zip" id="clientZip"></input>
+                                        <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="Spain" id="clientCountry"></input>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Your Client's Name" id="clientName">Cliente</p>
+                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Client's Address" id="clientAddress">Calle</p>
+                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="City, State Zip" id="clientZip">Zip</p>
+                                        <p readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="Spain" id="clientCountry"> España</p>
+                                    </>
+                                )}
+
                             </div>
                             <div className={`view ${styles.w45}`}>
                                 <MDBRow>
@@ -288,7 +312,9 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                     handleQuantity={handleQuantity}
                                     handleDelete={handleDelete}
                                     handleDonation={handleDonation}
-                                    index={index}></InvoiceItem>
+                                    index={index}
+                                    view={view}
+                                    ></InvoiceItem>
                             })
                         }
 
@@ -297,7 +323,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
 
                         <MDBRow className="mx-0">
                             <MDBCol className="mt-2 px-0">
-                                {!pdf ?
+                                {!view ?
                                     <>
                                         <MDBBtn color={"success"} onClick={() => { toggleOpen() }} className="px-3"> <MDBIcon fas icon="plus" className="me-2" />Añadir Libro</MDBBtn>
                                         <MDBModal open={basicModal} setOpen={setBasicModal} tabIndex='-1'>
@@ -348,11 +374,19 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
 
                         <div className={`view ${styles.mt20}`}>
                             <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Notas adicionales</p>
-                            <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
+                            {view ? (
+                                <p className={`w-100`} placeholder="" style={{ height: 48 + "px" }}></p>
+                            ) : (
+                                <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
+                            )}
                         </div>
                         <div className={`view ${styles.mt20}`}>
                             <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Terminos y condiciones</p>
-                            <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
+                            {view ? (
+                                <p className={`w-100`} placeholder="" style={{ height: 48 + "px" }}></p>
+                            ) : (
+                                <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
+                            )}
                         </div>
                     </div >
                     <div>

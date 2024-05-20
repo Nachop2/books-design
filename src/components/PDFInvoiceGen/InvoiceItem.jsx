@@ -12,7 +12,7 @@ import {
     MDBRow,
 } from "mdb-react-ui-kit";
 
-const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonation, index }) => {
+const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonation, index, view = false }) => {
 
     let price = 0;
     let total = 0;
@@ -25,7 +25,7 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
         total = total.toFixed(2);
     }
 
-
+    console.log(item);
 
 
     return (
@@ -36,17 +36,32 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
 
                 </MDBCol>
                 <MDBCol className="px-2 col-2">
-                    <div className="ps-1 pe-3">
-                        <select defaultValue={item.chosenQuantity} className={`${styles.select} text-black text-end `}>
-                            {[...Array(item.stock)].map((x, i) =>
-                                <option value={i + 1} onClick={(e) => handleQuantity(index, (i + 1), e)} >{i + 1}</option>
-                            )}
-                        </select>
-                    </div>
+                    {!view ? (
+                        <div className="ps-1 pe-3">
+                            <select defaultValue={item.chosenQuantity} className={`${styles.select} text-black text-end `}>
+                                {[...Array(item.stock)].map((x, i) =>
+                                    <option value={i + 1} onClick={(e) => handleQuantity(index, (i + 1), e)} >{i + 1}</option>
+                                )}
+                            </select>
+                        </div>
+
+                    ) : (
+                        <p className="w-100 pdfPad d-inline-block pdfFont fw-bold text-black text-center">{item.chosenQuantity}</p>
+                    )}
+
 
                 </MDBCol>
                 <MDBCol className="text-center px-2 col-2">
-                    <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' aria-label='...' onClick={() => { handleDonation(index) }}></MDBCheckbox>
+                    {!view ? (
+                        <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' aria-label='...' onClick={() => { handleDonation(index) }}></MDBCheckbox>
+
+                    ) : (
+                        <MDBCheckbox
+                            id='controlledCheckbox'
+                            checked={item.donation}
+                            disabled
+                        />
+                    )}
                 </MDBCol>
                 <MDBCol className="col-2 px-2 col-2">
                     <p className={`w-100 pdfPad d-inline-block pdfFont text-black text-center`}>{price + "€"}</p>
