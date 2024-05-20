@@ -1,0 +1,19 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: 79.143.90.170
+          port: 2222
+          username: ignacio
+          key: ${{secrets.PRIVATE_KEY}}
+          script: "cd /var/www/html/books-design; git pull; npm run build"
