@@ -24,7 +24,10 @@ const BookInvoiceContextProvider = ({ children }) => {
             }
             const newData = await response.json();
             console.log(newData);
-
+            newData.data.forEach(book => {
+                let re = new RegExp(String.raw`(?:${term})`, "gi");
+                book.name = book.name.replace(re,`<strong style="color:blue">$&</strong>`)
+            });
             setBooks(newData.data)
         }
         catch (error) {

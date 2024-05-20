@@ -143,7 +143,7 @@ const CardMenu = ({enabledButtons = true}) => {
                                             <MDBRow>
                                                 <MDBCol className="text-center text-lg-start">
                                                     {/* href={`/quiz/play/${card.id}`} */}
-                                                    <MDBCardTitle className="text-primary">{card.title}</MDBCardTitle>
+                                                    <MDBCardTitle className="text-primary" dangerouslySetInnerHTML={{__html: card.title}}></MDBCardTitle>
                                                     {card.category_names.map(name => (
                                                         <MDBBadge pill light color='primary' className="mb-3 me-1">
                                                             {name}
