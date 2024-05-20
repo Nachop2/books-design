@@ -25,7 +25,6 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
         total = total.toFixed(2);
     }
 
-    console.log(item);
 
 
     return (
@@ -70,11 +69,17 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
                 <MDBCol className="px-2 col-1 col-2">
                     <p className={`w-100 pdfPad d-inline-block pdfFont text-black text-end fw-bold`}>{total + "€"}</p>
                 </MDBCol>
-                <div style={{ height: "0px", width: "0px" }} className="xVoid ">
+                {!view ? (
+                    <div style={{ height: "0px", width: "0px" }} className="xVoid ">
                     <MDBIcon fas icon="times-circle" className="text-danger xButtonCSSInvoice py-3 pe-2" size="lg"
                         onClick={(e) => handleDelete(index)}
                     />
                 </div>
+                ):(
+                    <>
+                    </>
+                )}
+                
             </MDBRow>
         </>
 
