@@ -2,12 +2,7 @@ import { useState } from 'react';
 import { MDBTabsContent, MDBTabsPane, MDBTabs, MDBTabsItem, MDBTabsLink, MDBIcon } from 'mdb-react-ui-kit';
 import Profile from './DashboardComponents/Profile';
 import Settings from './DashboardComponents/Settings';
-import MadeQuizzes from './DashboardComponents/MadeQuizzes';
 import UserManagement from "./DashboardComponents/UserManagement";
-import QuizManagement from "./DashboardComponents/QuizManagement";
-import ContactManagement from "./DashboardComponents/ContactManagement";
-import QuestionBank from "./DashboardComponents/QuestionBank";
-import PlayedQuizzes from "./DashboardComponents/PlayedQuizzes";
 
 const Dashboard = ({ }) => {
     const [activeTab, setActiveTab] = useState('profile');
