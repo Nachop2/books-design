@@ -7,7 +7,7 @@ const BookInvoiceContextProvider = ({ children }) => {
     const [books, setBooks] = useState([]);
     const [pagination, setPagination] = useState([]);
     let loading = false;
-
+    let term = "";
 
     const paginationBook = async (paginationLink) => {
         try {
@@ -20,10 +20,11 @@ const BookInvoiceContextProvider = ({ children }) => {
             }
             const newData = await response.json();
             setPagination([newData.current_page,newData.next_page_url,newData.last_page,newData.last_page_url,newData.first_page_url])
-            // newData.data.forEach(book => {
-            //     let re = new RegExp(String.raw`(?:${term})`, "gi");
-            //     book.name = book.name.replace(re, `<strong style="color:blue">$&</strong>`)
-            // });
+            newData.data.forEach(book => {
+                let re = new RegExp(String.raw`(?:${term})`, "gi");
+                book.name = book.name.replace(re, `<strong style="color:blue">$&</strong>`)
+            });
+            console.log(newData);
             setBooks(newData.data)
         }
         catch (error) {
@@ -31,7 +32,8 @@ const BookInvoiceContextProvider = ({ children }) => {
         }
     }
 
-    const fetchBooksSearch = async (event, term) => {
+    const fetchBooksSearch = async (event, newTerm) => {
+        term = newTerm;
         event.preventDefault();
         console.log(term);
         if (term == "") {
