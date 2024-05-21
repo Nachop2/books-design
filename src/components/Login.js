@@ -79,8 +79,8 @@ const Login = ({ onLogin }) => {
     }
 
     return (
-        <div className="d-flex justify-content-center align-content-center mt-5">
-            <MDBCard>
+        <div className="d-flex justify-content-center align-content-center align-middle mt-5">
+            <MDBCard className="d-flex justify-content-center align-content-center align-middle mt-5">
                 <MDBCardHeader>
                     <MDBTypography tag='h3' className="my-3">Iniciar sesión</MDBTypography>
                 </MDBCardHeader>
@@ -98,16 +98,6 @@ const Login = ({ onLogin }) => {
 
                             <MDBInput className='mb-4' type='email' id='email' label='Email' />
                             <MDBInput className='mb-4' type='password' id='password' label='Contraseña' />
-
-                            <MDBRow className='mb-4'>
-                                <MDBCol className='d-flex justify-content-center'>
-                                    <MDBCheckbox id='rememberMe' label='Recuerdame' defaultChecked />
-                                </MDBCol>
-                                <MDBCol>
-                                    <Link to="/recover-password">¿Se olvidó de la contraseña?</Link>
-                                </MDBCol>
-                            </MDBRow>
-
                             <MDBBtn type='submit' className='mb-4' block onClick={login}>
                                 Iniciar sesión
                             </MDBBtn>
