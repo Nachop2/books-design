@@ -106,22 +106,9 @@ const Register = ({ onLogin }) => {
                             <MDBInput className='mb-4' type='password' id='password_confirmation' label='Confirmar contraseña' />
                             {/* <MDBInput className='mb-4' type='tel' id='phoneNumber' label='Phone number' /> */}
 
-                            <MDBCheckbox
-                                wrapperClass='d-flex justify-content-center mb-4'
-                                id='newsletterSubscription'
-                                label='Subscribe to our newsletter'
-                                defaultChecked
-                            />
-
                             <MDBBtn type='submit' className='mb-4' block onClick={register}>
-                                Registrarse
+                                Crear Usuario
                             </MDBBtn>
-
-                            <div className='text-center'>
-                                <p>
-                                    ¿Ya eres un miembro? <Link to="/login">Inicia sesión</Link>
-                                </p>
-                            </div>
                         </form>
                     </MDBCardText>
                 </MDBCardBody>

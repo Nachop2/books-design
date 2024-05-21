@@ -4,20 +4,18 @@ import GuestRoute from "./components/GuestRoute";
 import Layout from "./components/layouts/Layout";
 import Navbar from "./components/Navbar";
 import CardList from "./components/CardList";
-import Category from "./components/Category";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import { MDBContainer } from "mdb-react-ui-kit";
 import "./css/main.css";
 import Dashboard from "./components/Dashboard";
 import Privacy from "./components/Privacy";
-import Terms from "./components/Terms";
+// import Terms from "./components/Terms";
 import CreateQuiz from "./components/CreateQuiz";
 import { useEffect, useState } from "react";
 import NotFound from "./components/NotFound";
 import EditQuiz from "./components/EditQuiz";
 import ChangePassword from "./components/ChangePassword";
-import RefreshLocation from "./components/utils/RefreshLocation";
 import RecoverPassword from "./components/RecoverPassword";
 import InvoicePDF from "./components/PDFInvoiceGen/InvoicePDF";
 import PdfRender from "./components/PDFInvoiceGen/PdfRender";
@@ -70,7 +68,7 @@ function App() {
 
 
                             <Route element={<Privacy />} path="/privacy" />
-                            <Route element={<Terms />} path="/terms" />
+                            {/* <Route element={<Terms />} path="/terms" /> */}
 
                             <Route element={<RecoverPassword />} path="/recover-password" />
                             <Route element={<NotFound />} path="*" />
