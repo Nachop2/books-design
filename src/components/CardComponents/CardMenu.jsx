@@ -1,23 +1,23 @@
-import { MDBBadge, MDBBtn, MDBCard, MDBCardBody, MDBCardLink, MDBCardTitle, MDBCol, MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle, MDBIcon, MDBRow } from "mdb-react-ui-kit";
+import { MDBBadge, MDBBtn, MDBCard, MDBCardBody, MDBCardLink, MDBCardTitle, MDBCol, MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle, MDBIcon, MDBPagination, MDBPaginationItem, MDBPaginationLink, MDBRow } from "mdb-react-ui-kit";
 import { useContext, useEffect, useState } from "react";
 import { BookInvoiceContext } from "../BookContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CardMenu = ({enabledButtons = true}) => {
+const CardMenu = ({ enabledButtons = true }) => {
 
     const { bookTest, books, fetchBooks } = useContext(BookInvoiceContext);
     const navigate = useNavigate();
     const [cards, setCards] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchBooks();
-    },[])
+    }, [])
     const token = document.cookie
-    .split('; ')
-    .find(cookie => cookie.startsWith('XSRF-TOKEN='))
-    ?.split('=')[1];
-    
+        .split('; ')
+        .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+        ?.split('=')[1];
+
     useEffect(() => {
         const prepareCards = books.map(book => ({
             id: book.id,
@@ -29,7 +29,7 @@ const CardMenu = ({enabledButtons = true}) => {
             //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
         }));
         setCards(prepareCards);
-    },[books])
+    }, [books])
 
 
     const handleSell = async (id) => {
@@ -143,7 +143,7 @@ const CardMenu = ({enabledButtons = true}) => {
                                             <MDBRow>
                                                 <MDBCol className="text-center text-lg-start">
                                                     {/* href={`/quiz/play/${card.id}`} */}
-                                                    <MDBCardTitle className="text-primary" dangerouslySetInnerHTML={{__html: card.title}}></MDBCardTitle>
+                                                    <MDBCardTitle className="text-primary" dangerouslySetInnerHTML={{ __html: card.title }}></MDBCardTitle>
                                                     {card.category_names.map(name => (
                                                         <MDBBadge pill light color='primary' className="mb-3 me-1">
                                                             {name}
@@ -216,7 +216,32 @@ const CardMenu = ({enabledButtons = true}) => {
 
                     ))
                 }
+                <MDBCol>
+                    <MDBPagination className='mb-0 align-items-center justify-content-center' circle >
+                        <MDBPaginationItem>
+
+                            <MDBPaginationLink href='#' aria-label='Previous' className="ps-2 pe-2 pt-1 pb-1 me-1">
+                                <MDBIcon fas icon="angle-double-left" />
+                            </MDBPaginationLink>
+                        </MDBPaginationItem>
+                        <MDBPaginationItem>
+                            <MDBPaginationLink href='#' className="fw-bold">1</MDBPaginationLink>
+                        </MDBPaginationItem>
+                        <MDBPaginationItem>
+                            <MDBPaginationLink href='#' className="fw-bold">2</MDBPaginationLink>
+                        </MDBPaginationItem>
+                        <MDBPaginationItem>
+                            <MDBPaginationLink href='#' className="fw-bold">3</MDBPaginationLink>
+                        </MDBPaginationItem>
+                        <MDBPaginationItem>
+                            <MDBPaginationLink href='#' aria-label='Next' className="ps-2 pe-2 pt-1 pb-1 me-1">
+                                <MDBIcon fas icon="angle-double-right" />
+                            </MDBPaginationLink>
+                        </MDBPaginationItem>
+                    </MDBPagination>
+                </MDBCol>
             </MDBRow>
+
         </MDBCardBody>
     )
 }
