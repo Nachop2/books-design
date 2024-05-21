@@ -6,10 +6,10 @@ import Swal from "sweetalert2";
 
 const CardMenu = ({ enabledButtons = true }) => {
 
-    const { bookTest, books, fetchBooks } = useContext(BookInvoiceContext);
+    const { bookTest, books, fetchBooks, paginationBook, pagination } = useContext(BookInvoiceContext);
     const navigate = useNavigate();
     const [cards, setCards] = useState([]);
-
+    console.log(pagination);
     useEffect(() => {
         fetchBooks();
     }, [])
@@ -19,6 +19,7 @@ const CardMenu = ({ enabledButtons = true }) => {
         ?.split('=')[1];
 
     useEffect(() => {
+        console.log(books);
         const prepareCards = books.map(book => ({
             id: book.id,
             title: book.name,
@@ -225,13 +226,13 @@ const CardMenu = ({ enabledButtons = true }) => {
                             </MDBPaginationLink>
                         </MDBPaginationItem>
                         <MDBPaginationItem>
-                            <MDBPaginationLink href='#' className="fw-bold">1</MDBPaginationLink>
+                            <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[4])}>{pagination[0]-1}</MDBPaginationLink>
+                        </MDBPaginationItem>
+                        <MDBPaginationItem active aria-current='page'>
+                            <MDBPaginationLink href='#'  className="fw-bold" onClick={(e) => paginationBook(pagination[0])}>{pagination[0]}</MDBPaginationLink>
                         </MDBPaginationItem>
                         <MDBPaginationItem>
-                            <MDBPaginationLink href='#' className="fw-bold">2</MDBPaginationLink>
-                        </MDBPaginationItem>
-                        <MDBPaginationItem>
-                            <MDBPaginationLink href='#' className="fw-bold">3</MDBPaginationLink>
+                            <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[3])}>{pagination[0]+1}</MDBPaginationLink>
                         </MDBPaginationItem>
                         <MDBPaginationItem>
                             <MDBPaginationLink href='#' aria-label='Next' className="ps-2 pe-2 pt-1 pb-1 me-1">

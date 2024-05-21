@@ -5,17 +5,41 @@ const BookInvoiceContext = createContext({ invoiceBooks: [], setInvoiceBooks: ()
 const BookInvoiceContextProvider = ({ children }) => {
     const [invoiceBooks, setInvoiceBooks] = useState([]);
     const [books, setBooks] = useState([]);
+    const [pagination, setPagination] = useState([]);
     let loading = false;
-    
+
+
+    const paginationBook = async (paginationLink) => {
+        try {
+            const response = await fetch(paginationLink, {
+                method: 'GET',
+                //credentials: 'include'
+            });
+            if (!response.ok) {
+                throw new Error("Failed to fetch books");
+            }
+            const newData = await response.json();
+            setPagination([newData.current_page,newData.next_page_url,newData.last_page,newData.last_page_url,newData.first_page_url])
+            // newData.data.forEach(book => {
+            //     let re = new RegExp(String.raw`(?:${term})`, "gi");
+            //     book.name = book.name.replace(re, `<strong style="color:blue">$&</strong>`)
+            // });
+            setBooks(newData.data)
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+
     const fetchBooksSearch = async (event, term) => {
         event.preventDefault();
         console.log(term);
-        if(term == ""){
+        if (term == "") {
             fetchBooks();
             return true;
         }
         try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/books/search?search=`+term, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/books/search?search=` + term , {
                 method: 'GET',
                 //credentials: 'include'
             });
@@ -24,9 +48,11 @@ const BookInvoiceContextProvider = ({ children }) => {
             }
             const newData = await response.json();
             console.log(newData);
+            setPagination([newData.current_page,newData.next_page_url,newData.last_page,newData.last_page_url,newData.first_page_url])
+
             newData.data.forEach(book => {
                 let re = new RegExp(String.raw`(?:${term})`, "gi");
-                book.name = book.name.replace(re,`<strong style="color:blue">$&</strong>`)
+                book.name = book.name.replace(re, `<strong style="color:blue">$&</strong>`)
             });
             setBooks(newData.data)
         }
@@ -47,6 +73,7 @@ const BookInvoiceContextProvider = ({ children }) => {
             }
             const newData = await response.json();
             console.log(newData);
+            setPagination([newData.current_page,newData.next_page_url,newData.last_page,newData.last_page_url,newData.first_page_url])
 
             setBooks(newData.data)
         }
@@ -95,7 +122,7 @@ const BookInvoiceContextProvider = ({ children }) => {
     }
 
     return (
-        <BookInvoiceContext.Provider value={{ setInvoiceBooks, bookTest, invoiceBooks, loading, fetchBooksSearch, fetchBooks, books }}>
+        <BookInvoiceContext.Provider value={{ setInvoiceBooks, bookTest, invoiceBooks, loading, fetchBooksSearch, fetchBooks, paginationBook, pagination, books }}>
             {children}
         </BookInvoiceContext.Provider>
     );
