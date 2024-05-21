@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     MDBBtn, MDBCollapse, MDBContainer, MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle,
     MDBIcon, MDBNavbar, MDBNavbarBrand, MDBNavbarItem, MDBNavbarLink, MDBNavbarNav, MDBNavbarToggler
@@ -8,18 +8,21 @@ import logo from "../images/logo.png";
 // import { CategoryContext } from "./CategoryContext";
 
 
-const Navbar = ({ userIsLoggedIn }) => {
+const Navbar = ({ userIsLoggedIn, userIsModOrAdmin }) => {
     // const { categories, setCategories } = useContext(CategoryContext);
     const navigate = useNavigate();
     const [openBasic, setOpenBasic] = useState(false);
+    useEffect(()=>{
+    },[userIsModOrAdmin])
+    console.log(userIsModOrAdmin);
 
     const onLogout = async () => {
         // Borrar almacenamiento local
 
         const csrfToken = document.cookie
-        .split('; ')
-        .find(cookie => cookie.startsWith('XSRF-TOKEN='))
-        ?.split('=')[1];
+            .split('; ')
+            .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+            ?.split('=')[1];
 
         await fetch(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
             method: 'POST',
@@ -96,6 +99,14 @@ const Navbar = ({ userIsLoggedIn }) => {
                                         <MDBBtn color="secondary" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/pdf">
                                             <MDBIcon fas icon="receipt" /> Crear factura
                                         </MDBBtn>
+                                        {userIsModOrAdmin ? (
+                                            <MDBBtn color="warning" className="ms-lg-2 ms-sm-0 mt-lg-0 mt-sm-2" href="/dashboard">
+                                                <MDBIcon fas icon="user" className='me-1' /> Administracion
+                                            </MDBBtn>
+                                        ) : (
+                                            <>
+                                            </>
+                                        )}
                                     </div>
                                 </MDBNavbarItem>
                             </MDBNavbarNav>

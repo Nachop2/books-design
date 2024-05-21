@@ -20,6 +20,7 @@ import RecoverPassword from "./components/RecoverPassword";
 import InvoicePDF from "./components/PDFInvoiceGen/InvoicePDF";
 import PdfRender from "./components/PDFInvoiceGen/PdfRender";
 import { BookInvoiceContextProvider } from "./components/BookContext";
+import AdminRoute from "./components/AdminRoute";
 function App() {
     const navigate = useNavigate();
     const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
@@ -27,34 +28,36 @@ function App() {
 
     const handleLogin = async () => {
         if (localStorage.getItem("XSRF-TOKEN")) {
-            await setUserIsLoggedIn(true);
-            console.log(userIsLoggedIn);
+            checkPerms();
             navigate("/home");
         }
     };
+    const checkPerms = async () => {
+        if (localStorage.getItem("XSRF-TOKEN")) {
+            await setUserIsLoggedIn(true);
+            const role = JSON.parse(localStorage.getItem("USER")).role
+            if (role == "mod" || role == "admin") {
+                await setUserIsMod(true)
+            }
+        }
+    }
     // This useEffect is required, since after you log in and get redirected handleLogin, it works 
     // but the moment you change tabs, pages, handleLogin is not called (Not being redirected from register or login) , so the default state prevails (false)
     // Meaning that after being logged in and changing pages (Ie, the dashboard), the register/login tabs reappear, and the protected routes dissapear
     useEffect(() => {
         // Check for token existence on component mount
-        const token = localStorage.getItem("XSRF-TOKEN");
-        if (token) {
-            setUserIsLoggedIn(true);
-            const role = JSON.parse(localStorage.getItem("USER")).role
-            if (role == "mod" || role == "admin") {
-                setUserIsMod(true)
-            }
-            console.log();
-        }
+        checkPerms();
     }, []);
+
+
 
     return (
         <MDBContainer className="p-0" style={{ height: "100vh" }}>
             <BookInvoiceContextProvider>
                 {/* <RefreshLocation/> */}
-                <Navbar userIsLoggedIn={userIsLoggedIn} />
+                <Navbar userIsLoggedIn={userIsLoggedIn} userIsModOrAdmin={userIsMod} />
                 <Routes>
-                    <Route element={<Layout userIsLoggedIn={userIsLoggedIn}/>} path="/">
+                    <Route element={<Layout userIsLoggedIn={userIsLoggedIn} />} path="/">
                         {/* Redirige a "/home" desde la ruta raíz, "/" */}
 
 
@@ -75,7 +78,11 @@ function App() {
                             <Route element={<InvoicePDF />} path="/pdf" />
                             <Route element={<InvoicePDF view={true} />} path="/pdf/:invoiceID" />
                             <Route element={<PdfRender />} path="/view" />
-                            {/* <Route element={<Dashboard userIsModOrAdmin={userIsMod} />} path="/dashboard" /> */}
+
+                            <Route element={<AdminRoute userIsModOrAdmin={userIsMod} />}>
+                                <Route element={<Dashboard />} path="/dashboard" />
+
+                            </Route>
                         </Route>
                         <Route element={<ChangePassword />} path="/password-reset/:token" />
                         <Route element={<GuestRoute />}>
