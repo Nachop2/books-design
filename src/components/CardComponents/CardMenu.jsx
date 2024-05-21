@@ -9,10 +9,13 @@ const CardMenu = ({ enabledButtons = true }) => {
     const { bookTest, books, fetchBooks, paginationBook, pagination } = useContext(BookInvoiceContext);
     const navigate = useNavigate();
     const [cards, setCards] = useState([]);
-    console.log(pagination);
     useEffect(() => {
         fetchBooks();
     }, [])
+    useEffect(() => {
+
+    }, [pagination]);
+    console.log(pagination);
     const token = document.cookie
         .split('; ')
         .find(cookie => cookie.startsWith('XSRF-TOKEN='))
@@ -219,26 +222,40 @@ const CardMenu = ({ enabledButtons = true }) => {
                 }
                 <MDBCol>
                     <MDBPagination className='mb-0 align-items-center justify-content-center' circle >
-                        <MDBPaginationItem>
+                        {(pagination[0] - 1) >= 1 ? (
+                            <>
+                                <MDBPaginationItem>
+                                    <MDBPaginationLink href='#' aria-label='Previous' className="ps-2 pe-2 pt-1 pb-1 me-1" onClick={(e) => paginationBook(pagination[4])}>
+                                        <MDBIcon fas icon="angle-double-left" />
+                                    </MDBPaginationLink>
+                                </MDBPaginationItem>
+                                <MDBPaginationItem>
+                                    <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[4])}>{pagination[0] - 1}</MDBPaginationLink>
+                                </MDBPaginationItem>
+                            </>
 
-                            <MDBPaginationLink href='#' aria-label='Previous' className="ps-2 pe-2 pt-1 pb-1 me-1">
-                                <MDBIcon fas icon="angle-double-left" />
-                            </MDBPaginationLink>
-                        </MDBPaginationItem>
-                        <MDBPaginationItem>
-                            <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[4])}>{pagination[0]-1}</MDBPaginationLink>
-                        </MDBPaginationItem>
+                        ) : (
+                            <></>
+                        )}
+
                         <MDBPaginationItem active aria-current='page'>
-                            <MDBPaginationLink href='#'  className="fw-bold" onClick={(e) => paginationBook(pagination[0])}>{pagination[0]}</MDBPaginationLink>
+                            <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[0])}>{pagination[0]}</MDBPaginationLink>
                         </MDBPaginationItem>
-                        <MDBPaginationItem>
-                            <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[3])}>{pagination[0]+1}</MDBPaginationLink>
-                        </MDBPaginationItem>
-                        <MDBPaginationItem>
-                            <MDBPaginationLink href='#' aria-label='Next' className="ps-2 pe-2 pt-1 pb-1 me-1">
-                                <MDBIcon fas icon="angle-double-right" />
-                            </MDBPaginationLink>
-                        </MDBPaginationItem>
+                        {(pagination[0] + 1) <= pagination[2] ? (
+                            <>
+                                <MDBPaginationItem>
+                                    <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[1])}>{pagination[0] + 1}</MDBPaginationLink>
+                                </MDBPaginationItem>
+                                <MDBPaginationItem>
+                                    <MDBPaginationLink href='#' aria-label='Next' className="ps-2 pe-2 pt-1 pb-1 me-1" onClick={(e) => paginationBook(pagination[3])}>
+                                        <MDBIcon fas icon="angle-double-right" />
+                                    </MDBPaginationLink>
+                                </MDBPaginationItem>
+                            </>
+                        ) : (
+                            <></>
+                        )}
+
                     </MDBPagination>
                 </MDBCol>
             </MDBRow>
