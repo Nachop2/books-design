@@ -37,7 +37,6 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
     useEffect(() => {
 
         let totalNoTax = 0;
-
         invoiceBooks.forEach(element => {
             if (element.donation == false) {
                 totalNoTax += element.price * element.chosenQuantity
@@ -87,6 +86,10 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                             category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
                             //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
                         };
+                        if(view){
+                            prepareCards.price = parseInt(book.pivot.priceSold)
+                            console.log(book.pivot.priceSold);
+                        }
                         invoiceCopy.push(prepareCards)
                         console.log(invoiceCopy);
 
