@@ -5,6 +5,10 @@ import InvoiceItem from "./InvoiceItem"
 import { useContext, useEffect, useState } from "react"
 import CardList from "../CardList"
 import Swal from "sweetalert2"
+import { useRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import {
     MDBBtn,
     MDBModal,
@@ -33,9 +37,13 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
     const [prices, setPrices] = useState(["0.00€", "0.00€", "0.00€"])
     const [tax, setTax] = useState(0.07);
 
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
     const dateObj = new Date;
 
-    const date = dateObj.getUTCDate().toString().padStart(2,"0") +"/"+ (dateObj.getUTCMonth()+1).toString().padStart(2,"0") +"/"+ dateObj.getUTCFullYear().toString()
+    const date = dateObj.getUTCDate().toString().padStart(2, "0") + "/" + (dateObj.getUTCMonth() + 1).toString().padStart(2, "0") + "/" + dateObj.getUTCFullYear().toString()
 
     useEffect(() => {
 
@@ -183,7 +191,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                         showConfirmButton: true,
                     }).then(result => {
                         if (result.isConfirmed) {
-                            navigate("/pdf/"+jsonResponse)
+                            navigate("/pdf/" + jsonResponse)
                         }
                     })
                 } else {
@@ -266,7 +274,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                             <p className={`w-100 pdfPad d-inline-block fw-bold pdfFont`}>Factura#</p>
                                         </MDBCol>
                                         <MDBCol >
-                                            <p className={`w-100 pdfPad d-inline-block pdfFont`}>{view ? (invoiceID.padStart(7,"0")) : ("_______")}</p>
+                                            <p className={`w-100 pdfPad d-inline-block pdfFont`}>{view ? (invoiceID.padStart(7, "0")) : ("_______")}</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow>
@@ -401,7 +409,26 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                         </div>
                     </div >
                     <div>
-                        <MDBBtn className="bg-success mt-4" onClick={() => saveInvoice()}><MDBIcon fas icon="save" className="me-2" size="lg" />Guardar</MDBBtn>
+                        {view ? (
+                            <>
+                            <MDBBtn className="bg-success mt-4" onClick={async () => {
+                                const element = componentRef.current;
+                                const canvas = await html2canvas(element);
+                                const imgData = canvas.toDataURL('image/png');
+                                const pdf = new jsPDF();
+                                pdf.addImage(imgData, 'PNG', 0, 0);
+                                pdf.save('download.pdf');
+                            }}><MDBIcon fas icon="save" className="me-2" size="lg" />PDF</MDBBtn>
+                            <MDBBtn className="bg-success mt-4" onClick={() => handlePrint()}><MDBIcon fas icon="save" className="me-2" size="lg" />Print</MDBBtn>
+                            </>
+                            
+
+                            
+
+                        ) : (
+                            <MDBBtn className="bg-success mt-4" onClick={() => saveInvoice()}><MDBIcon fas icon="save" className="me-2" size="lg" />Guardar</MDBBtn>
+
+                        )}
                     </div>
                 </div >
 
