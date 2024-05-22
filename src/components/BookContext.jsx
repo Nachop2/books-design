@@ -20,11 +20,23 @@ const BookInvoiceContextProvider = ({ children }) => {
             }
             const newData = await response.json();
             setPagination([newData.current_page,newData.next_page_url,newData.last_page,newData.last_page_url,newData.first_page_url,newData.prev_page_url])
-            newData.data.forEach(book => {
-                let re = new RegExp(String.raw`(?:${term})`, "gi");
-                book.name = book.name.replace(re, `<strong style="color:blue">$&</strong>`)
+            
+            const url = document.createElement('a');
+            url.href = paginationLink;
+            const parameters = {};
+            url.search.substring(1).split('&').forEach(param => {
+                const [key, value] = param.split('=');
+                parameters[decodeURIComponent(key)] = decodeURIComponent(value);
             });
-            console.log(newData);
+
+            if(parameters.search){
+                term = parameters.search;
+                newData.data.forEach(book => {
+                    let re = new RegExp(String.raw`(?:${term})`, "gi");
+                    book.name = book.name.replace(re, `<strong style="color:blue">$&</strong>`)
+                });
+            }
+            
             setBooks(newData.data)
         }
         catch (error) {
