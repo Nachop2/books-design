@@ -25,7 +25,7 @@ const CardMenu = ({ enabledButtons = true }) => {
             id: book.id,
             title: book.name,
             stock: book.stock,
-            price: parseInt(book.sellingAt).toFixed(2) + "€",
+            price: parseFloat(book.sellingAt).toFixed(2) + "€",
             text: book.description || "Sin descripción",
             category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
             //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'

@@ -47,18 +47,20 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
 
     useEffect(() => {
 
-        let totalNoTax = 0;
+        let totalNoTax = 0.00;
+        console.log(invoiceBooks);
         invoiceBooks.forEach(element => {
+            console.log(element.price);
             if (element.donation == false) {
                 totalNoTax += element.price * element.chosenQuantity
             }
         });
         let taxes = totalNoTax * tax;
         let total = taxes + totalNoTax
-
-        totalNoTax = totalNoTax.toFixed(2) + "€";
-        taxes = taxes.toFixed(2) + "€";
-        total = total.toFixed(2) + "€";
+        console.log(totalNoTax);
+        totalNoTax = parseFloat(totalNoTax).toFixed(2) + "€";
+        taxes = parseFloat(taxes).toFixed(2) + "€";
+        total = parseFloat(total).toFixed(2) + "€";
         setBasicModal(false);
         setPrices([totalNoTax, taxes, total]);
     }, [invoiceBooks, tax]);
@@ -95,12 +97,12 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                             chosenQuantity: book.pivot.amountSold,
                             donation: book.pivot.donation,
                             text: book.description || "Sin descripción",
-                            price: parseInt(book.sellingAt),
+                            price: parseFloat(book.sellingAt),
                             category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
                             //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
                         };
                         if (view) {
-                            prepareCards.price = parseInt(book.pivot.priceSold)
+                            prepareCards.price = parseFloat(book.pivot.priceSold)
                             console.log(book.pivot.priceSold);
                         }
                         invoiceCopy.push(prepareCards)

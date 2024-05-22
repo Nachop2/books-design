@@ -108,7 +108,7 @@ const BookInvoiceContextProvider = ({ children }) => {
                     chosenQuantity: 1,
                     donation: false,
                     text: book.description || "Sin descripción",
-                    price: parseInt(book.sellingAt),
+                    price: parseFloat(book.sellingAt),
                     category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
                     //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
                 };
