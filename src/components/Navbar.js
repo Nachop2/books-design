@@ -14,7 +14,6 @@ const Navbar = ({ userIsLoggedIn, userIsModOrAdmin }) => {
     const [openBasic, setOpenBasic] = useState(false);
     useEffect(()=>{
     },[userIsModOrAdmin])
-    console.log(userIsModOrAdmin);
 
     const onLogout = async () => {
         // Borrar almacenamiento local

@@ -15,14 +15,12 @@ const CardMenu = ({ enabledButtons = true }) => {
     useEffect(() => {
 
     }, [pagination]);
-    console.log(pagination);
     const token = document.cookie
         .split('; ')
         .find(cookie => cookie.startsWith('XSRF-TOKEN='))
         ?.split('=')[1];
 
     useEffect(() => {
-        console.log(books);
         const prepareCards = books.map(book => ({
             id: book.id,
             title: book.name,
