@@ -138,7 +138,6 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
         formData.append('clientCity', "Puerto");
 
         formData.append('clientZip', document.querySelector("#clientZip").value);
-        formData.append('clientCountry', document.querySelector("#clientCountry").value);
         // formData.append('invoiceDate', document.querySelector("#invoiceDate").value);
 
         invoiceBooks.forEach((book, index) => {
@@ -206,21 +205,12 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                     <img className="d-block" src={cabildo} alt="logo" style={{ maxWidth: 100 + "px" }}></img>
                                 </div>
                                 <p className={`fs-5 fw-bold d-inline-block pdfPad pdfFont`}>Cabildo de Fuerteventura</p>
-                                {!view ? (
-                                    <>
-                                        <input type="text" className={`${styles.input}`} placeholder="Your Name"></input>
-                                        <input type="text" className={`${styles.input}`} placeholder="Company's Address"></input>
-                                        <input type="text" className={`${styles.input}`} placeholder="Ciudad/Poblacion"></input>
-                                        <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input>
-                                    </>
-                                ) : (
-                                    <>
-                                        <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Your Name">Tu nombre</p>
-                                        <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Company's Address">Compañia</p>
-                                        <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Ciudad/Poblacion">Ciudad</p>
-                                        <p readOnly="readOnly" type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="" value="United States">España</p>
-                                    </>
-                                )}
+
+                                <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Dirección de la compañia"><strong>C.I.F.:</strong> P - 3500003 - C</p>
+                                <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Dirección de la compañia"><strong>Tel.:</strong> 928 862 300</p>
+                                <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Dirección de la compañia">C/ 1º de Mayo, 39</p>
+                                <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Ciudad/Poblacion">35600 Puerto del Rosario</p>
+                                <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Ciudad/Poblacion">Fuerteventura</p>
 
                                 {/* <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input> */}
                             </MDBCol>
@@ -238,9 +228,8 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                 {!view ? (
                                     <>
                                         <input type="text" className={`${styles.input}`} placeholder="Nombre del cliente" id="clientName"></input>
-                                        <input type="text" className={`${styles.input}`} placeholder="Dirección del cliente" id="clientAddress"></input>
-                                        <input type="text" className={`${styles.input}`} placeholder="Ciudad/Poblacion" id="clientZip"></input>
-                                        <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="Pais" value="Spain" id="clientCountry"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="Dirección" id="clientAddress"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="Localidad" id="clientZip"></input>
                                     </>
                                 ) : (
                                     <>
@@ -274,7 +263,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                             </div>
                                         </MDBCol>
                                     </MDBRow>
-                                    
+
                                 </MDBRow>
                             </div>
                         </div>
@@ -303,7 +292,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                     handleDonation={handleDonation}
                                     index={index}
                                     view={view}
-                                    ></InvoiceItem>
+                                ></InvoiceItem>
                             })
                         }
 
