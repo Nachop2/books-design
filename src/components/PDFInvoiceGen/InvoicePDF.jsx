@@ -210,14 +210,14 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                     <>
                                         <input type="text" className={`${styles.input}`} placeholder="Your Name"></input>
                                         <input type="text" className={`${styles.input}`} placeholder="Company's Address"></input>
-                                        <input type="text" className={`${styles.input}`} placeholder="City, State Zip"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="Ciudad/Poblacion"></input>
                                         <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input>
                                     </>
                                 ) : (
                                     <>
                                         <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Your Name">Tu nombre</p>
                                         <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Company's Address">Compañia</p>
-                                        <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="City, State Zip">Ciudad</p>
+                                        <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Ciudad/Poblacion">Ciudad</p>
                                         <p readOnly="readOnly" type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="" value="United States">España</p>
                                     </>
                                 )}
@@ -237,16 +237,16 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                 {/* <pPDF text="Factura para:" styling={`${styles.input} fw-bold text-black ${styles.mb5}`}></TextPDF> */}
                                 {!view ? (
                                     <>
-                                        <input type="text" className={`${styles.input}`} placeholder="Your Client's Name" id="clientName"></input>
-                                        <input type="text" className={`${styles.input}`} placeholder="Client's Address" id="clientAddress"></input>
-                                        <input type="text" className={`${styles.input}`} placeholder="City, State Zip" id="clientZip"></input>
-                                        <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="Spain" id="clientCountry"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="Nombre del cliente" id="clientName"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="Dirección del cliente" id="clientAddress"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="Ciudad/Poblacion" id="clientZip"></input>
+                                        <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="Pais" value="Spain" id="clientCountry"></input>
                                     </>
                                 ) : (
                                     <>
-                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Your Client's Name" id="clientName">Cliente</p>
-                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Client's Address" id="clientAddress">Calle</p>
-                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="City, State Zip" id="clientZip">Zip</p>
+                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Nombre del cliente" id="clientName">Cliente</p>
+                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Dirección del cliente" id="clientAddress">Calle</p>
+                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Ciudad/Poblacion" id="clientZip">Zip</p>
                                         <p readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="Spain" id="clientCountry"> España</p>
                                     </>
                                 )}
@@ -256,7 +256,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                 <MDBRow>
                                     <MDBRow>
                                         <MDBCol className="col-5">
-                                            <p className={`w-100 pdfPad d-inline-block fw-bold pdfFont`}>Invoice#</p>
+                                            <p className={`w-100 pdfPad d-inline-block fw-bold pdfFont`}>Factura#</p>
                                         </MDBCol>
                                         <MDBCol >
                                             <p className={`w-100 pdfPad d-inline-block pdfFont`}>0000001</p>
@@ -264,7 +264,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                     </MDBRow>
                                     <MDBRow>
                                         <MDBCol className="col-5 pe-0">
-                                            <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Invoice Date</p>
+                                            <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Fecha de emisión</p>
                                         </MDBCol>
                                         <MDBCol className="" >
                                             <div className="react-datepicker-wrapper">
@@ -274,18 +274,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                             </div>
                                         </MDBCol>
                                     </MDBRow>
-                                    <MDBRow>
-                                        <MDBCol className="col-5 pe-0">
-                                            <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Due Date</p>
-                                        </MDBCol>
-                                        <MDBCol className="" >
-                                            <div className="react-datepicker-wrapper">
-                                                <div className="react-datepicker__input-container">
-                                                    <input type="text" className={`${styles.input}`} defaultValue="Apr 12, 2024"></input>
-                                                </div>
-                                            </div>
-                                        </MDBCol>
-                                    </MDBRow>
+                                    
                                 </MDBRow>
                             </div>
                         </div>

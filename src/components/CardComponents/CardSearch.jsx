@@ -23,7 +23,7 @@ const CardSearch = () => {
                 </MDBCol>
                 <MDBCol className="d-flex " style={{ alignItems: "center" }}>
                     <form className="input-group my-2">
-                        <input type="search" className="form-control" placeholder="Search..." aria-label="Search" id="bookSearch"/>
+                        <input type="search" className="form-control" placeholder="Buscar..." aria-label="Search" id="bookSearch"/>
                         <MDBBtn color="primary"
                         aria-label="search books"
                         onClick={(e)=>fetchBooksSearch(e,document.getElementById("bookSearch").value)}
