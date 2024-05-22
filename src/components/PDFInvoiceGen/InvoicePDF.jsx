@@ -22,17 +22,20 @@ import CardMenu from "../CardComponents/CardMenu"
 import CardSearch from "../CardComponents/CardSearch"
 import { BookInvoiceContext } from "../BookContext"
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import { useParams } from "react-router-dom"
+import { Navigate, useNavigate, useParams } from "react-router-dom"
 
 const InvoicePDF = ({ pdf = false, view = false }) => {
     const { invoiceID } = useParams();
     const { bookTest, invoiceBooks, setInvoiceBooks } = useContext(BookInvoiceContext)
     const [basicModal, setBasicModal] = useState(false);
-
+    const navigate = useNavigate();
     const toggleOpen = () => setBasicModal(!basicModal);
     const [prices, setPrices] = useState(["0.00€", "0.00€", "0.00€"])
+    const [tax, setTax] = useState(0.07);
 
+    const dateObj = new Date;
 
+    const date = dateObj.getUTCDate().toString().padStart(2,"0") +"/"+ (dateObj.getUTCMonth()+1).toString().padStart(2,"0") +"/"+ dateObj.getUTCFullYear().toString()
 
     useEffect(() => {
 
@@ -42,7 +45,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                 totalNoTax += element.price * element.chosenQuantity
             }
         });
-        let taxes = totalNoTax * 0.24;
+        let taxes = totalNoTax * tax;
         let total = taxes + totalNoTax
 
         totalNoTax = totalNoTax.toFixed(2) + "€";
@@ -50,7 +53,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
         total = total.toFixed(2) + "€";
         setBasicModal(false);
         setPrices([totalNoTax, taxes, total]);
-    }, [invoiceBooks]);
+    }, [invoiceBooks, tax]);
 
     useEffect(() => {
         if (invoiceID != null) {
@@ -68,7 +71,9 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
 
                     document.querySelector("#clientAddress").textContent = invoiceData.clientAddress;
                     document.querySelector("#clientLocation").textContent = invoiceData.clientLocation;
+                    document.querySelector("#clientCountry").textContent = invoiceData.clientCountry;
 
+                    setTax(invoiceData.tax);
                     // formData.append('clientCity', document.querySelector("#clientCity").value);
 
                     document.querySelector("#clientCIF").textContent = invoiceData.clientCIF;
@@ -86,7 +91,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                             category_names: ["ISBN: " + book.isbn, "Autor: " + book.author],
                             //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
                         };
-                        if(view){
+                        if (view) {
                             prepareCards.price = parseInt(book.pivot.priceSold)
                             console.log(book.pivot.priceSold);
                         }
@@ -104,7 +109,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
             };
             fetchInvoice()
         }
-    }, [])
+    }, [invoiceID])
 
     const handleQuantity = (index, quantity) => {
         let itemCopy = [...invoiceBooks];
@@ -138,11 +143,12 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
         formData.append('clientName', document.querySelector("#clientName").value);
         formData.append('clientAddress', document.querySelector("#clientAddress").value);
         // formData.append('clientCity', document.querySelector("#clientCity").value);
-        formData.append('clientLocation', "Puerto");
+        formData.append('clientLocation', document.querySelector("#clientLocation").value);
+        formData.append('clientCountry', document.querySelector("#clientCountry").value);
 
-        formData.append('clientCIF', document.querySelector("#clientZip").value);
-        formData.append('tax', 21 || document.querySelector("#tax").value);
-
+        formData.append('clientCIF', document.querySelector("#clientCIF").value);
+        formData.append('tax', tax);
+        console.log(formData);
         // formData.append('invoiceDate', document.querySelector("#invoiceDate").value);
 
         invoiceBooks.forEach((book, index) => {
@@ -175,6 +181,10 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                         icon: "success",
                         title: "La factura fue creada con éxito",
                         showConfirmButton: true,
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            navigate("/pdf/"+jsonResponse)
+                        }
                     })
                 } else {
 
@@ -191,7 +201,6 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
             })
             .then(data => {
                 console.log(data);
-
             })
             .catch(error => console.error('Error:', error));
     }
@@ -234,7 +243,9 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                     <>
                                         <input type="text" className={`${styles.input}`} placeholder="Nombre del cliente" id="clientName"></input>
                                         <input type="text" className={`${styles.input}`} placeholder="Dirección" id="clientAddress"></input>
-                                        <input type="text" className={`${styles.input}`} placeholder="Localidad" id="clientZip"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="Localidad" id="clientLocation"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="CIF" id="clientCIF"></input>
+                                        <input type="text" className={`${styles.input}`} placeholder="Pais" id="clientCountry"></input>
                                     </>
                                 ) : (
                                     <>
@@ -255,7 +266,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                             <p className={`w-100 pdfPad d-inline-block fw-bold pdfFont`}>Factura#</p>
                                         </MDBCol>
                                         <MDBCol >
-                                            <p className={`w-100 pdfPad d-inline-block pdfFont`}>0000001</p>
+                                            <p className={`w-100 pdfPad d-inline-block pdfFont`}>{view ? (invoiceID.padStart(7,"0")) : ("_______")}</p>
                                         </MDBCol>
                                     </MDBRow>
                                     <MDBRow>
@@ -263,11 +274,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                             <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Fecha de emisión</p>
                                         </MDBCol>
                                         <MDBCol className="" >
-                                            <div className="react-datepicker-wrapper">
-                                                <div className="react-datepicker__input-container">
-                                                    <input type="text" className={`${styles.input}`} defaultValue="Mar 13, 2024"></input>
-                                                </div>
-                                            </div>
+                                            <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>{date}</p>
                                         </MDBCol>
                                     </MDBRow>
 
@@ -338,7 +345,26 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                 </MDBRow>
                                 <MDBRow className={`view mx-0 align-items-center`}>
                                     <MDBCol>
-                                        <p className={`w-100 pdfPad d-inline-block pdfFont`}>Impuestos (21%)</p>
+                                        <MDBRow>
+                                            <MDBCol className={view ? ("col") : ("col-6")}>
+                                                <p className={`w-100 pdfPad d-inline-block pdfFont`}>{view ? ("Impuestos (" + Math.round(tax * 100) + "%)") : ("Impuestos")}</p>
+                                            </MDBCol>
+                                            {view ? (
+                                                <></>
+
+                                            ) : (
+                                                <MDBCol className="col-6">
+                                                    <select defaultValue={0.07} className={`${styles.select} text-black text-end `}>
+                                                        <option value={0} onClick={() => setTax(0)}>0%</option>
+                                                        <option value={0.07} onClick={() => setTax(0.07)}>7%</option>
+                                                        <option value={0.21} onClick={() => setTax(0.21)}>21%</option>
+                                                        {/* <option value={0.21} onClick={(e) => handleTax(index, (i + 1), ee)} >21%</option> */}
+                                                    </select>
+                                                </MDBCol>
+                                            )}
+
+                                        </MDBRow>
+
 
                                     </MDBCol>
                                     <MDBCol className={`view ${styles.p5} justify-content-end`}>
