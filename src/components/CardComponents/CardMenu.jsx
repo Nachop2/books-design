@@ -230,7 +230,7 @@ const CardMenu = ({ enabledButtons = true }) => {
                                     </MDBPaginationLink>
                                 </MDBPaginationItem>
                                 <MDBPaginationItem>
-                                    <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[4])}>{pagination[0] - 1}</MDBPaginationLink>
+                                    <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[5])}>{pagination[0] - 1}</MDBPaginationLink>
                                 </MDBPaginationItem>
                             </>
 
