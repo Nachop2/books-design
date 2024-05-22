@@ -412,7 +412,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                     </div >
                     <div>
                         {view ? (
-                            <MDBBtn className="bg-success mt-4" onClick={() => handlePrint()}><MDBIcon fas icon="save" className="me-2" size="lg" />Print</MDBBtn>
+                            <MDBBtn className="bg-success mt-4" onClick={() => handlePrint()}><MDBIcon fas icon="file-pdf" className="me-2" size="lg" />Imprimir</MDBBtn>
                         ) : (
                             <MDBBtn className="bg-success mt-4" onClick={() => saveInvoice()}><MDBIcon fas icon="save" className="me-2" size="lg" />Guardar</MDBBtn>
 
