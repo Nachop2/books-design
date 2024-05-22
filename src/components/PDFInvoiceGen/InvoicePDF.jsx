@@ -68,11 +68,11 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                     document.querySelector("#clientName").textContent = invoiceData.clientName;
 
                     document.querySelector("#clientAddress").textContent = invoiceData.clientAddress;
+                    document.querySelector("#clientLocation").textContent = invoiceData.clientLocation;
+
                     // formData.append('clientCity', document.querySelector("#clientCity").value);
 
-                    document.querySelector("#clientZip").textContent = invoiceData.clientZip;
-
-                    document.querySelector("#clientCountry").textContent = invoiceData.clientCountry
+                    document.querySelector("#clientCIF").textContent = invoiceData.clientCIF;
 
                     let invoiceCopy = [];
                     invoiceData.books.forEach(book => {
@@ -135,9 +135,11 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
         formData.append('clientName', document.querySelector("#clientName").value);
         formData.append('clientAddress', document.querySelector("#clientAddress").value);
         // formData.append('clientCity', document.querySelector("#clientCity").value);
-        formData.append('clientCity', "Puerto");
+        formData.append('clientLocation', "Puerto");
 
-        formData.append('clientZip', document.querySelector("#clientZip").value);
+        formData.append('clientCIF', document.querySelector("#clientZip").value);
+        formData.append('tax', 21 || document.querySelector("#tax").value);
+
         // formData.append('invoiceDate', document.querySelector("#invoiceDate").value);
 
         invoiceBooks.forEach((book, index) => {
@@ -235,8 +237,10 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                     <>
                                         <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Nombre del cliente" id="clientName">Cliente</p>
                                         <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Dirección del cliente" id="clientAddress">Calle</p>
-                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Ciudad/Poblacion" id="clientZip">Zip</p>
-                                        <p readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="Spain" id="clientCountry"> España</p>
+                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Dirección del cliente" id="clientLocation">Calle</p>
+
+                                        <p type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Ciudad/Poblacion" id="clientCIF">Zip</p>
+                                        <p readOnly="readOnly" type="text" className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="" value="Spain" id="clientCountry"> España</p>
                                     </>
                                 )}
 
