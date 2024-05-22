@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { BookInvoiceContext } from "../BookContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Pagination from "./Pagination";
 
 const CardMenu = ({ enabledButtons = true }) => {
 
@@ -12,9 +13,7 @@ const CardMenu = ({ enabledButtons = true }) => {
     useEffect(() => {
         fetchBooks();
     }, [])
-    useEffect(() => {
-
-    }, [pagination]);
+    
     const token = document.cookie
         .split('; ')
         .find(cookie => cookie.startsWith('XSRF-TOKEN='))
@@ -113,14 +112,6 @@ const CardMenu = ({ enabledButtons = true }) => {
             <MDBRow className="row-cols-1 row-cols-md-12 g-4">
                 {
                     cards.map((card, i) => (
-                        <>
-                            {/* Detect if card has 0 stock and do stuff
-                            {enabledButtons ?
-                                null :
-                                card.stock > 0 ?
-                                    <h1>EEE</h1> : null
-                            } */}
-
                             <MDBCol key={i}>
                                 <MDBCard>
                                     <div className='hover-overlay'>
@@ -214,47 +205,10 @@ const CardMenu = ({ enabledButtons = true }) => {
                                     </div>
                                 </MDBCard>
                             </MDBCol>
-                        </>
-
                     ))
                 }
                 <MDBCol>
-                    <MDBPagination className='mb-0 align-items-center justify-content-center' circle >
-                        {(pagination[0] - 1) >= 1 ? (
-                            <>
-                                <MDBPaginationItem>
-                                    <MDBPaginationLink href='#' aria-label='Previous' className="ps-2 pe-2 pt-1 pb-1 me-1" onClick={(e) => paginationBook(pagination[4])}>
-                                        <MDBIcon fas icon="angle-double-left" />
-                                    </MDBPaginationLink>
-                                </MDBPaginationItem>
-                                <MDBPaginationItem>
-                                    <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[5])}>{pagination[0] - 1}</MDBPaginationLink>
-                                </MDBPaginationItem>
-                            </>
-
-                        ) : (
-                            <></>
-                        )}
-
-                        <MDBPaginationItem active aria-current='page'>
-                            <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[0])}>{pagination[0]}</MDBPaginationLink>
-                        </MDBPaginationItem>
-                        {(pagination[0] + 1) <= pagination[2] ? (
-                            <>
-                                <MDBPaginationItem>
-                                    <MDBPaginationLink href='#' className="fw-bold" onClick={(e) => paginationBook(pagination[1])}>{pagination[0] + 1}</MDBPaginationLink>
-                                </MDBPaginationItem>
-                                <MDBPaginationItem>
-                                    <MDBPaginationLink href='#' aria-label='Next' className="ps-2 pe-2 pt-1 pb-1 me-1" onClick={(e) => paginationBook(pagination[3])}>
-                                        <MDBIcon fas icon="angle-double-right" />
-                                    </MDBPaginationLink>
-                                </MDBPaginationItem>
-                            </>
-                        ) : (
-                            <></>
-                        )}
-
-                    </MDBPagination>
+                    <Pagination paginationFunction={paginationBook} paginationInfo={pagination}></Pagination>
                 </MDBCol>
             </MDBRow>
 
