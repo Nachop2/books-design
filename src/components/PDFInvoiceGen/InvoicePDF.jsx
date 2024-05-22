@@ -220,7 +220,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
         <>
             <div id="root">
                 <div className={styles.app}>
-                    <div className={`page ${styles.invoiceWrapper}`} >
+                    <div className={`page ${styles.invoiceWrapper}`} ref={componentRef}>
                         <MDBRow>
                             <MDBCol>
                                 <div className={`logo d-inline-block ${styles.mb5}`}>
@@ -394,7 +394,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                         <div className={`view ${styles.mt20}`}>
                             <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Notas adicionales</p>
                             {view ? (
-                                <p className={`w-100`} placeholder="" style={{ height: 48 + "px" }}></p>
+                                <p className={`w-100`} placeholder="" ></p>
                             ) : (
                                 <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                             )}
@@ -402,7 +402,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                         <div className={`view ${styles.mt20}`}>
                             <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Terminos y condiciones</p>
                             {view ? (
-                                <p className={`w-100`} placeholder="" style={{ height: 48 + "px" }}></p>
+                                <p className={`w-100`} placeholder="" ></p>
                             ) : (
                                 <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                             )}
@@ -410,21 +410,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                     </div >
                     <div>
                         {view ? (
-                            <>
-                            <MDBBtn className="bg-success mt-4" onClick={async () => {
-                                const element = componentRef.current;
-                                const canvas = await html2canvas(element);
-                                const imgData = canvas.toDataURL('image/png');
-                                const pdf = new jsPDF();
-                                pdf.addImage(imgData, 'PNG', 0, 0);
-                                pdf.save('download.pdf');
-                            }}><MDBIcon fas icon="save" className="me-2" size="lg" />PDF</MDBBtn>
                             <MDBBtn className="bg-success mt-4" onClick={() => handlePrint()}><MDBIcon fas icon="save" className="me-2" size="lg" />Print</MDBBtn>
-                            </>
-                            
-
-                            
-
                         ) : (
                             <MDBBtn className="bg-success mt-4" onClick={() => saveInvoice()}><MDBIcon fas icon="save" className="me-2" size="lg" />Guardar</MDBBtn>
 
