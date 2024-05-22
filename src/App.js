@@ -9,18 +9,18 @@ import Register from "./components/Register";
 import { MDBContainer } from "mdb-react-ui-kit";
 import "./css/main.css";
 import Dashboard from "./components/Dashboard";
-import Privacy from "./components/Privacy";
+// import Privacy from "./components/Privacy";
 // import Terms from "./components/Terms";
 import CreateQuiz from "./components/CreateQuiz";
 import { useEffect, useState } from "react";
 import NotFound from "./components/NotFound";
 import EditQuiz from "./components/EditQuiz";
 import ChangePassword from "./components/ChangePassword";
-import RecoverPassword from "./components/RecoverPassword";
 import InvoicePDF from "./components/PDFInvoiceGen/InvoicePDF";
-import PdfRender from "./components/PDFInvoiceGen/PdfRender";
 import { BookInvoiceContextProvider } from "./components/BookContext";
 import AdminRoute from "./components/AdminRoute";
+import InvoiceCardMenu from "./components/CardComponents/InvoiceCardMenu";
+import InvoiceCardList from "./components/InvoiceCardList";
 function App() {
     const navigate = useNavigate();
     const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
@@ -64,20 +64,18 @@ function App() {
                         {/* Rutas protegidas (comprueban si el usuario inició sesión) */}
                         <Route element={<ProtectedRoute />}>
                             <Route element={<Navigate to="/home" replace />} path="/" />
-
                             <Route element={<CardList />} path="/home" />
+                            <Route element={<InvoiceCardList/>} path="/invoices"/>
                             <Route element={<CreateQuiz bookToBeEdited={null} />} path="/book/create" />
                             <Route element={<EditQuiz />} path="/book/edit/:bookId" />
 
 
-                            <Route element={<Privacy />} path="/privacy" />
+                            {/* <Route element={<Privacy />} path="/privacy" /> */}
                             {/* <Route element={<Terms />} path="/terms" /> */}
 
-                            <Route element={<RecoverPassword />} path="/recover-password" />
                             <Route element={<NotFound />} path="*" />
                             <Route element={<InvoicePDF />} path="/pdf" />
                             <Route element={<InvoicePDF view={true} />} path="/pdf/:invoiceID" />
-                            <Route element={<PdfRender />} path="/view" />
 
                             <Route element={<AdminRoute userIsModOrAdmin={userIsMod} />}>
                                 <Route element={<Dashboard />} path="/dashboard" />
