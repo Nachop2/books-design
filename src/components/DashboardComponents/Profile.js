@@ -118,7 +118,7 @@ const Profile = () => {
                             label="Nombre"
                             type="text"
                             name="name"
-                            value={isEditing ? editedUserData.name : userData.name}
+                            value={userData.name}
                             disabled={!isEditing}
                             onChange={handleInputChange}
                             className='mb-4'
@@ -128,22 +128,12 @@ const Profile = () => {
                             label="Correo electrónico"
                             type="email"
                             name="email"
-                            value={isEditing ? editedUserData.email : userData.email}
+                            value={userData.email}
                             disabled={!isEditing}
                             onChange={handleInputChange}
                             className='mb-4'
                         />
-                        {isEditing ? (
-                            <div className="d-grid gap-2">
-                                <MDBBtn color="secondary" onClick={handleCancelClick}>Cancelar</MDBBtn>
-                                <MDBBtn color="primary" onClick={handleSaveClick}>Guardar cambios</MDBBtn>
-                            </div>
-                        ) : (
-                            <div className="d-grid gap-2">
-                                <MDBBtn color="secondary" onClick={handleEditClick}>Editar perfil</MDBBtn>
-                                <MDBBtn color="primary" onClick={handleChangePasswordClick}>Cambiar contraseña</MDBBtn>
-                            </div>
-                        )}
+                        
                     </MDBCardText>
                 </MDBCardBody>
             </MDBCard>
