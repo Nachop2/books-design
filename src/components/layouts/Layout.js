@@ -16,7 +16,7 @@ const Layout = ({ userIsLoggedIn }) => {
                                     voluptatibus placeat nam, commodi optio pariatur est quia magnam eum harum corrupti dicta, aliquam
                                     sequi voluptate quas.
                                 </p>
-                            </section> */}
+                            </section>
 
                             <section className=''>
                                 <MDBRow>
@@ -48,13 +48,13 @@ const Layout = ({ userIsLoggedIn }) => {
                                             
 
                                 </MDBRow>
-                            </section>
+                            </section> */}
                         </MDBContainer>
 
 
 
                         <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                            © 2024 Copyright/Derechos de autor:
+                            <span>© 2024 Copyright/Derechos de autor: </span> 
                             <a className='text-white' href=''>
                                 Cabildo de Fuerteventura
                             </a>
