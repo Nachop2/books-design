@@ -83,7 +83,7 @@ const Register = ({ onLogin }) => {
 
 
     return (
-        <div className="d-flex justify-content-center align-content-center mt-5">
+        // <div className="d-flex justify-content-center align-content-center mt-5">
             <MDBCard>
                 <MDBCardHeader>
                     <MDBTypography tag='h3' className="my-3">Register</MDBTypography>
@@ -113,7 +113,7 @@ const Register = ({ onLogin }) => {
                     </MDBCardText>
                 </MDBCardBody>
             </MDBCard>
-        </div>
+        // </div>
     );
 }
 

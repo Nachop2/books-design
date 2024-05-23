@@ -9,41 +9,57 @@ import {
     MDBIcon,
     MDBListGroup,
     MDBListGroupItem,
+    MDBModal,
+    MDBModalBody,
+    MDBModalContent,
+    MDBModalDialog,
+    MDBModalFooter,
+    MDBModalHeader,
+    MDBModalTitle,
     MDBTypography
 } from "mdb-react-ui-kit";
+import Register from "../Register";
 
 const UserManagement = () => {
     // Necesitamos saber el rol del usuario actual:
     const currentUserData = localStorage.getItem('USER');
     const formattedCurrentUserData = JSON.parse(currentUserData);
+    const [basicModal, setBasicModal] = useState(false);
 
+    const toggleOpen = () => setBasicModal(!basicModal);
 
     const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
-    /*
+    // const [users, setUsers] = useState([]);
     const users = [
         { username: 'RandomUser', image_src: 'https://mdbootstrap.com/img/new/avatars/1.jpg' },
         { username: 'RandomUser2', image_src: 'https://mdbootstrap.com/img/new/avatars/2.jpg' },
         { username: 'RandomUser3', image_src: 'https://mdbootstrap.com/img/new/avatars/3.jpg' }
     ];
-     */
-
+    console.log(users);
     useEffect(() => {
         const fetchUsers = async (e) => {
             // TODO - Crear una ruta para conseguir todos los usuarios (excepto el propio usuario con el se tiene la sesión actual)
             try {
-                const response = await fetch('https://localhost:8000/api/users', {
-                    
+                const csrfToken = document.cookie
+                    .split('; ')
+                    .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+                    ?.split('=')[1];
+
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/users`, {
                     method: 'GET',
-                    credentials: 'include',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-XSRF-TOKEN': decodeURIComponent(csrfToken), // Include the CSRF token in the headers
+                    },
+                    credentials: 'include', // Include cookies for the domain
                 });
 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-
                 const userData = await response.json();
-                setUsers(userData);
+                console.log(userData);
+                // setUsers(userData);
             }
             catch (error) {
                 console.error('Error fetching users:', error);
@@ -83,7 +99,7 @@ const UserManagement = () => {
                     try {
                         // TODO - Crear ruta para poder actualizar a un usuario (excepto el mismo con el que se está en sesión)
                         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/${id}`, {
-                            
+
                             method: 'POST',
                             headers: {
                                 'Accept': 'application/json',
@@ -115,8 +131,8 @@ const UserManagement = () => {
             }
         });
     }
-    
-    
+
+
     const onAdminPromotion = async (id) => {
         Swal.fire({
             icon: "warning",
@@ -141,7 +157,7 @@ const UserManagement = () => {
                     try {
                         // TODO - Crear ruta para poder actualizar a un usuario (excepto el mismo con el que se está en sesión)
                         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/${id}`, {
-                            
+
                             method: 'POST',
                             headers: {
                                 'Accept': 'application/json',
@@ -195,7 +211,7 @@ const UserManagement = () => {
                     try {
                         // TODO - Crear ruta para poder eliminar a un usuario (excepto el mismo con el que se está en sesión)
                         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/user/${id}`, {
-                            
+
                             method: 'DELETE',
                             headers: {
                                 'X-XSRF-TOKEN': decodeURIComponent(csrfToken), // Include the CSRF token in the headers
@@ -229,6 +245,13 @@ const UserManagement = () => {
 
     return (
         <div className="d-flex justify-content-center">
+            <MDBModal open={basicModal} onClose={() => setBasicModal(false)} tabIndex='-1'>
+                <MDBModalDialog>
+                    <MDBModalContent>
+                        <Register></Register>
+                    </MDBModalContent>
+                </MDBModalDialog>
+            </MDBModal>
             <MDBCard>
                 <MDBCardHeader>
                     <MDBTypography tag='h3' className="my-3">
@@ -248,7 +271,7 @@ const UserManagement = () => {
                                             className='rounded-circle'
                                         />
                                         <div className='ms-3'>
-                                            <p className='fw-bold mb-1'>{user.name}</p>
+                                            <p className='fw-bold mb-1'>{user.username}</p>
                                         </div>
                                     </div>
                                     <div className="ms-5">
@@ -260,7 +283,7 @@ const UserManagement = () => {
                                         {formattedCurrentUserData.role === 'mod' && (
                                             user.role === 'user' && (
                                                 <MDBBtn size='sm' rounded color='info' className="ms-2"
-                                                        onClick={() => onModPromotion(user.id)}>
+                                                    onClick={() => onModPromotion(user.id)}>
                                                     <MDBIcon fas icon="arrow-alt-circle-up" /> Moderador
                                                 </MDBBtn>
                                             )
@@ -271,17 +294,17 @@ const UserManagement = () => {
                                             user.role === 'user' ? (
                                                 <>
                                                     <MDBBtn size='sm' rounded color='info' className="ms-2"
-                                                            onClick={() => onModPromotion(user.id)}>
+                                                        onClick={() => onModPromotion(user.id)}>
                                                         <MDBIcon fas icon="arrow-alt-circle-up" /> Moderador
                                                     </MDBBtn>
 
                                                     <MDBBtn size='sm' rounded color='primary' className="ms-2"
-                                                            onClick={() => onAdminPromotion(user.id)}>
+                                                        onClick={() => onAdminPromotion(user.id)}>
                                                         <MDBIcon fas icon="arrow-alt-circle-up" /> Administrador
                                                     </MDBBtn>
 
                                                     <MDBBtn size='sm' rounded color='danger' className="ms-2"
-                                                            onClick={() => onDelete(user.id)}>
+                                                        onClick={() => onDelete(user.id)}>
                                                         <MDBIcon fas icon="trash" />
                                                     </MDBBtn>
                                                 </>
@@ -289,12 +312,12 @@ const UserManagement = () => {
                                                 user.role === 'mod' && (
                                                     <>
                                                         <MDBBtn size='sm' rounded color='primary' className="ms-2"
-                                                                onClick={() => onAdminPromotion(user.id)}>
+                                                            onClick={() => onAdminPromotion(user.id)}>
                                                             <MDBIcon fas icon="arrow-alt-circle-up" /> Administrador
                                                         </MDBBtn>
 
                                                         <MDBBtn size='sm' rounded color='danger' className="ms-2"
-                                                                onClick={() => onDelete(user.id)}>
+                                                            onClick={() => onDelete(user.id)}>
                                                             <MDBIcon fas icon="trash" />
                                                         </MDBBtn>
                                                     </>
@@ -306,6 +329,8 @@ const UserManagement = () => {
                             </MDBListGroupItem>
                         ))}
                     </MDBListGroup>
+                    <MDBBtn className="w-100 bg-success" onClick={toggleOpen}>Crear Usuario</MDBBtn>
+
                 </MDBCardBody>
             </MDBCard>
         </div>

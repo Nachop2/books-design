@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { MDBTabsContent, MDBTabsPane, MDBTabs, MDBTabsItem, MDBTabsLink, MDBIcon } from 'mdb-react-ui-kit';
 import Profile from './DashboardComponents/Profile';
-import Settings from './DashboardComponents/Settings';
 import UserManagement from "./DashboardComponents/UserManagement";
 
 const Dashboard = ({ }) => {
@@ -19,11 +18,6 @@ const Dashboard = ({ }) => {
                         <MDBIcon fas icon="user-cog" /> Perfil
                     </MDBTabsLink>
                 </MDBTabsItem>
-                <MDBTabsItem>
-                    <MDBTabsLink onClick={() => handleTabClick('settings')} active={activeTab === 'settings'}>
-                        <MDBIcon fas icon="cog" /> Ajustes
-                    </MDBTabsLink>
-                </MDBTabsItem>
                 
                 <MDBTabsItem>
                     <MDBTabsLink onClick={() => handleTabClick('user-management')} active={activeTab === 'user-management'}>
@@ -35,9 +29,6 @@ const Dashboard = ({ }) => {
             <MDBTabsContent>
                 <MDBTabsPane open={activeTab === 'profile'}>
                     <Profile />
-                </MDBTabsPane>
-                <MDBTabsPane open={activeTab === 'settings'}>
-                    <Settings />
                 </MDBTabsPane>
                 <MDBTabsPane open={activeTab === 'user-management'}>
                     <UserManagement />
