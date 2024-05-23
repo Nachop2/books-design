@@ -58,7 +58,6 @@ const CardMenu = ({ enabledButtons = true }) => {
             console.log(response);
             //throw new Error("Failed to add books");
         } else {
-            console.log(await response.json());
             fetchBooks();
         }
     }
@@ -81,7 +80,6 @@ const CardMenu = ({ enabledButtons = true }) => {
                     showConfirmButton: true,
                 })
             } else {
-                console.log(await response.json());
                 Swal.fire({
                     icon: "success",
                     title: "El libro se elimino con éxito",

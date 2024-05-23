@@ -47,7 +47,6 @@ const BookInvoiceContextProvider = ({ children }) => {
     const fetchBooksSearch = async (event, newTerm) => {
         term = newTerm;
         event.preventDefault();
-        console.log(term);
         if (term == "") {
             fetchBooks();
             return true;
@@ -61,7 +60,6 @@ const BookInvoiceContextProvider = ({ children }) => {
                 throw new Error("Failed to fetch books");
             }
             const newData = await response.json();
-            console.log(newData);
             setPagination([newData.current_page,newData.next_page_url,newData.last_page,newData.last_page_url,newData.first_page_url,newData.prev_page_url])
 
             newData.data.forEach(book => {
@@ -86,7 +84,6 @@ const BookInvoiceContextProvider = ({ children }) => {
                 throw new Error("Failed to fetch books");
             }
             const newData = await response.json();
-            console.log(newData);
             setPagination([newData.current_page,newData.next_page_url,newData.last_page,newData.last_page_url,newData.first_page_url,newData.prev_page_url])
 
             setBooks(newData.data)
@@ -109,7 +106,6 @@ const BookInvoiceContextProvider = ({ children }) => {
         })
             .then(response => response.json())
             .then(book => {
-                console.log(book);
                 //setInvoiceBooks(data);
 
 
@@ -127,12 +123,9 @@ const BookInvoiceContextProvider = ({ children }) => {
 
                 let invoiceCopy = [...invoiceBooks];
                 invoiceCopy.push(prepareCards)
-                console.log(invoiceCopy);
-
                 setInvoiceBooks(invoiceCopy);
             })
             .catch(error => console.error("error", error));
-        console.log(invoiceBooks);
     }
 
     return (

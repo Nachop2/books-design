@@ -27,7 +27,6 @@ const UserManagement = () => {
     const [basicModal, setBasicModal] = useState(false);
 
     const toggleOpen = () => setBasicModal(!basicModal);
-    console.log(formattedCurrentUserData);
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     // const users = [
@@ -35,7 +34,6 @@ const UserManagement = () => {
     //     { username: 'RandomUser2', image_src: 'https://mdbootstrap.com/img/new/avatars/2.jpg' },
     //     { username: 'RandomUser3', image_src: 'https://mdbootstrap.com/img/new/avatars/3.jpg' }
     // ];
-    console.log(users);
     const fetchUsers = async (e) => {
         // TODO - Crear una ruta para conseguir todos los usuarios (excepto el propio usuario con el se tiene la sesión actual)
         try {
@@ -57,7 +55,6 @@ const UserManagement = () => {
                 throw new Error('Network response was not ok');
             }
             const userData = await response.json();
-            console.log(userData);
             setUsers(userData);
         }
         catch (error) {
@@ -108,7 +105,6 @@ const UserManagement = () => {
                             throw new Error("Failed to promote user to admin");
                         }
 
-                        console.log("User promoted to admin successfully");
                         await Swal.fire({
                             icon: "success",
                             text: "Usuario promocionado a administrador con éxito",
@@ -160,7 +156,6 @@ const UserManagement = () => {
                             throw new Error("Failed to delete user");
                         }
 
-                        console.log("User deleted successfully");
                         await Swal.fire({
                             icon: "success",
                             text: "Usuario borrado con éxito",

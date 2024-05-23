@@ -7,8 +7,6 @@ import CardList from "../CardList"
 import Swal from "sweetalert2"
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import {
     MDBBtn,
     MDBModal,
@@ -25,7 +23,6 @@ import {
 import CardMenu from "../CardComponents/CardMenu"
 import CardSearch from "../CardComponents/CardSearch"
 import { BookInvoiceContext } from "../BookContext"
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { Navigate, useNavigate, useParams } from "react-router-dom"
 
 const InvoicePDF = ({ pdf = false, view = false }) => {
@@ -48,16 +45,13 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
     useEffect(() => {
 
         let totalNoTax = 0.00;
-        console.log(invoiceBooks);
         invoiceBooks.forEach(element => {
-            console.log(element.price);
             if (element.donation == false) {
                 totalNoTax += element.price * element.chosenQuantity
             }
         });
         let taxes = totalNoTax * tax;
         let total = taxes + totalNoTax
-        console.log(totalNoTax);
         totalNoTax = parseFloat(totalNoTax).toFixed(2) + "€";
         taxes = parseFloat(taxes).toFixed(2) + "€";
         total = parseFloat(total).toFixed(2) + "€";
@@ -76,7 +70,6 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                         throw new Error("Failed to fetch quiz data");
                     }
                     const invoiceData = await response.json();
-                    console.log(invoiceData)
                     document.querySelector("#clientName").textContent = invoiceData.clientName;
 
                     document.querySelector("#clientAddress").textContent = invoiceData.clientAddress;
@@ -106,15 +99,12 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                         };
                         if (view) {
                             prepareCards.price = parseFloat(book.pivot.priceSold)
-                            console.log(book.pivot.priceSold);
                         }
                         invoiceCopy.push(prepareCards)
-                        console.log(invoiceCopy);
 
                     });
                     setInvoiceBooks(invoiceCopy);
 
-                    console.log(invoiceData);
                 }
                 catch (error) {
                     console.error(error);
@@ -161,7 +151,6 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
 
         formData.append('clientCIF', document.querySelector("#clientCIF").value);
         formData.append('tax', tax);
-        console.log(formData);
         // formData.append('invoiceDate', document.querySelector("#invoiceDate").value);
 
         invoiceBooks.forEach((book, index) => {
@@ -170,7 +159,6 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                 chosenQuantity: book.chosenQuantity,
                 donation: book.donation
             }
-            console.log(bookData);
             formData.append(`books[${index}][id]`, book.id);
             formData.append(`books[${index}][chosenQuantity]`, book.chosenQuantity);
             formData.append(`books[${index}][donation]`, book.donation);
