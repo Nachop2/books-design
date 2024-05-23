@@ -16,9 +16,9 @@ const CreateQuiz = ({ bookToBeEdited }) => {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const csrfToken = document.cookie
-    .split('; ')
-    .find(cookie => cookie.startsWith('XSRF-TOKEN='))
-    ?.split('=')[1];
+        .split('; ')
+        .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+        ?.split('=')[1];
 
 
     useEffect(() => {
@@ -52,7 +52,7 @@ const CreateQuiz = ({ bookToBeEdited }) => {
     }, []);
 
     const saveToAccount = async () => {
-        
+
 
         const formData = new FormData();
         formData.append('name', document.querySelector("#name").value);
@@ -101,13 +101,27 @@ const CreateQuiz = ({ bookToBeEdited }) => {
                 credentials: 'include', // Include cookies for the domain
                 body: formData,
             })
-                .then(response => response.json())
-                .then(data => {
-                    Swal.fire({
-                        icon: "success",
-                        title: "El libro se subido a la plataforma con éxito",
-                        showConfirmButton: true,
-                    })
+                .then(async response => {
+                    let jsonResponse = await response.json()
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "El libro se subido a la plataforma con éxito",
+                            showConfirmButton: true,
+                        }).then(result => {
+                            if (result.isConfirmed) {
+                                navigate("/pdf/" + jsonResponse)
+                            }
+                        })
+                    } else {
+
+                        let errors = [];
+                        Swal.fire({
+                            icon: "error",
+                            title: "Hubo errores en la creacion del libro ",
+                            showConfirmButton: true,
+                        })
+                    }
                 })
                 .catch(error => console.error('Error:', error));
         }
