@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import {
     MDBBtn, MDBCard,
@@ -13,7 +13,7 @@ import {
 
 
 const CreateQuiz = ({ bookToBeEdited }) => {
-
+    const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const csrfToken = document.cookie
         .split('; ')
@@ -110,7 +110,8 @@ const CreateQuiz = ({ bookToBeEdited }) => {
                             showConfirmButton: true,
                         }).then(result => {
                             if (result.isConfirmed) {
-                                navigate("/pdf/" + jsonResponse)
+                                console.log(jsonResponse);
+                                navigate("/book/edit/" + jsonResponse)
                             }
                         })
                     } else {
