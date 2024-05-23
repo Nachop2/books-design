@@ -36,35 +36,36 @@ const UserManagement = () => {
     //     { username: 'RandomUser3', image_src: 'https://mdbootstrap.com/img/new/avatars/3.jpg' }
     // ];
     console.log(users);
-    useEffect(() => {
-        const fetchUsers = async (e) => {
-            // TODO - Crear una ruta para conseguir todos los usuarios (excepto el propio usuario con el se tiene la sesión actual)
-            try {
-                const csrfToken = document.cookie
-                    .split('; ')
-                    .find(cookie => cookie.startsWith('XSRF-TOKEN='))
-                    ?.split('=')[1];
+    const fetchUsers = async (e) => {
+        // TODO - Crear una ruta para conseguir todos los usuarios (excepto el propio usuario con el se tiene la sesión actual)
+        try {
+            const csrfToken = document.cookie
+                .split('; ')
+                .find(cookie => cookie.startsWith('XSRF-TOKEN='))
+                ?.split('=')[1];
 
-                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/users`, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-XSRF-TOKEN': decodeURIComponent(csrfToken), // Include the CSRF token in the headers
-                    },
-                    credentials: 'include', // Include cookies for the domain
-                });
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/users`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-XSRF-TOKEN': decodeURIComponent(csrfToken), // Include the CSRF token in the headers
+                },
+                credentials: 'include', // Include cookies for the domain
+            });
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const userData = await response.json();
-                console.log(userData);
-                setUsers(userData);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-            catch (error) {
-                console.error('Error fetching users:', error);
-            }
+            const userData = await response.json();
+            console.log(userData);
+            setUsers(userData);
         }
+        catch (error) {
+            console.error('Error fetching users:', error);
+        }
+    }
+    useEffect(() => {
+        
 
         fetchUsers();
     }, [basicModal]);
@@ -130,7 +131,7 @@ const UserManagement = () => {
     const onDelete = async (id) => {
         Swal.fire({
             icon: "warning",
-            text: "AVISO: Está apunto de BORRAR un usuario. Esto significa que no podrá volver a verlo. ¿Está seguro de eliminarlo de la base de datos?",
+            text: "AVISO: Está apunto de BORRAR un usuario. ¿Está seguro de eliminarlo de la base de datos?",
             showCancelButton: true,
             confirmButtonText: "Sí, estoy seguro",
             confirmButtonColor: "green",
@@ -146,7 +147,7 @@ const UserManagement = () => {
                 const deleteUser = async (e) => {
                     try {
                         // TODO - Crear ruta para poder eliminar a un usuario (excepto el mismo con el que se está en sesión)
-                        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/user/${id}`, {
+                        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/users/${id}`, {
 
                             method: 'DELETE',
                             headers: {
@@ -165,7 +166,7 @@ const UserManagement = () => {
                             text: "Usuario borrado con éxito",
                             timer: 2000
                         }).then(result => {
-                            window.location.reload();
+                            fetchUsers();
                         });
                     }
                     catch (error) {
