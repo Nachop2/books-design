@@ -12,7 +12,7 @@ import {
 
 
 
-const CreateQuiz = ({ bookToBeEdited }) => {
+const CreateBook = ({ bookToBeEdited }) => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const csrfToken = document.cookie
@@ -169,4 +169,4 @@ const CreateQuiz = ({ bookToBeEdited }) => {
     );
 }
 
-export default CreateQuiz;
+export default CreateBook;

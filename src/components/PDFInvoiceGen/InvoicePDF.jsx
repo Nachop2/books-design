@@ -65,6 +65,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                 try {
                     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/invoice/${invoiceID}`, {
                         method: 'GET',
+                        credentials: "include"
                     });
                     if (!response.ok) {
                         throw new Error("Failed to fetch quiz data");

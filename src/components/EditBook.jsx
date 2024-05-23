@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import CreateQuiz from "./CreateQuiz";
+import CreateQuiz from "./CreateBook";
 import { useEffect, useState } from "react";
 import {MDBCard, MDBCardBody, MDBTypography} from "mdb-react-ui-kit";
 
-const EditQuiz = () => {
+const EditBook = () => {
     const { bookId } = useParams(); // Parámetros de la edición del cuestionario
     const [loading, setLoading] = useState(true); // Estado de carga (NOTA: Importante dejar, pues los datos pueden llegar tarde desde la API)
     const [bookToBeEdited, setBookToBeEdited] = useState({});
@@ -14,7 +14,7 @@ const EditQuiz = () => {
                 const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/${bookId}`, {
                     
                     method: 'GET',
-                    //credentials: 'include'
+                    credentials: 'include'
                 });
                 if (!response.ok) {
                     throw new Error("Failed to fetch quiz data");
@@ -52,4 +52,4 @@ const EditQuiz = () => {
     );
 }
 
-export default EditQuiz;
+export default EditBook;

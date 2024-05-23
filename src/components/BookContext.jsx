@@ -13,7 +13,7 @@ const BookInvoiceContextProvider = ({ children }) => {
         try {
             const response = await fetch(paginationLink, {
                 method: 'GET',
-                //credentials: 'include'
+                credentials: 'include'
             });
             if (!response.ok) {
                 throw new Error("Failed to fetch books");
@@ -54,7 +54,7 @@ const BookInvoiceContextProvider = ({ children }) => {
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/books/search?search=` + term , {
                 method: 'GET',
-                //credentials: 'include'
+                credentials: 'include'
             });
             if (!response.ok) {
                 throw new Error("Failed to fetch books");
@@ -78,7 +78,7 @@ const BookInvoiceContextProvider = ({ children }) => {
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/books`, {
                 method: 'GET',
-                //credentials: 'include'
+                credentials: 'include'
             });
             if (!response.ok) {
                 throw new Error("Failed to fetch books");
@@ -102,7 +102,8 @@ const BookInvoiceContextProvider = ({ children }) => {
         }
 
         await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + id, {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include'
         })
             .then(response => response.json())
             .then(book => {

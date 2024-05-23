@@ -11,16 +11,15 @@ import "./css/main.css";
 import Dashboard from "./components/Dashboard";
 // import Privacy from "./components/Privacy";
 // import Terms from "./components/Terms";
-import CreateQuiz from "./components/CreateQuiz";
 import { useEffect, useState } from "react";
 import NotFound from "./components/NotFound";
-import EditQuiz from "./components/EditQuiz";
 import ChangePassword from "./components/ChangePassword";
 import InvoicePDF from "./components/PDFInvoiceGen/InvoicePDF";
 import { BookInvoiceContextProvider } from "./components/BookContext";
 import AdminRoute from "./components/AdminRoute";
-import InvoiceCardMenu from "./components/CardComponents/InvoiceCardMenu";
 import InvoiceCardList from "./components/InvoiceCardList";
+import CreateBook from "./components/CreateBook";
+import EditBook from "./components/EditBook";
 function App() {
     const navigate = useNavigate();
     const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
@@ -66,8 +65,8 @@ function App() {
                             <Route element={<Navigate to="/home" replace />} path="/" />
                             <Route element={<CardList />} path="/home" />
                             <Route element={<InvoiceCardList/>} path="/invoices"/>
-                            <Route element={<CreateQuiz bookToBeEdited={null} />} path="/book/create" />
-                            <Route element={<EditQuiz />} path="/book/edit/:bookId" />
+                            <Route element={<CreateBook bookToBeEdited={null} />} path="/book/create" />
+                            <Route element={<EditBook />} path="/book/edit/:bookId" />
 
 
                             {/* <Route element={<Privacy />} path="/privacy" /> */}
