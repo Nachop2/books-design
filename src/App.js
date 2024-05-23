@@ -84,7 +84,6 @@ function App() {
                         <Route element={<ChangePassword />} path="/password-reset/:token" />
                         <Route element={<GuestRoute />}>
                             <Route element={<Login onLogin={handleLogin} />} path="/login" />
-                            <Route element={<Register onLogin={handleLogin} />} path="/register" />
                         </Route>
 
 
