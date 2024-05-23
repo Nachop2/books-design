@@ -66,14 +66,18 @@ const CardMenu = ({ enabledButtons = true }) => {
 
         const bookDelete = async () => {
             const formData = new FormData();
-            formData.append('_method', "DELETE");
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/book/` + id, {
-                method: 'POST',
-                //credentials: 'include'
-                body: formData,
+                method: 'DELETE',
+                headers: {
+                    //'Content-Type': 'application/json',
+                    //'X-Requested-With': 'XMLHttpRequest',
+                    'X-XSRF-TOKEN': decodeURIComponent(token), // Include the CSRF token in the headers
+                },
+                credentials: 'include'
             });
             if (!response.ok) {
                 console.log(response);
+                console.log(await response.json());
                 Swal.fire({
                     icon: "error",
                     title: "Hubo un problema eliminando el libro",
