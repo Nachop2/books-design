@@ -43,7 +43,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
     });
     const dateObj = new Date;
 
-    const date = dateObj.getUTCDate().toString().padStart(2, "0") + "/" + (dateObj.getUTCMonth() + 1).toString().padStart(2, "0") + "/" + dateObj.getUTCFullYear().toString()
+    let date = dateObj.getUTCDate().toString().padStart(2, "0") + "/" + (dateObj.getUTCMonth() + 1).toString().padStart(2, "0") + "/" + dateObj.getUTCFullYear().toString()
 
     useEffect(() => {
 
@@ -87,7 +87,11 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                     // formData.append('clientCity', document.querySelector("#clientCity").value);
 
                     document.querySelector("#clientCIF").textContent = invoiceData.clientCIF;
-
+                    let dateMatch =invoiceData.created_at.match(/(\d{4})-(\d{2})-(\d{2})/);
+                    const dateArray = dateMatch[0].split('-');
+                    document.querySelector("#date").textContent = dateArray[2] + "/" + dateArray[1] + "/" +  dateArray[0];
+                    
+                    console.log(dateArray);
                     let invoiceCopy = [];
                     invoiceData.books.forEach(book => {
                         const prepareCards = {
@@ -284,7 +288,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                             <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>Fecha de emisión</p>
                                         </MDBCol>
                                         <MDBCol className="" >
-                                            <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`}>{date}</p>
+                                            <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold px-0`} id="date">{date}</p>
                                         </MDBCol>
                                     </MDBRow>
 
@@ -393,7 +397,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                         </MDBRow>
 
 
-                        <div className={`view ${styles.mt20}`}>
+                        {/* <div className={`view ${styles.mt20}`}>
                             <p className={`w-100 pdfPad d-inline-block pdfFont fw-bold`}>Notas adicionales</p>
                             {view ? (
                                 <p className={`w-100`} placeholder="" ></p>
@@ -408,7 +412,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                             ) : (
                                 <textarea className={`${styles.input} w-100`} placeholder="" style={{ height: 48 + "px" }}></textarea>
                             )}
-                        </div>
+                        </div> */}
                     </div >
                     <div>
                         {view ? (
