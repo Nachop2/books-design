@@ -91,7 +91,6 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                     const dateArray = dateMatch[0].split('-');
                     document.querySelector("#date").textContent = dateArray[2] + "/" + dateArray[1] + "/" +  dateArray[0];
                     
-                    console.log(dateArray);
                     let invoiceCopy = [];
                     invoiceData.books.forEach(book => {
                         const prepareCards = {

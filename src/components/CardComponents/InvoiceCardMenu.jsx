@@ -54,10 +54,13 @@ const InvoiceCardMenu = ({ term }) => {
     ?.split('=')[1];
 
   useEffect(() => {
+  //   let dateMatch = invoice.created_at.match(/(\d{4})-(\d{2})-(\d{2})/);
+  // const dateArray = dateMatch[0].split('-');
+  // document.querySelector("#date").textContent = dateArray[2] + "/" + dateArray[1] + "/" +  dateArray[0];
     const prepareCards = invoices.map(invoice => ({
       id: invoice.id,
       title: "Factura#" + (invoice.id).toString().padStart(7, "0") + " - Cliente: " + invoice.clientName,
-      category_names: ["Emitido: " + invoice.created_at],
+      category_names: ["Emitido: " + invoice.created_at.match(/(\d{4})-(\d{2})-(\d{2})/)[0]],
       //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
     }));
     setCards(prepareCards);
