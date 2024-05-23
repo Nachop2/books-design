@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Pagination from "./Pagination";
 
-const InvoiceCardMenu = ({ enabledButtons = true }) => {
+const InvoiceCardMenu = ({ term }) => {
 
   const navigate = useNavigate();
   const [cards, setCards] = useState([]);
   const [invoices, setInvoices] = useState([]);
   const [pagination, setPagination] = useState([]);
+
   const fetchInvoices = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/invoices`, {
@@ -32,6 +33,18 @@ const InvoiceCardMenu = ({ enabledButtons = true }) => {
   }
 
   useEffect(() => {
+    const searchInvoice = async () => {
+      if (term == "") {
+        fetchInvoices();
+        return true;
+      }
+      term = parseInt(term, 10)
+      navigate("/pdf/" + term);
+    }
+    searchInvoice();
+  }, [term])
+
+  useEffect(() => {
     fetchInvoices();
   }, [])
 
@@ -43,7 +56,7 @@ const InvoiceCardMenu = ({ enabledButtons = true }) => {
   useEffect(() => {
     const prepareCards = invoices.map(invoice => ({
       id: invoice.id,
-      title: "Factura: " + (invoice.id).toString().padStart(7, "0") + " - Cliente: " + invoice.clientName,
+      title: "Factura#" + (invoice.id).toString().padStart(7, "0") + " - Cliente: " + invoice.clientName,
       category_names: ["Emitido: " + invoice.created_at],
       //image: 'https://mdbootstrap.com/img/new/standard/nature/184.webp'
     }));
@@ -84,24 +97,6 @@ const InvoiceCardMenu = ({ enabledButtons = true }) => {
                     </MDBCol>
                   </MDBRow>
                 </MDBCardBody>
-                {!enabledButtons ?
-                  card.stock > 0 ?
-                    <div
-                      className='mask rounded-3'
-                      style={{
-                        background: 'rgba(0, 0, 255, 0.075)',
-                        cursor: "pointer"
-                      }}
-                      onClick={() => bookTest(card.id)}
-                    ></div>
-                    :
-                    <div
-                      className='mask rounded-3'
-                      style={{
-                        background: 'rgba(255, 0, 0, 0.075)',
-                        cursor: "not-allowed"
-                      }}
-                    ></div> : null}
               </MDBCard>
             </MDBCol>
           ))

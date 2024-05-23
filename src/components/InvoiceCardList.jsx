@@ -26,13 +26,23 @@ import Swal from "sweetalert2";
 import CardMenu from "./CardComponents/CardMenu";
 import CardSearch from "./CardComponents/CardSearch";
 import InvoiceCardMenu from "./CardComponents/InvoiceCardMenu";
+import InvoiceCardSearch from "./CardComponents/InvoiceCardSearch";
 const InvoiceCardList = ({ buttons = true }) => {
+
+  const [term, setTerm] = useState("");
+
+  const fetchInvoiceSearch = async (event, newTerm) => {
+    setTerm(newTerm);
+    event.preventDefault();
+    console.log(term);
+    
+};
 
   return (
       <div className="mt-5">
           <MDBCard>
-              <CardSearch></CardSearch>
-              <InvoiceCardMenu></InvoiceCardMenu>
+              <InvoiceCardSearch  fetchInvoiceSearch={fetchInvoiceSearch}></InvoiceCardSearch>
+              <InvoiceCardMenu term={term}></InvoiceCardMenu>
           </MDBCard>
       </div>
 
