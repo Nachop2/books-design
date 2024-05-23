@@ -216,7 +216,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                 <div className={styles.app}>
                     <div className={`page ${styles.invoiceWrapper}`} ref={componentRef}>
                         <MDBRow>
-                            <MDBCol>
+                            <MDBCol className="col-8">
                                 <div className={`logo d-inline-block ${styles.mb5}`}>
                                     <img className="d-block" src={cabildo} alt="logo" style={{ maxWidth: 100 + "px" }}></img>
                                 </div>
@@ -230,7 +230,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
 
                                 {/* <input readOnly="readOnly" type="text" className={`${styles.input}`} placeholder="" value="United States"></input> */}
                             </MDBCol>
-                            <MDBCol>
+                            <MDBCol className="col-4">
                                 <p className={`w-100 d-inline-block pdfPad ${styles.fs45} text-end fw-bold`} style={{ fontFamily: "sans-serif" }}>Factura</p>
                             </MDBCol>
                         </MDBRow>
