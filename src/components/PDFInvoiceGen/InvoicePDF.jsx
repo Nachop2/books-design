@@ -220,7 +220,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                 <div className={`logo d-inline-block ${styles.mb5}`}>
                                     <img className="d-block" src={cabildo} alt="logo" style={{ maxWidth: 100 + "px" }}></img>
                                 </div>
-                                <p className={`fs-5 fw-bold d-inline-block pdfPad pdfFont`}>Cabildo de Fuerteventura</p>
+                                <p className={`fs-5 fw-bold d-inline-block pdfPad pdfFont`}>Cabildo Insular de Fuerteventura</p>
 
                                 <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Dirección de la compañia"><strong>C.I.F.:</strong> P - 3500003 - C</p>
                                 <p className={`w-100 pdfPad d-inline-block pdfFont`} placeholder="Dirección de la compañia"><strong>Tel.:</strong> 928 862 300</p>
