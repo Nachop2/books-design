@@ -17,7 +17,7 @@ const EditBook = () => {
                     credentials: 'include'
                 });
                 if (!response.ok) {
-                    throw new Error("Failed to fetch quiz data");
+                    throw new Error("Failed to fetch book data");
                 }
                 const bookData = await response.json();
                 console.log(bookData);
