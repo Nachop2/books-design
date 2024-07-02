@@ -346,7 +346,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className={`view mx-0 align-items-center`}>
-                                    <MDBCol>
+                                    <MDBCol className="col-7">
                                         <MDBRow>
                                             <MDBCol className={view ? ("col") : ("col-6")}>
                                                 <p className={`w-100 pdfPad d-inline-block pdfFont`}>{view ? ("Impuestos (" + Math.round(tax * 100) + "%)") : ("Impuestos")}</p>
@@ -355,11 +355,11 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
                                                 <></>
 
                                             ) : (
-                                                <MDBCol className="col-6">
-                                                    <select defaultValue={0.07} className={`${styles.select} text-black text-end `}>
-                                                        <option value={0} onClick={() => setTax(0)}>0%</option>
-                                                        <option value={0.07} onClick={() => setTax(0.07)}>7%</option>
-                                                        <option value={0.21} onClick={() => setTax(0.21)}>21%</option>
+                                                <MDBCol className="col-6 align-items-center">
+                                                    <select defaultValue={0.07} className={`${styles.select} text-black text-end `} onChange={(e) => setTax(e.target.value)}>
+                                                        <option value={0}>0%</option>
+                                                        <option value={0.07}>7%</option>
+                                                        <option value={0.21}>21%</option>
                                                         {/* <option value={0.21} onClick={(e) => handleTax(index, (i + 1), ee)} >21%</option> */}
                                                     </select>
                                                 </MDBCol>

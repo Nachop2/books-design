@@ -36,9 +36,13 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
                 <MDBCol className="px-2 col-2">
                     {!view ? (
                         <div className="ps-1 pe-3">
-                            <select defaultValue={item.chosenQuantity} className={`${styles.select} text-black text-end `}>
+                            <select defaultValue={item.chosenQuantity} className={`${styles.select} text-black text-end `}
+                                onChange={(e) => {
+                                    handleQuantity(index, e.target.value);
+                                }}
+                            >
                                 {[...Array(item.stock)].map((x, i) =>
-                                    <option value={i + 1} onClick={(e) => handleQuantity(index, (i + 1), e)} >{i + 1}</option>
+                                    <option value={i + 1} >{i + 1}</option>
                                 )}
                             </select>
                         </div>
@@ -70,15 +74,15 @@ const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonatio
                 </MDBCol>
                 {!view ? (
                     <div style={{ height: "0px", width: "0px" }} className="xVoid ">
-                    <MDBIcon fas icon="times-circle" className="text-danger xButtonCSSInvoice py-3 pe-2" size="lg"
-                        onClick={(e) => handleDelete(index)}
-                    />
-                </div>
-                ):(
+                        <MDBIcon fas icon="times-circle" className="text-danger xButtonCSSInvoice py-3 pe-2" size="lg"
+                            onClick={(e) => handleDelete(index)}
+                        />
+                    </div>
+                ) : (
                     <>
                     </>
                 )}
-                
+
             </MDBRow>
         </>
 
