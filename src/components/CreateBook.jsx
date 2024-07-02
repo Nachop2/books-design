@@ -6,8 +6,10 @@ import {
     MDBCardBody,
     MDBCardHeader,
     MDBCardText, MDBCheckbox, MDBFile, MDBIcon,
-    MDBInput, MDBListGroup, MDBListGroupItem, MDBTextArea,
-    MDBTypography
+    MDBInput, MDBListGroup, MDBListGroupItem, MDBRow, MDBTextArea,
+    MDBTypography,
+    MDBValidation,
+    MDBValidationItem
 } from "mdb-react-ui-kit";
 
 
@@ -20,33 +22,25 @@ const CreateBook = ({ bookToBeEdited }) => {
         .find(cookie => cookie.startsWith('XSRF-TOKEN='))
         ?.split('=')[1];
 
+    const [formData, setFormData] = useState({
+        name: '',
+        isbn: '',
+        author: '',
+        imprenta: '',
+        stock: '',
+        price: '',
+        sellingAt: ''
+    });
+
+    const onChange = (e: any) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     useEffect(() => {
         // Si la edición está activada, esto se encarga de recoger los datos del test y actualizar
         if (bookToBeEdited) {
-            document.querySelector("#name").value = bookToBeEdited.name;
-            document.querySelector("#name").classList.add("active");
-
-            document.querySelector("#isbn").value = bookToBeEdited.isbn;
-            document.querySelector("#isbn").classList.add("active");
-
-            document.querySelector("#author").value = bookToBeEdited.author;
-            document.querySelector("#author").classList.add("active");
-
-            document.querySelector("#imprenta").value = bookToBeEdited.imprenta;
-            document.querySelector("#imprenta").classList.add("active");
-
-            document.querySelector("#stock").value = bookToBeEdited.stock;
-            document.querySelector("#stock").classList.add("active");
-
-            document.querySelector("#price").value = bookToBeEdited.price;
-            document.querySelector("#price").classList.add("active");
-
-            document.querySelector("#sellingAt").value = bookToBeEdited.sellingAt;
-            document.querySelector("#sellingAt").classList.add("active");
-
-            // document.querySelector("#description").value = bookToBeEdited.description;
-            // document.querySelector("#description").classList.add("active");
+            console.log(formData);
+            setFormData(bookToBeEdited);
         }
 
     }, []);
@@ -81,13 +75,30 @@ const CreateBook = ({ bookToBeEdited }) => {
                 credentials: 'include', // Include cookies for the domain
                 body: formData,
             })
-                .then(response => response.json())
-                .then(data => {
-                    Swal.fire({
-                        icon: "success",
-                        title: "El libro fue actualizado con éxito",
-                        showConfirmButton: true,
-                    })
+                .then(async response => {
+                    let jsonResponse = await response.json()
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "El libro fue actualizado con éxito",
+                            showConfirmButton: true,
+                        })
+                    }  else if(jsonResponse == "No hubo ningun cambio") {
+                        let errors = [];
+                        Swal.fire({
+                            icon: "error",
+                            title: "No se hizo ningun cambio",
+                            showConfirmButton: true,
+                        })
+                    } else {
+                        
+                        let errors = [];
+                        Swal.fire({
+                            icon: "error",
+                            title: "Hubo errores en la actualización del libro ",
+                            showConfirmButton: true,
+                        })
+                    }
                 })
                 .catch(error => console.error('Error:', error));
         } else {
@@ -138,21 +149,99 @@ const CreateBook = ({ bookToBeEdited }) => {
 
     return (
         <div className="d-flex justify-content-center align-content-center mt-5">
-            <MDBCard>
+            <MDBCard className="w-25">
                 <MDBCardHeader>
                     <MDBTypography tag='h3' className="my-3">{bookToBeEdited ? 'Editar' : 'Crear'} libro</MDBTypography>
                 </MDBCardHeader>
                 <MDBCardBody>
 
-                    <MDBCardText>
-                        {/* Título */}
-                        <MDBInput type='text' id='name' label='Título' />
-                        <MDBInput className="mt-4" type='text' id='isbn' label='ISBN' />
-                        <MDBInput className="mt-4" type='text' id='author' label='Autor' />
-                        <MDBInput className="mt-4" type='text' id='imprenta' label='Imprenta' />
+                    {/* Título */}
+                    <MDBValidation className="row g-3">
+                        <MDBValidationItem feedback='Introduce un titulo' invalid >
+                            <MDBInput
+                                type="text"
+                                id="name"
+                                label="Título"
+                                required
+                                name="name"
+                                value={formData.name}
+                                onChange={onChange}
+                            />
+                        </MDBValidationItem>
+
+
+                        {/* <MDBInput type='text' id='name' label='Título' required /> */}
+                        <MDBValidationItem feedback='Introduce un ISBN valido' invalid >
+                            <MDBInput
+                                type="text"
+                                id="isbn"
+                                label="ISBN"
+                                required
+                                name="isbn"
+                                value={formData.isbn}
+                                onChange={onChange}
+                            />
+                        </MDBValidationItem>
+                        <MDBValidationItem feedback='Introduce un autor' invalid >
+                            <MDBInput
+                                type="text"
+                                id="author"
+                                label="Autor"
+                                required
+                                name="author"
+                                value={formData.author}
+                                onChange={onChange}
+                            />
+                        </MDBValidationItem>
+                        <MDBValidationItem feedback='Introduce una imprenta' invalid >
+                            <MDBInput
+                                type="text"
+                                id="imprenta"
+                                label="Imprenta"
+                                required
+                                name="imprenta"
+                                value={formData.imprenta}
+                                onChange={onChange}
+                            />
+                        </MDBValidationItem>
+                        <MDBValidationItem feedback='Introduce una cantidad valida' invalid >
+                            <MDBInput
+                                type="number"
+                                id="stock"
+                                label="Cantidad"
+                                required
+                                name="stock"
+                                value={formData.stock}
+                                onChange={onChange}
+                            />
+                        </MDBValidationItem>
+                        <MDBValidationItem feedback='Introduce un precio de compra valido' invalid >
+                            <MDBInput
+                                type="number"
+                                id="price"
+                                label="Precio de compra"
+                                required
+                                name="price"
+                                value={formData.price}
+                                onChange={onChange}
+                            />
+                        </MDBValidationItem>
+                        <MDBValidationItem feedback='Introduce un precio de venta valido' invalid >
+                            <MDBInput
+                                type="number"
+                                id="sellingAt"
+                                label="Precio de venta"
+                                required
+                                name="sellingAt"
+                                value={formData.sellingAt}
+                                onChange={onChange}
+                            />
+                        </MDBValidationItem>
+
+                        {/* <MDBInput className="mt-4" type='text' id='imprenta' label='Imprenta' />
                         <MDBInput className="mt-4" type='number' id='stock' label='Cantidad' />
                         <MDBInput className="mt-4" type='number' id='price' label='Precio de compra' />
-                        <MDBInput className="mt-4" type='number' id='sellingAt' label='Precio de venta' />
+                        <MDBInput className="mt-4" type='number' id='sellingAt' label='Precio de venta' /> */}
 
                         {/* Descripción */}
                         {/* <MDBTextArea className="mt-4" type='text' id='description' label='Descripción' rows={4} /> */}
@@ -161,7 +250,9 @@ const CreateBook = ({ bookToBeEdited }) => {
                         <MDBBtn type='submit' className='mt-4' block onClick={saveToAccount}>
                             <MDBIcon fas icon="check-double" /> {bookToBeEdited ? 'Guardar cambios' : 'Crear libro'}
                         </MDBBtn>
-                    </MDBCardText>
+                    </MDBValidation>
+
+
 
                 </MDBCardBody>
             </MDBCard>
