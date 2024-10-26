@@ -32,6 +32,16 @@ const CreateBook = ({ bookToBeEdited }) => {
         sellingAt: ''
     });
 
+    const[formFeedback, setFormFeedback] = useState({
+        name: '',
+        isbn: '',
+        author: '',
+        imprenta: '',
+        stock: '',
+        price: '',
+        sellingAt: ''
+    })
+
     const onChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -91,8 +101,14 @@ const CreateBook = ({ bookToBeEdited }) => {
                             showConfirmButton: true,
                         })
                     } else {
-                        
-                        let errors = [];
+                        Object.keys(jsonResponse.errors).forEach(error => {
+                            setFormFeedback(prevState => ({
+                                ...prevState,
+                                [error]: jsonResponse.errors[error]
+                            }));
+                        });
+
+                        console.log(formFeedback);
                         await Swal.fire({
                             icon: "error",
                             title: "Hubo errores en la actualización del libro ",
@@ -126,7 +142,12 @@ const CreateBook = ({ bookToBeEdited }) => {
                             }
                         })
                     } else {
-
+                        Object.keys(jsonResponse.errors).forEach(error => {
+                            setFormFeedback(prevState => ({
+                                ...prevState,
+                                [error]: jsonResponse.errors[error]
+                            }));
+                        });
                         let errors = [];
                         await Swal.fire({
                             icon: "error",
@@ -149,15 +170,15 @@ const CreateBook = ({ bookToBeEdited }) => {
 
     return (
         <div className="d-flex justify-content-center align-content-center mt-5">
-            <MDBCard className="w-25">
+            <MDBCard className="w-50">
                 <MDBCardHeader>
                     <MDBTypography tag='h3' className="my-3">{bookToBeEdited ? 'Editar' : 'Crear'} libro</MDBTypography>
                 </MDBCardHeader>
                 <MDBCardBody>
 
                     {/* Título */}
-                    <MDBValidation className="row g-3">
-                        <MDBValidationItem feedback='Introduce un titulo' invalid >
+                    <MDBValidation className="row g-3 was-validated"  >
+                        <MDBValidationItem feedback={formFeedback.name}  invalid>
                             <MDBInput
                                 type="text"
                                 id="name"
@@ -171,7 +192,7 @@ const CreateBook = ({ bookToBeEdited }) => {
 
 
                         {/* <MDBInput type='text' id='name' label='Título' required /> */}
-                        <MDBValidationItem feedback='Introduce un ISBN valido' invalid >
+                        <MDBValidationItem feedback={formFeedback.isbn} invalid>
                             <MDBInput
                                 type="text"
                                 id="isbn"
@@ -182,7 +203,7 @@ const CreateBook = ({ bookToBeEdited }) => {
                                 onChange={onChange}
                             />
                         </MDBValidationItem>
-                        <MDBValidationItem feedback='Introduce un autor' invalid >
+                        <MDBValidationItem feedback={formFeedback.author}  invalid>
                             <MDBInput
                                 type="text"
                                 id="author"
@@ -193,7 +214,7 @@ const CreateBook = ({ bookToBeEdited }) => {
                                 onChange={onChange}
                             />
                         </MDBValidationItem>
-                        <MDBValidationItem feedback='Introduce una imprenta' invalid >
+                        <MDBValidationItem feedback={formFeedback.imprenta} invalid >
                             <MDBInput
                                 type="text"
                                 id="imprenta"
@@ -204,7 +225,7 @@ const CreateBook = ({ bookToBeEdited }) => {
                                 onChange={onChange}
                             />
                         </MDBValidationItem>
-                        <MDBValidationItem feedback='Introduce una cantidad valida' invalid >
+                        <MDBValidationItem feedback={formFeedback.stock} invalid >
                             <MDBInput
                                 type="number"
                                 id="stock"
@@ -215,7 +236,7 @@ const CreateBook = ({ bookToBeEdited }) => {
                                 onChange={onChange}
                             />
                         </MDBValidationItem>
-                        <MDBValidationItem feedback='Introduce un precio de compra valido' invalid >
+                        <MDBValidationItem feedback={formFeedback.price} invalid >
                             <MDBInput
                                 type="number"
                                 id="price"
@@ -226,7 +247,7 @@ const CreateBook = ({ bookToBeEdited }) => {
                                 onChange={onChange}
                             />
                         </MDBValidationItem>
-                        <MDBValidationItem feedback='Introduce un precio de venta valido' invalid >
+                        <MDBValidationItem feedback={formFeedback.sellingAt} invalid >
                             <MDBInput
                                 type="number"
                                 id="sellingAt"
