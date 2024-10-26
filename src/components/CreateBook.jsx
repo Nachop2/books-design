@@ -227,7 +227,8 @@ const CreateBook = ({ bookToBeEdited }) => {
                         </MDBValidationItem>
                         <MDBValidationItem feedback={formFeedback.stock} invalid >
                             <MDBInput
-                                type="number"
+                                type="text"
+                                pattern={'[0-9]*'}
                                 id="stock"
                                 label="Cantidad"
                                 required
@@ -238,7 +239,8 @@ const CreateBook = ({ bookToBeEdited }) => {
                         </MDBValidationItem>
                         <MDBValidationItem feedback={formFeedback.price} invalid >
                             <MDBInput
-                                type="number"
+                                type="text"
+                                pattern={'^\\d+(\\.\\d{1,2})?$'}
                                 id="price"
                                 label="Precio de compra"
                                 required
@@ -249,7 +251,8 @@ const CreateBook = ({ bookToBeEdited }) => {
                         </MDBValidationItem>
                         <MDBValidationItem feedback={formFeedback.sellingAt} invalid >
                             <MDBInput
-                                type="number"
+                                type="text"
+                                pattern={'^\\d+(\\.\\d{1,2})?$'}
                                 id="sellingAt"
                                 label="Precio de venta"
                                 required
