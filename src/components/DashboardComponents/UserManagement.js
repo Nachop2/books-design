@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import Swal from "sweetalert2";
 import {
     MDBBtn,
@@ -10,12 +10,8 @@ import {
     MDBListGroup,
     MDBListGroupItem,
     MDBModal,
-    MDBModalBody,
     MDBModalContent,
     MDBModalDialog,
-    MDBModalFooter,
-    MDBModalHeader,
-    MDBModalTitle,
     MDBTypography
 } from "mdb-react-ui-kit";
 import Register from "../Register";
@@ -212,13 +208,9 @@ const UserManagement = () => {
                                                 onClick={() => onAdminPromotion(user.id)}>
                                                 <MDBIcon fas icon="arrow-alt-circle-up" /> Administrador
                                             </MDBBtn>
-                                        ) : (
-                                            null
-                                        )}
+                                        ) : null}
 
-                                        {user.id == formattedCurrentUserData.id ? (
-                                            null
-                                        ) : (
+                                        {user.id == formattedCurrentUserData.id ? null : (
                                             <MDBBtn size='sm' rounded color='danger' className="ms-2"
                                                 onClick={() => onDelete(user.id)}>
                                                 <MDBIcon fas icon="trash" />

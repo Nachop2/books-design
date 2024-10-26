@@ -1,15 +1,4 @@
-import { useState } from "react";
-
-import {
-    MDBCheckbox,
-    MDBCol,
-    MDBDropdown,
-    MDBDropdownItem,
-    MDBDropdownMenu,
-    MDBDropdownToggle,
-    MDBIcon,
-    MDBRow,
-} from "mdb-react-ui-kit";
+import {MDBCheckbox, MDBCol, MDBIcon, MDBRow,} from "mdb-react-ui-kit";
 
 const InvoiceItem = ({ styles, item, handleQuantity, handleDelete, handleDonation, index, view = false }) => {
 

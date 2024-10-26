@@ -1,29 +1,23 @@
 import styles from "./InvoicePDF.module.css"
-import TextPDF from "./TextPDF"
 import cabildo from "./logo-cabildo-i2.webp"
 import InvoiceItem from "./InvoiceItem"
-import { useContext, useEffect, useState } from "react"
-import CardList from "../CardList"
+import {useContext, useEffect, useRef, useState} from "react"
 import Swal from "sweetalert2"
-import { useRef } from 'react';
-import { useReactToPrint } from 'react-to-print';
+import {useReactToPrint} from 'react-to-print';
 import {
     MDBBtn,
-    MDBModal,
-    MDBModalDialog,
-    MDBModalContent,
-    MDBModalHeader,
-    MDBModalTitle,
-    MDBModalBody,
-    MDBModalFooter,
-    MDBIcon,
-    MDBRow,
     MDBCol,
+    MDBIcon,
+    MDBModal,
+    MDBModalBody,
+    MDBModalContent,
+    MDBModalDialog,
+    MDBRow,
 } from 'mdb-react-ui-kit';
 import CardMenu from "../CardComponents/CardMenu"
 import CardSearch from "../CardComponents/CardSearch"
-import { BookInvoiceContext } from "../BookContext"
-import { Navigate, useNavigate, useParams } from "react-router-dom"
+import {BookInvoiceContext} from "../BookContext"
+import {useNavigate, useParams} from "react-router-dom"
 
 const InvoicePDF = ({ pdf = false, view = false }) => {
     const { invoiceID } = useParams();
@@ -194,7 +188,7 @@ const InvoicePDF = ({ pdf = false, view = false }) => {
 
 
 
-                    Swal.fire({
+                    await Swal.fire({
                         icon: "error",
                         title: "Hubo errores en la creacion de la factura ",
                         showConfirmButton: true,

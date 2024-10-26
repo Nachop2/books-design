@@ -1,25 +1,25 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import GuestRoute from "./components/GuestRoute";
 import Layout from "./components/layouts/Layout";
 import Navbar from "./components/Navbar";
 import CardList from "./components/CardList";
 import Login from "./components/Login";
-import Register from "./components/Register";
-import { MDBContainer } from "mdb-react-ui-kit";
+import {MDBContainer} from "mdb-react-ui-kit";
 import "./css/main.css";
 import Dashboard from "./components/Dashboard";
 // import Privacy from "./components/Privacy";
 // import Terms from "./components/Terms";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import NotFound from "./components/NotFound";
 import ChangePassword from "./components/ChangePassword";
 import InvoicePDF from "./components/PDFInvoiceGen/InvoicePDF";
-import { BookInvoiceContextProvider } from "./components/BookContext";
+import {BookInvoiceContextProvider} from "./components/BookContext";
 import AdminRoute from "./components/AdminRoute";
 import InvoiceCardList from "./components/InvoiceCardList";
 import CreateBook from "./components/CreateBook";
 import EditBook from "./components/EditBook";
+
 function App() {
     const navigate = useNavigate();
     const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
@@ -27,7 +27,7 @@ function App() {
 
     const handleLogin = async () => {
         if (localStorage.getItem("XSRF-TOKEN")) {
-            checkPerms();
+            await checkPerms();
             navigate("/home");
         }
     };

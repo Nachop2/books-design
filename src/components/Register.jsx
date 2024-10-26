@@ -1,14 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import {
-    MDBInput,
-    MDBCheckbox,
-    MDBBtn,
-    MDBIcon,
-    MDBCard,
-    MDBTypography,
-    MDBCardHeader, MDBCardBody, MDBCardText
-} from 'mdb-react-ui-kit';
+import {useNavigate} from "react-router-dom";
+import {useState} from "react";
+import {MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBCardText, MDBInput, MDBTypography} from 'mdb-react-ui-kit';
 import Swal from "sweetalert2";
 
 const Register = ({ setBasicModal }) => {
@@ -50,7 +42,7 @@ const Register = ({ setBasicModal }) => {
         }).then(async (res) => {
             if (!res.ok) {
                 handleErrors(res.errors);
-                Swal.fire({
+                await Swal.fire({
                     icon: "error",
                     title: "Hubo errores en la creacion del usuario ",
                     showConfirmButton: true,

@@ -1,10 +1,15 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom';
+import {useEffect, useState} from "react";
 import {
-    MDBBtn, MDBCollapse, MDBContainer, MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle,
-    MDBIcon, MDBNavbar, MDBNavbarBrand, MDBNavbarItem, MDBNavbarLink, MDBNavbarNav, MDBNavbarToggler
+    MDBBtn,
+    MDBCollapse,
+    MDBContainer,
+    MDBIcon,
+    MDBNavbar,
+    MDBNavbarItem,
+    MDBNavbarNav,
+    MDBNavbarToggler
 } from "mdb-react-ui-kit";
-import logo from "../images/logo.png";
 // import { CategoryContext } from "./CategoryContext";
 
 

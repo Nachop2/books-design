@@ -1,15 +1,5 @@
-import {
-    MDBBtn,
-    MDBCard,
-    MDBCardBody, MDBCardHeader, MDBCardText,
-    MDBCheckbox,
-    MDBCol, MDBIcon,
-    MDBInput,
-    MDBRow,
-    MDBTypography
-} from "mdb-react-ui-kit";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import {MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBCardText, MDBInput, MDBTypography} from "mdb-react-ui-kit";
+import {useState} from "react";
 
 const Login = ({ onLogin }) => {
     const [errors, setErrors] = useState(null);

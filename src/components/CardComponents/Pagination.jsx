@@ -1,14 +1,5 @@
-import {
-  MDBBtn,
-  MDBCardHeader,
-  MDBCol,
-  MDBIcon,
-  MDBRow,
-  MDBTypography,
-  MDBPagination, MDBPaginationItem, MDBPaginationLink
-} from "mdb-react-ui-kit";
-import { BookInvoiceContext } from "../BookContext";
-import { useContext, useEffect } from "react";
+import {MDBIcon, MDBPagination, MDBPaginationItem, MDBPaginationLink} from "mdb-react-ui-kit";
+import {useEffect} from "react";
 
 
 const Pagination = ({paginationFunction,paginationInfo}) => {

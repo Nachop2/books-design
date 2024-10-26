@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import {Navigate, Outlet} from 'react-router-dom';
 
 const GuestRoute = ({ userIsLoggedIn }) => { // Temporarily hard-code for debugging
     const token = localStorage.getItem("XSRF-TOKEN");

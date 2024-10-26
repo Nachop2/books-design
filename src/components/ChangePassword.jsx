@@ -1,16 +1,7 @@
-import { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-    MDBBtn,
-    MDBCard,
-    MDBCardBody,
-    MDBCardHeader,
-    MDBCardText,
-    MDBInput,
-    MDBTypography
-} from "mdb-react-ui-kit";
+import {useState} from "react";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBCardText, MDBInput, MDBTypography} from "mdb-react-ui-kit";
 import Swal from "sweetalert2";
-
 
 
 const ChangePassword = () => {

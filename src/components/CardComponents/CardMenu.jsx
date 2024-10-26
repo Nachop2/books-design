@@ -1,7 +1,20 @@
-import { MDBBadge, MDBBtn, MDBCard, MDBCardBody, MDBCardLink, MDBCardTitle, MDBCol, MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle, MDBIcon, MDBPagination, MDBPaginationItem, MDBPaginationLink, MDBRow } from "mdb-react-ui-kit";
-import { useContext, useEffect, useState } from "react";
-import { BookInvoiceContext } from "../BookContext";
-import { useNavigate } from "react-router-dom";
+import {
+    MDBBadge,
+    MDBBtn,
+    MDBCard,
+    MDBCardBody,
+    MDBCardTitle,
+    MDBCol,
+    MDBDropdown,
+    MDBDropdownItem,
+    MDBDropdownMenu,
+    MDBDropdownToggle,
+    MDBIcon,
+    MDBRow
+} from "mdb-react-ui-kit";
+import {useContext, useEffect, useState} from "react";
+import {BookInvoiceContext} from "../BookContext";
+import {useNavigate} from "react-router-dom";
 import Swal from "sweetalert2";
 import Pagination from "./Pagination";
 
@@ -78,13 +91,13 @@ const CardMenu = ({ enabledButtons = true }) => {
             if (!response.ok) {
                 console.log(response);
                 console.log(await response.json());
-                Swal.fire({
+                await Swal.fire({
                     icon: "error",
                     title: "Hubo un problema eliminando el libro",
                     showConfirmButton: true,
                 })
             } else {
-                Swal.fire({
+                await Swal.fire({
                     icon: "success",
                     title: "El libro se elimino con éxito",
                     timer: 1000

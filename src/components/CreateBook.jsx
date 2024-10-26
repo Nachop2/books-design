@@ -1,17 +1,17 @@
-import { useState, useContext, useEffect } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import Swal from "sweetalert2";
 import {
-    MDBBtn, MDBCard,
+    MDBBtn,
+    MDBCard,
     MDBCardBody,
     MDBCardHeader,
-    MDBCardText, MDBCheckbox, MDBFile, MDBIcon,
-    MDBInput, MDBListGroup, MDBListGroupItem, MDBRow, MDBTextArea,
+    MDBIcon,
+    MDBInput,
     MDBTypography,
     MDBValidation,
     MDBValidationItem
 } from "mdb-react-ui-kit";
-
 
 
 const CreateBook = ({ bookToBeEdited }) => {
@@ -32,7 +32,7 @@ const CreateBook = ({ bookToBeEdited }) => {
         sellingAt: ''
     });
 
-    const onChange = (e: any) => {
+    const onChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
@@ -78,14 +78,14 @@ const CreateBook = ({ bookToBeEdited }) => {
                 .then(async response => {
                     let jsonResponse = await response.json()
                     if (response.ok) {
-                        Swal.fire({
+                        await Swal.fire({
                             icon: "success",
                             title: "El libro fue actualizado con éxito",
                             showConfirmButton: true,
                         })
                     }  else if(jsonResponse == "No hubo ningun cambio") {
                         let errors = [];
-                        Swal.fire({
+                        await Swal.fire({
                             icon: "error",
                             title: "No se hizo ningun cambio",
                             showConfirmButton: true,
@@ -93,7 +93,7 @@ const CreateBook = ({ bookToBeEdited }) => {
                     } else {
                         
                         let errors = [];
-                        Swal.fire({
+                        await Swal.fire({
                             icon: "error",
                             title: "Hubo errores en la actualización del libro ",
                             showConfirmButton: true,
@@ -128,7 +128,7 @@ const CreateBook = ({ bookToBeEdited }) => {
                     } else {
 
                         let errors = [];
-                        Swal.fire({
+                        await Swal.fire({
                             icon: "error",
                             title: "Hubo errores en la creacion del libro ",
                             showConfirmButton: true,

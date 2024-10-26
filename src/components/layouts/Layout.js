@@ -1,5 +1,5 @@
-import { Link, Outlet } from "react-router-dom";
-import { MDBBtn, MDBCol, MDBContainer, MDBFooter, MDBIcon, MDBInput, MDBRow } from "mdb-react-ui-kit";
+import {Outlet} from "react-router-dom";
+import {MDBContainer, MDBFooter} from "mdb-react-ui-kit";
 
 const Layout = ({ userIsLoggedIn }) => {
     return (

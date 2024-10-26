@@ -1,13 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import {
-    MDBBtn,
-    MDBCard,
-    MDBCardBody,
-    MDBCardHeader,
-    MDBCardText, MDBIcon,
-    MDBInput, MDBTypography
-} from 'mdb-react-ui-kit';
+import {useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import {MDBCard, MDBCardBody, MDBCardHeader, MDBCardText, MDBIcon, MDBInput, MDBTypography} from 'mdb-react-ui-kit';
 import Swal from "sweetalert2";
 
 const Profile = () => {

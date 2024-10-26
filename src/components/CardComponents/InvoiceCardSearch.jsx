@@ -1,14 +1,4 @@
-import {
-  MDBBtn,
-  MDBCardHeader,
-  MDBCol,
-  MDBIcon,
-  MDBRow,
-  MDBTypography
-} from "mdb-react-ui-kit";
-import { BookInvoiceContext } from "../BookContext";
-import { useContext } from "react";
-
+import {MDBBtn, MDBCardHeader, MDBCol, MDBIcon, MDBRow, MDBTypography} from "mdb-react-ui-kit";
 
 const InvoiceCardSearch = ({fetchInvoiceSearch}) => {
 

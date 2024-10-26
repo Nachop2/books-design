@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import {createContext, useState} from "react";
 
 const BookInvoiceContext = createContext({ invoiceBooks: [], setInvoiceBooks: () => { }, loading: false });
 
@@ -48,7 +48,7 @@ const BookInvoiceContextProvider = ({ children }) => {
         term = newTerm;
         event.preventDefault();
         if (term == "") {
-            fetchBooks();
+            await fetchBooks();
             return true;
         }
         try {

@@ -1,8 +1,6 @@
-import { MDBBadge, MDBBtn, MDBCard, MDBCardBody, MDBCardLink, MDBCardTitle, MDBCol, MDBDropdown, MDBDropdownItem, MDBDropdownMenu, MDBDropdownToggle, MDBIcon, MDBPagination, MDBPaginationItem, MDBPaginationLink, MDBRow } from "mdb-react-ui-kit";
-import { useContext, useEffect, useState } from "react";
-import { BookInvoiceContext } from "../BookContext";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import {MDBBadge, MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBIcon, MDBRow} from "mdb-react-ui-kit";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import Pagination from "./Pagination";
 
 const InvoiceCardMenu = ({ term }) => {
@@ -32,16 +30,14 @@ const InvoiceCardMenu = ({ term }) => {
     }
   }
 
-  useEffect(() => {
-    const searchInvoice = async () => {
-      if (term == "") {
-        fetchInvoices();
-        return true;
-      }
-      term = parseInt(term, 10)
-      navigate("/pdf/" + term);
+  useEffect(async () => {
+    // Search invoices
+    if (term == "") {
+      await fetchInvoices();
+      return true;
     }
-    searchInvoice();
+    term = parseInt(term, 10)
+    navigate("/pdf/" + term);
   }, [term])
 
   useEffect(() => {

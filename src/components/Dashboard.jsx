@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { MDBTabsContent, MDBTabsPane, MDBTabs, MDBTabsItem, MDBTabsLink, MDBIcon } from 'mdb-react-ui-kit';
+import {useState} from 'react';
+import {MDBIcon, MDBTabs, MDBTabsContent, MDBTabsItem, MDBTabsLink, MDBTabsPane} from 'mdb-react-ui-kit';
 import Profile from './DashboardComponents/Profile';
 import UserManagement from "./DashboardComponents/UserManagement";
 
